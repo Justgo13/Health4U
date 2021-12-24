@@ -1,0 +1,15 @@
+Backend Routes
+
+Main Page --> "/"
+Shop Page --> "/shop"
+Category --> "/shop/:categoryName"
+Item --> "/shop/:categoryName/:itemID"
+Search --> "/shop/search/:searchQuery"
+Cart --> "/shop/cart/:buyerID"
+Account --> "/auth"
+Buyer Sign Up --> "/auth/buyer/sign-up"
+Buyer Login --> "/auth/buyer/login"
+Seller Sign Up --> "/auth/seller/sign-up"
+Seller Login --> "/auth/seller/login"
+Seller Page --> "/seller/:sellerID"
+Seller Item Page --> "/seller/:sellerID/:itemID"
