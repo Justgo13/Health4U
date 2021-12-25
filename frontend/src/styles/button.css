@@ -6,6 +6,19 @@
   flex-direction: column;
 }
 
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+.box {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+
 .red-inverse {
   background-color: #f00 !important;
   color: #fff !important;
@@ -14,6 +27,16 @@
 .red-inverse:hover {
   color: #f00 !important;
   background-color: #fff !important;
+}
+
+.white-inverse {
+  background-color: #fff !important;
+  color: #f00 !important;
+}
+
+.white-inverse:hover {
+  color: #fff !important;
+  background-color: #f00 !important;
 }
 
 .btn {

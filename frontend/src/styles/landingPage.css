@@ -6,6 +6,19 @@
   flex-direction: column;
 }
 
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+.box {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+
 #landingPage {
   background-image: url("https://t3.ftcdn.net/jpg/02/58/32/94/360_F_258329401_MCy6WUBkklTARuBbYRwENqDYE9ssYrZk.jpg");
   height: 100vh;
@@ -23,10 +36,9 @@
 }
 
 .heading {
-  font-family: "Eczar", serif;
   font-size: 10rem;
   font-weight: 400;
-  color: #fff;
+  color: #f00;
   margin: 1rem;
 }
 .heading p {
