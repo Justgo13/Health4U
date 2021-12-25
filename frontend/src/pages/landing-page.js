@@ -11,7 +11,7 @@ const LandingPage = () => {
 
   return (
     <div id="landingPage" className="fullscreen">
-      <Container direction="horizontal" className="container">
+      <Container className="container">
         <div className="row">
           <h1 className="heading">
             <FontAwesomeIcon
