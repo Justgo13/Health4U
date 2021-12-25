@@ -1,4 +1,4 @@
-Backend Routes
+Routes
 
 Main Page --> "/"
 Shop Page --> "/shop"
