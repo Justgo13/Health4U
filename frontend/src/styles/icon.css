@@ -1,0 +1,14 @@
+.container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icon {
+  color: red;
+  margin: 0 2rem;
+}
+
+/*# sourceMappingURL=icon.css.map */

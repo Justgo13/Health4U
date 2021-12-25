@@ -1,0 +1,25 @@
+.container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.red-inverse {
+  background-color: #f00 !important;
+  color: #fff !important;
+}
+
+.red-inverse:hover {
+  color: #f00 !important;
+  background-color: #fff !important;
+}
+
+.btn {
+  font-size: 3rem !important;
+  width: 30vw;
+  border-radius: 10% !important;
+}
+
+/*# sourceMappingURL=button.css.map */
