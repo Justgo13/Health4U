@@ -16,7 +16,7 @@ const App = () => {
               className="fa-heartbeat icon"
               fontSize="10rem"
             ></FontAwesomeIcon>
-            Health 4U
+            <p>Health 4U</p>
           </h1>
         </div>
         <div className="row">

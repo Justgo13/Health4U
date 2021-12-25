@@ -29,5 +29,8 @@
   color: #fff;
   margin: 1rem;
 }
+.heading p {
+  display: inline;
+}
 
 /*# sourceMappingURL=app.css.map */
