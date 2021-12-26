@@ -2,9 +2,6 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  Container,
-  Box,
-  Menu,
   MenuItem,
   Typography,
 } from "@mui/material";
@@ -14,7 +11,12 @@ import NavbarBrand from "./navbar-brand";
 import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
 
-const settings = [
+// Material UI custom components
+import MuiBox from "../MaterialUI/mui-box";
+import MuiContainer from "../MaterialUI/mui-container";
+import MuiMenu from "../MaterialUI/mui-menu";
+
+const accountChoices = [
   "Buyer Sign Up",
   "Buyer Login",
   "Seller Sign Up",
@@ -22,63 +24,25 @@ const settings = [
 ];
 
 const Navbar = () => {
-  const [accountMenu, setAccountMenu] = React.useState(null);
-
-  const handleOpenUserMenu = (event) => {
-    setAccountMenu(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAccountMenu(null);
-  };
-
   return (
     <AppBar position="static" className="app-bar">
-      <Container maxWidth="xl">
+      <MuiContainer maxWidth="xl">
         <Toolbar disableGutters>
           <NavbarBrand />
-          <Box className="box">
+          <MuiBox>
             <Search />
-          </Box>
-          <Box className="box nav-items">
-            <Box>
-              <CustomButton
-                variant="text"
-                size="large"
-                onClick={handleOpenUserMenu}
-                className="nav-btn"
-              >
-                Account
-              </CustomButton>
-              <Menu
-                sx={{ mt: "3rem" }}
-                anchorEl={accountMenu}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(accountMenu)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+          </MuiBox>
+          <MuiBox className="nav-items">
+            <MuiBox>
+              <MuiMenu menuChoices={accountChoices} menuMainButtonText="Account"/>
+            </MuiBox>
             <CustomButton variant="text" size="large" className="nav-btn">
-              <FontAwesomeIcon className="fa-cart-plus"/>
+              <FontAwesomeIcon className="fa-cart-plus" />
               <p id="cart-total">0</p>
             </CustomButton>
-          </Box>
+          </MuiBox>
         </Toolbar>
-      </Container>
+      </MuiContainer>
     </AppBar>
   );
 };

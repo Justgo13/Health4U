@@ -1,0 +1,28 @@
+.container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+.box {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+
+.nav-items {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+/*# sourceMappingURL=box.css.map */

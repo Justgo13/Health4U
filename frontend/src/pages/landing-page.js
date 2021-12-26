@@ -1,9 +1,9 @@
 import React from "react";
-import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
+import MuiContainer from "../components/MaterialUI/mui-container";
 
 import "../styles/landingPage.css";
 
@@ -12,7 +12,7 @@ const LandingPage = () => {
 
   return (
     <div id="landingPage" className="fullscreen">
-      <Container className="container">
+      <MuiContainer className="container">
         <div className="row">
           <h1 className="heading">
             <FontAwesomeIcon
@@ -33,7 +33,7 @@ const LandingPage = () => {
             </CustomButton>
           </Link>
         </div>
-      </Container>
+      </MuiContainer>
     </div>
   );
 };
