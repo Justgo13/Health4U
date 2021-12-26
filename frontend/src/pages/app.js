@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import LandingPage from "./landing-page";
+import ShopPage from "./shop-page";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <Route path="*" element={<Navigate replace to="/" />} />
         <Route path="/" element={<LandingPage />} />
 
-        <Route path="shop" element={<LandingPage />}>
+        <Route path="shop" element={<ShopPage />}>
           <Route path="category/:categoryName" element={<LandingPage />} />
           <Route path="item/:itemID" element={<LandingPage />} />
           <Route path="search/:searchQuery" element={<LandingPage />} />
