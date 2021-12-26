@@ -1,0 +1,54 @@
+.container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+.box {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+
+.navbar-brand h1 {
+  display: inline !important;
+  color: #f00;
+}
+.navbar-brand .icon {
+  margin-right: 1rem;
+}
+
+#auto-complete {
+  width: 20rem;
+}
+
+.app-bar {
+  background-color: #fff !important;
+}
+
+.nav-items {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.nav-btn {
+  color: #f00 !important;
+  font-size: 1.5rem !important;
+}
+
+#cart-total {
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+/*# sourceMappingURL=navbar.css.map */

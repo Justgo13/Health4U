@@ -6,6 +6,19 @@
   flex-direction: column;
 }
 
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+.box {
+  margin: 0 1rem;
+  padding: 1rem 0;
+}
+
 .icon {
   color: red;
   margin: 0 2rem;
