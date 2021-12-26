@@ -1,17 +1,17 @@
-.container {
-  display: flex !important;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .link {
   text-decoration: none;
 }
 
 body {
   font-family: "Eczar", serif;
+}
+
+.container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .box {
@@ -23,6 +23,22 @@ body {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
+}
+
+.carousel {
+  margin: 3rem 0;
+  height: 30vh;
+}
+
+#featuredContainer {
+  display: flex !important;
+  height: 25vh;
+}
+
+.carousel-card {
+  width: 100%;
+  height: 100%;
+  margin: 0 3rem;
 }
 
 /*# sourceMappingURL=mui.css.map */
