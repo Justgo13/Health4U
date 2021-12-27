@@ -15,6 +15,7 @@ const MuiCarousel = ({ carouselItems }) => {
         className="carousel"
         animation="slide"
         navButtonsAlwaysVisible
+        activeIndicatorIconButtonProps
         navButtonsProps={{
           // Change the background and radius of the actual buttons. THIS STYLES BOTH BUTTONS
           style: {
