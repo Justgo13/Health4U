@@ -9,9 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 import "../../styles/mui.css";
 
 const MuiCarousel = ({ carouselItems }) => {
-  const MAX_FEATURED_ITEM = 3;
-  let currFeatureItemCount = 0;
-
   return (
     <MuiContainer>
       <Carousel
@@ -32,14 +29,13 @@ const MuiCarousel = ({ carouselItems }) => {
           <FontAwesomeIcon className="fa-caret-square-left caret fa-lg" />
         }
       >
-        {carouselItems.map((item, i) => (
-          <MuiContainer key={uuidv4()} id="featuredContainer">
-            <MuiCard />
-            <MuiCard />
-            <MuiCard />
-            <MuiCard />
-          </MuiContainer>
-        ))}
+        {carouselItems.map((item, i) => {
+          return (
+            <MuiContainer key={uuidv4()} id="featuredContainer">
+              <MuiCard title={item.name} description={item.description} image={item.image}/>
+            </MuiContainer>
+          );
+        })}
       </Carousel>
     </MuiContainer>
   );
