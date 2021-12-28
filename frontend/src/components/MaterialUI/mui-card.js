@@ -11,9 +11,9 @@ import {
 import "../../styles/mui.css";
 
 
-const MuiCard = ({title, description, image}) => {
+const MuiCard = ({title, description, image, className}) => {
   return (
-    <Card className="carousel-card">
+    <Card className={`${className}`}>
       <CardMedia
         component="img"
         height="80%"

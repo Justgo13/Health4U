@@ -33,7 +33,7 @@ const MuiCarousel = ({ carouselItems }) => {
         {carouselItems.map((item, i) => {
           return (
             <MuiContainer key={uuidv4()} id="featuredContainer">
-              <MuiCard title={item.name} description={item.description} image={item.image}/>
+              <MuiCard title={item.name} description={item.description} image={item.image} className="carousel-card"/>
             </MuiContainer>
           );
         })}

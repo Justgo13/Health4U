@@ -12,7 +12,7 @@ const LandingPage = () => {
 
   return (
     <div id="landingPage" className="fullscreen">
-      <MuiContainer className="container">
+      <MuiContainer className="landingPageContainer">
         <div className="row">
           <h1 className="heading">
             <FontAwesomeIcon

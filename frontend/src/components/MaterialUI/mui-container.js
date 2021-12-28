@@ -5,7 +5,7 @@ import "../../styles/mui.css";
 
 const MuiContainer = (props) => {
   return (
-    <Container id={`${props.id}`} className={`${props.className}`} maxWidth={`${props.maxWidth}`}>{props.children}</Container>
+    <Container id={`${props.id}`} className={`container ${props.className}`} maxWidth={`${props.maxWidth}`}>{props.children}</Container>
   );
 };
 

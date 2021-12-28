@@ -6,7 +6,7 @@ body {
   font-family: "Eczar", serif;
 }
 
-.container {
+.landingPageContainer {
   display: flex !important;
   height: 100vh;
   justify-content: center;
@@ -27,7 +27,7 @@ body {
 
 .carousel {
   margin: 3rem 0;
-  height: 60vh;
+  height: 50vh;
 }
 
 #featuredContainer {
