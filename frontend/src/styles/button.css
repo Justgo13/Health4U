@@ -26,6 +26,10 @@ body {
   background-color: #f00 !important;
 }
 
+.no-background, .no-background:hover {
+  background-color: #fff !important;
+}
+
 .btn {
   font-size: 3rem !important;
   width: 30vw;

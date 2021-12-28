@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import MuiCard from "./mui-card";
+import CustomButton from "../custom-button";
 
 const MuiGrid = ({ categoryList }) => {
   return (
@@ -11,11 +12,13 @@ const MuiGrid = ({ categoryList }) => {
     >
       {categoryList.categories.map((category) => (
         <Grid item xs={12} sm={6} md={4}>
-          <MuiCard
-            title={category.name}
-            image={category.image}
-            className="carousel-card"
-          />
+          <CustomButton className="no-background" variant="outline">
+            <MuiCard
+              title={category.name}
+              image={category.image}
+              className="carousel-card"
+            />
+          </CustomButton>
         </Grid>
       ))}
     </Grid>
