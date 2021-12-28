@@ -1,5 +1,6 @@
 Routes
 
+Frontend Routes
 Main Page --> "/"
 Shop Page --> "/shop"
 Category --> "/shop/category/:categoryName"
@@ -13,3 +14,16 @@ Seller Sign Up --> "/auth/seller/sign-up"
 Seller Login --> "/auth/seller/login"
 Seller Page --> "/seller/account/:sellerID"
 Seller Item Page --> "/seller/item/:itemID"
+
+Backend Routes
+GET user --> "/user/:userID"
+POST user --> "/user/:userID"
+PATCH user --> "/user/:userID"
+DELETE user --> "/user/:userID"
+
+GET item --> "/item/:itemID"
+(seller only)
+POST item --> "/item/:itemID" 
+PATH item --> "/item/:itemID" 
+DELETE item --> "/item/:itemID" 
+
