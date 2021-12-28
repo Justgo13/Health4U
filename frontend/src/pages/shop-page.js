@@ -63,7 +63,9 @@ const ShopPage = () => {
     ],
   };
 
-  const [isModuleCategories, setIsModuleCategories] = useState(false);
+  const [isModuleCategories, setIsModuleCategories] = useState(true);
+
+  console.log('mod',isModuleCategories);
 
   return (
     <Fragment>
@@ -75,7 +77,7 @@ const ShopPage = () => {
         </div>
         <div className="categories-body">
           <div className="category-toggle">
-            <MuiToggleButton />
+            <MuiToggleButton onChange={setIsModuleCategories}/>
            
           </div>
           {isModuleCategories && <MuiGrid categoryList={categoryList} />}

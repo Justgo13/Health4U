@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemText
 } from "@mui/material";
+import { v4 as uuidv4 } from 'uuid';
 
 import MuiCard from "./mui-card";
 import CustomButton from "../custom-button";
@@ -19,7 +20,7 @@ const MuiGrid = ({ listActive, categoryList }) => {
         className="grid"
       >
         {categoryList.categories.map((category) => (
-          <Grid item xs={12} className="grid-item">
+          <Grid key={uuidv4()} item xs={12} className="grid-item">
             <CustomButton className="btn category-list-btn white-inverse" variant="outline">
               <List>
                 <ListItem>
@@ -40,7 +41,7 @@ const MuiGrid = ({ listActive, categoryList }) => {
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       {categoryList.categories.map((category) => (
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid key={uuidv4()} item xs={12} sm={6} md={4}>
           <CustomButton className="no-background btn" variant="outline">
             <MuiCard
               title={category.name}

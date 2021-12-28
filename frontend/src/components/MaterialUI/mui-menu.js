@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, Typography } from "@mui/material";
+import { v4 as uuidv4 } from 'uuid';
 
 import CustomButton from "../custom-button";
 
@@ -44,8 +45,8 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
       >
         {menuChoices &&
           menuChoices.map((menuChoice) => (
-            <MenuItem key={menuChoice}>
-              <Typography textAlign="center"><p>{menuChoice}</p></Typography>
+            <MenuItem key={uuidv4()}>
+              <Typography textAlign="center">{menuChoice}</Typography>
             </MenuItem>
           ))}
       </Menu>
