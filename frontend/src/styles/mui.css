@@ -22,18 +22,12 @@ body {
 
 .carousel {
   margin: 3rem 0;
-  height: 50vh;
+  height: 45vh;
 }
 
 #featuredContainer {
   display: flex !important;
   height: 40vh;
-}
-
-.carousel-card-btn {
-  width: 100%;
-  height: 100%;
-  margin: 0 3rem !important;
 }
 
 .carousel-card {
