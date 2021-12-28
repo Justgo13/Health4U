@@ -9,7 +9,6 @@ const MuiToggleButton = ({onChange}) => {
 
   const handleChange = (event, nextView) => {
     setCurrentView(nextView);
-    console.log(nextView);
     nextView === "module"
       ? onChange(true)
       : onChange(false);

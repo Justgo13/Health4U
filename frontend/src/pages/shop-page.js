@@ -5,7 +5,6 @@ import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiToggleButton from "../components/MaterialUI/mui-toggle-button";
-import MuiList from "../components/MaterialUI/mui-list";
 
 import "../styles/shopPage.css";
 
@@ -64,8 +63,6 @@ const ShopPage = () => {
   };
 
   const [isModuleCategories, setIsModuleCategories] = useState(true);
-
-  console.log('mod',isModuleCategories);
 
   return (
     <Fragment>
