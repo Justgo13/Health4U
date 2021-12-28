@@ -12,7 +12,7 @@ const MuiGrid = ({ categoryList }) => {
     >
       {categoryList.categories.map((category) => (
         <Grid item xs={12} sm={6} md={4}>
-          <CustomButton className="no-background" variant="outline">
+          <CustomButton className="no-background btn" variant="outline">
             <MuiCard
               title={category.name}
               image={category.image}

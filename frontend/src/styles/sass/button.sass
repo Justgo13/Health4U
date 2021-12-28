@@ -1,27 +1,23 @@
 @use "_global.sass" as global
 
-.red-inverse
-    background-color: global.$red !important
-    color: global.$white !important
-
-.red-inverse:hover
-    color: global.$red !important
-    background-color: global.$white !important
-
-
 .white-inverse
-    background-color: global.$white !important
-    color: global.$red !important
+    @include global.inverse($bgColor: global.$white, $color: global.$red)
 
 .white-inverse:hover
-    color: global.$white !important
-    background-color: global.$red !important
+    @include global.inverseHover($bgColor: global.$white, $color: global.$red)
 
 .no-background, .no-background:hover
     background-color: global.$white !important
 
-
-.btn
+.landingPageBtn
     font-size: 3rem !important
     width: 30vw
     border-radius: 10% !important
+
+.btn
+    padding: 0 !important
+
+.btn:focus
+    outline: none
+    box-shadow: none
+

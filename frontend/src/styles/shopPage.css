@@ -6,13 +6,6 @@ body {
   font-family: "Eczar", serif;
 }
 
-.shopPageContainer {
-  display: flex !important;
-  height: auto;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
 h3 {
   font-size: 4rem !important;
   color: #f00;

@@ -6,34 +6,33 @@ body {
   font-family: "Eczar", serif;
 }
 
-.red-inverse {
-  background-color: #f00 !important;
-  color: #fff !important;
-}
-
-.red-inverse:hover {
-  color: #f00 !important;
-  background-color: #fff !important;
-}
-
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;
 }
 
 .white-inverse:hover {
-  color: #fff !important;
   background-color: #f00 !important;
+  color: #fff !important;
 }
 
 .no-background, .no-background:hover {
   background-color: #fff !important;
 }
 
-.btn {
+.landingPageBtn {
   font-size: 3rem !important;
   width: 30vw;
   border-radius: 10% !important;
+}
+
+.btn {
+  padding: 0 !important;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=button.css.map */

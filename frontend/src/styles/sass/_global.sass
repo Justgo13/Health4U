@@ -4,6 +4,20 @@ $red: #f00
 $green: #0f0
 $blue: #00f
 
+@mixin inverse($bgColor: #fff, $color: #000)
+    background-color: $bgColor !important
+    color: $color !important
+
+@mixin inverseHover($bgColor: #fff, $color: #000)
+    @include inverse($color, $bgColor)
+
+@mixin flex($direction: row, $justify-content: flex-start, $align-items: flex-start, $grow: 0)
+    display: flex !important
+    flex-direction: $direction
+    justify-content: $justify-content
+    align-items: $align-items
+    flex-grow: $grow
+
 .link
     text-decoration: none
 
