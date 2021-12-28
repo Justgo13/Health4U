@@ -25,7 +25,7 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         onClick={showUserMenuHandler}
         className="nav-btn"
       >
-        {menuMainButtonText}
+        <h4 className="menu-item-title" >{menuMainButtonText}</h4>
       </CustomButton>
       <Menu
         sx={{ mt: `${size || "3rem"}` }}
@@ -45,7 +45,7 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         {menuChoices &&
           menuChoices.map((menuChoice) => (
             <MenuItem key={menuChoice}>
-              <Typography textAlign="center">{menuChoice}</Typography>
+              <Typography textAlign="center"><p>{menuChoice}</p></Typography>
             </MenuItem>
           ))}
       </Menu>

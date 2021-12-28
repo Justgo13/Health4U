@@ -22,7 +22,7 @@ const MuiCard = ({title, description, image, className}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h3" component="div">
-          {title}
+          <h2>{title}</h2>
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {description}

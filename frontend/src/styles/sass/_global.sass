@@ -9,7 +9,7 @@ $blue: #00f
     color: $color !important
 
 @mixin inverseHover($bgColor: #fff, $color: #000)
-    @include inverse($color, $bgColor)
+    @include inverse($bgColor: $color, $color: $bgColor)
 
 @mixin flex($direction: row, $justify-content: flex-start, $align-items: flex-start, $grow: 0)
     display: flex !important
@@ -18,8 +18,14 @@ $blue: #00f
     align-items: $align-items
     flex-grow: $grow
 
+@mixin border($size: 1px, $type: solid, $color: $black)
+    border: $size $type $color !important
+
 .link
     text-decoration: none
 
 body
     font-family: 'Eczar', serif
+
+h2,h3,h4,h5,h6, p
+    font-family: 'Inter', sans-serif

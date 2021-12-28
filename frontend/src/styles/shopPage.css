@@ -6,9 +6,22 @@ body {
   font-family: "Eczar", serif;
 }
 
+h2, h3, h4, h5, h6, p {
+  font-family: "Inter", sans-serif;
+}
+
 h3 {
   font-size: 4rem !important;
   color: #f00;
+}
+
+.category-toggle {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-grow: 0;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=shopPage.css.map */

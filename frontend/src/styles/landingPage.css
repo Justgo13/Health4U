@@ -6,6 +6,10 @@ body {
   font-family: "Eczar", serif;
 }
 
+h2, h3, h4, h5, h6, p {
+  font-family: "Inter", sans-serif;
+}
+
 #landingPage {
   background-image: url("https://t3.ftcdn.net/jpg/02/58/32/94/360_F_258329401_MCy6WUBkklTARuBbYRwENqDYE9ssYrZk.jpg");
   height: 100vh;

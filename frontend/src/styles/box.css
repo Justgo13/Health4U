@@ -6,6 +6,10 @@ body {
   font-family: "Eczar", serif;
 }
 
+h2, h3, h4, h5, h6, p {
+  font-family: "Inter", sans-serif;
+}
+
 .nav-items {
   display: flex;
   flex-grow: 1;

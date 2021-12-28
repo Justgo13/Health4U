@@ -1,9 +1,38 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import {
+  List,
+  ListItem,
+  ListItemText
+} from "@mui/material";
+
 import MuiCard from "./mui-card";
 import CustomButton from "../custom-button";
 
-const MuiGrid = ({ categoryList }) => {
+const MuiGrid = ({ listActive, categoryList }) => {
+  if (listActive) {
+    return (
+      <Grid
+        container
+        spacing={{ xs: 2, md: 5 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        className="grid"
+      >
+        {categoryList.categories.map((category) => (
+          <Grid item xs={12} className="grid-item">
+            <CustomButton className="btn category-list-btn white-inverse" variant="outline">
+              <List>
+                <ListItem>
+                  <ListItemText primary={<h2 className="list-item">{category.name}</h2>}/>
+                </ListItem>
+              </List>
+            </CustomButton>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+
   return (
     <Grid
       container

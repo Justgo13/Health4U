@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import NavBar from "../components/NavBar/navbar";
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
+import MuiToggleButton from "../components/MaterialUI/mui-toggle-button";
+import MuiList from "../components/MaterialUI/mui-list";
 
 import "../styles/shopPage.css";
 
@@ -61,6 +63,8 @@ const ShopPage = () => {
     ],
   };
 
+  const [isModuleCategories, setIsModuleCategories] = useState(false);
+
   return (
     <Fragment>
       <NavBar />
@@ -70,7 +74,12 @@ const ShopPage = () => {
           <MuiDivider children={<h3>Categories</h3>} />
         </div>
         <div className="categories-body">
-          <MuiGrid categoryList={categoryList}/>
+          <div className="category-toggle">
+            <MuiToggleButton />
+           
+          </div>
+          {isModuleCategories && <MuiGrid categoryList={categoryList} />}
+          {!isModuleCategories && <MuiGrid listActive categoryList={categoryList}/>}
         </div>
       </div>
     </Fragment>

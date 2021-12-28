@@ -6,6 +6,10 @@ body {
   font-family: "Eczar", serif;
 }
 
+h2, h3, h4, h5, h6, p {
+  font-family: "Inter", sans-serif;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;
@@ -39,6 +43,11 @@ body {
 .btn:focus {
   outline: none;
   box-shadow: none;
+}
+
+.category-list-btn {
+  width: 100%;
+  border: 1px solid #000 !important;
 }
 
 /*# sourceMappingURL=button.css.map */
