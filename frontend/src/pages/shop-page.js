@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
 
-import NavBar from "../components/NavBar/navbar";
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiToggleButton from "../components/MaterialUI/mui-toggle-button";
+import MuiBox from "../components/MaterialUI/mui-box";
 
 import "../styles/shopPage.css";
 
@@ -64,26 +63,25 @@ const ShopPage = () => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
 
   return (
-    <Fragment>
-      <MuiCarousel carouselItems={items} />
-      <div className="container shopPageContainer categories">
-        <div className="categories-header">
-          <MuiDivider children={<h3>Categories</h3>} />
-        </div>
-        <div className="categories-body">
-          <div className="category-toggle">
-            <MuiToggleButton onChange={setIsModuleCategories} />
+      <MuiBox>
+        <MuiCarousel carouselItems={items} />
+        <div className="container shopPageContainer categories">
+          <div className="categories-header">
+            <MuiDivider children={<h3>Categories</h3>} />
           </div>
-          {isModuleCategories && (
-            <MuiGrid categoryModuleActive list={categoryList} />
-          )}
-          {!isModuleCategories && (
-            <MuiGrid categoryListActive list={categoryList} />
-          )}
+          <div className="categories-body">
+            <div className="category-toggle">
+              <MuiToggleButton onChange={setIsModuleCategories} />
+            </div>
+            {isModuleCategories && (
+              <MuiGrid categoryModuleActive list={categoryList} />
+            )}
+            {!isModuleCategories && (
+              <MuiGrid categoryListActive list={categoryList} />
+            )}
+          </div>
         </div>
-      </div>
-      <Outlet />
-    </Fragment>
+      </MuiBox>
   );
 };
 

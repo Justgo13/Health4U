@@ -5,7 +5,7 @@ import "../../styles/mui.css"
 
 const MuiBox = props => {
     return (
-        <Box className={`box ${props.className}`}>
+        <Box id={props.id} className={`box ${props.className}`}>
             {props.children}
         </Box>
     );

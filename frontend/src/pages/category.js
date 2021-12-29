@@ -1,12 +1,11 @@
-import React, {Fragment} from 'react';
-import NavBar from "../components/NavBar/navbar";
+import React from 'react';
+import MuiBox from '../components/MaterialUI/mui-box';
 
-const Category = () => {
+const Category = ({category}) => {
     return (
-        <Fragment>
-            <NavBar />
-            <h2>HI</h2>
-        </Fragment>
+        <MuiBox>
+            <h2>Viewing category {category} </h2>
+        </MuiBox>
     );
 }
 
