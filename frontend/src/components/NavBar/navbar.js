@@ -1,10 +1,6 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import React, { Fragment } from "react";
+import { AppBar, Toolbar } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 import Search from "./search";
 import NavbarBrand from "./navbar-brand";
@@ -25,25 +21,32 @@ const accountChoices = [
 
 const Navbar = () => {
   return (
-    <AppBar position="static" className="app-bar">
-      <MuiContainer maxWidth="xl">
-        <Toolbar disableGutters>
-          <NavbarBrand />
-          <MuiBox>
-            <Search />
-          </MuiBox>
-          <MuiBox className="nav-items">
+    <Fragment>
+      <AppBar position="static" className="app-bar">
+        <MuiContainer maxWidth="xl">
+          <Toolbar disableGutters>
+            <NavbarBrand />
             <MuiBox>
-              <MuiMenu menuChoices={accountChoices} menuMainButtonText="Account"/>
+              <Search />
             </MuiBox>
-            <CustomButton variant="text" size="large" className="nav-btn">
-              <FontAwesomeIcon className="fa-cart-plus" />
-              <p id="cart-total">0</p>
-            </CustomButton>
-          </MuiBox>
-        </Toolbar>
-      </MuiContainer>
-    </AppBar>
+            <MuiBox className="nav-items">
+              <MuiBox>
+                <MuiMenu
+                  menuChoices={accountChoices}
+                  menuMainButtonText="Account"
+                />
+              </MuiBox>
+              <CustomButton variant="text" size="large" className="nav-btn">
+                <FontAwesomeIcon className="fa-cart-plus" />
+                <p id="cart-total">0</p>
+              </CustomButton>
+            </MuiBox>
+          </Toolbar>
+        </MuiContainer>
+      </AppBar>
+
+      <Outlet />
+    </Fragment>
   );
 };
 

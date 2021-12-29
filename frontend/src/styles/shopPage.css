@@ -10,6 +10,10 @@ h2, h3, h4, h5, h6, p {
   font-family: "Inter", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 h3 {
   font-size: 4rem !important;
   color: #f00;

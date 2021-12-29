@@ -10,6 +10,10 @@ h2, h3, h4, h5, h6, p {
   font-family: "Inter", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .landingPageContainer {
   display: flex !important;
   flex-direction: column;
@@ -48,10 +52,11 @@ h2, h3, h4, h5, h6, p {
 
 .grid-item {
   padding-top: 0 !important;
+  padding-left: 1rem !important;
 }
 
 .grid {
-  margin: 3rem 0 !important;
+  margin: 2rem 0 !important;
 }
 
 .list-item {

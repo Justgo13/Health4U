@@ -23,7 +23,7 @@ const LandingPage = () => {
           </h1>
         </div>
         <div className="row">
-          <Link to="shop" className="link">
+          <Link to="shop/mainPage" className="link">
             <CustomButton
               variant="outlined"
               className="white-inverse landingPageBtn"

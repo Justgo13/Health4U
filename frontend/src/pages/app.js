@@ -8,6 +8,8 @@ import {
 
 import LandingPage from "./landing-page";
 import ShopPage from "./shop-page";
+import Category from "./category";
+import Navbar from "../components/NavBar/navbar";
 
 const App = () => {
   return (
@@ -16,8 +18,9 @@ const App = () => {
         <Route path="*" element={<Navigate replace to="/" />} />
         <Route path="/" element={<LandingPage />} />
 
-        <Route path="shop" element={<ShopPage />}>
-          <Route path="category/:categoryName" element={<LandingPage />} />
+        <Route path="shop" element={<Navbar />}>
+          <Route path="mainPage" element={<ShopPage />} />
+          <Route path="category/:categoryName" element={<Category />} />
           <Route path="item/:itemID" element={<LandingPage />} />
           <Route path="search/:searchQuery" element={<LandingPage />} />
           <Route path="cart/:buyerID" element={<LandingPage />} />
