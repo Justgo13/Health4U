@@ -5,3 +5,15 @@
 
 .header
     text-align: center
+
+.flex-container
+    @include global.flex()
+    height: 100vh
+
+
+.right-align
+    @include global.flex($justify-content: flex-end, $grow: 1)
+
+.small-box
+    width: 80%
+    margin-top: 2rem

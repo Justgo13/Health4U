@@ -54,4 +54,16 @@ a {
   border: 1px solid #000 !important;
 }
 
+.big-btn {
+  font-size: 2rem !important;
+}
+
+.black {
+  color: #000 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
 /*# sourceMappingURL=button.css.map */

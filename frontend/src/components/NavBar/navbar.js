@@ -39,7 +39,7 @@ const Navbar = () => {
                 />
               </MuiBox>
               <CustomButton variant="text" size="large" className="nav-btn">
-                <FontAwesomeIcon className="fa-cart-plus" />
+                <FontAwesomeIcon className="fa-shopping-cart" />
                 <p id="cart-total">0</p>
               </CustomButton>
             </MuiBox>

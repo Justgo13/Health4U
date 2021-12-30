@@ -3,6 +3,7 @@ $black: #000
 $red: #f00
 $green: #0f0
 $blue: #00f
+$grey: #F4F6F9
 
 @mixin inverse($bgColor: #fff, $color: #000)
     background-color: $bgColor !important
@@ -20,6 +21,9 @@ $blue: #00f
 
 @mixin border($size: 1px, $type: solid, $color: $black)
     border: $size $type $color !important
+
+@mixin box-shadow($horizontalOffset: 2px, $vertialOffset: 2px, $blur: 4px, $spread: -4px, $color: global.$black)
+    box-shadow: $horizontalOffset $vertialOffset $blur $spread $color !important
 
 .link
     text-decoration: none

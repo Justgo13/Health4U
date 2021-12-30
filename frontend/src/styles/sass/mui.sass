@@ -17,7 +17,7 @@
     height: 100%
     text-align: center
     @include global.border()
-    box-shadow: 2px 4px 4px -4px global.$red !important
+    @include global.box-shadow($vertialOffset: 4px, $color: global.$red)
     margin: 1rem 0
 
 .toggle-group

@@ -14,18 +14,8 @@ a {
   text-decoration: none;
 }
 
-.icon {
-  color: #f00;
-  margin: 0 2rem;
+.form-control {
+  width: 20%;
 }
 
-.small-icon {
-  color: #000;
-  margin: 0 0.5rem;
-}
-
-.caret {
-  color: #000;
-}
-
-/*# sourceMappingURL=icon.css.map */
+/*# sourceMappingURL=form.css.map */
