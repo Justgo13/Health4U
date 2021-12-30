@@ -32,7 +32,7 @@ const MuiGrid = ({ gridItems }) => {
               className="grid-item"
             >
               <Link to={`category/${category.name}`}>
-                <CustomButton className="no-background btn" variant="outline">
+                <CustomButton className="no-background no-btn-padding" variant="outline">
                   <MuiCard
                     title={category.name}
                     image={category.image}

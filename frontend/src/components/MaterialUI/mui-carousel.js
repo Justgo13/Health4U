@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
+import { Link } from "react-router-dom";
 
 import FontAwesomeIcon from "../font-awesome-icon";
 import MuiContainer from "./mui-container";
@@ -33,17 +34,18 @@ const MuiCarousel = ({ carouselItems }) => {
         {carouselItems.map((item) => {
           return (
             <MuiContainer key={item.id} id="featuredContainer">
-              <CustomButton
-                className="no-background carousel-card-btn btn"
-                variant="outline"
-              >
-                <MuiCard
-                  title={item.name}
-                  description={item.description}
-                  image={item.image}
-                  className="card"
-                />
-              </CustomButton>
+              <Link className="featured-link" to={`item/${item.id}`}>
+                <CustomButton
+                  className="no-background carousel-card-btn no-btn-padding"
+                  variant="outline"
+                >
+                  <MuiCard
+                    title={item.name}
+                    image={item.image}
+                    className="card"
+                  />
+                </CustomButton>
+              </Link>
             </MuiContainer>
           );
         })}

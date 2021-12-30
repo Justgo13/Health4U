@@ -14,13 +14,13 @@ const LandingPage = () => {
   return (
     <MuiBox id="landingPage" className="fullscreen">
       <MuiContainer className="landingPageContainer">
-        <div className="row">
+        <MuiBox className="row">
           <h1 className="heading">
             <FontAwesomeIcon className="fa-heartbeat icon" fontSize="10rem" />
             <p>Health4U</p>
           </h1>
-        </div>
-        <div className="row">
+        </MuiBox>
+        <MuiBox className="row">
           <Link to="shop">
             <CustomButton
               variant="outlined"
@@ -30,7 +30,7 @@ const LandingPage = () => {
               Shop Now
             </CustomButton>
           </Link>
-        </div>
+        </MuiBox>
       </MuiContainer>
     </MuiBox>
   );

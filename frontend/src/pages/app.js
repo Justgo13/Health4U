@@ -10,6 +10,7 @@ import LandingPage from "./landing-page";
 import ShopPage from "./shop-page";
 import Category from "./category";
 import Navbar from "../components/NavBar/navbar";
+import Item from "./item";
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route path="shop" element={<Navbar />}>
           <Route path="" element={<ShopPage />} />
           <Route path="category/:categoryName" element={<Category />} />
-          <Route path="item/:itemID" element={<LandingPage />} />
+          <Route path="item/:itemID" element={<Item />} />
           <Route path="search/:searchQuery" element={<LandingPage />} />
           <Route path="cart/:buyerID" element={<LandingPage />} />
         </Route>
