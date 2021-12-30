@@ -24,7 +24,7 @@ h3 {
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  flex-grow: 0;
+  flex-grow: 1;
   margin-bottom: 1rem;
 }
 

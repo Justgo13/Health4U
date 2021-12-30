@@ -63,28 +63,12 @@ const ShopPage = () => {
     },
   ];
 
-  const [isModuleCategories, setIsModuleCategories] = useState(true);
-
   return (
     <MuiBox>
       <MuiCarousel carouselItems={items} />
       <MuiBox className="container">
-        <MuiBox>
-          <MuiDivider children={<h3>Categories</h3>} />
-        </MuiBox>
-        <MuiBox>
-          <MuiBox className="category-toggle">
-            <MuiToggleButton onChange={setIsModuleCategories} />
-          </MuiBox>
-          <MuiBox>
-            {isModuleCategories && (
-              <MuiGrid moduleGrid gridItems={categoryList} />
-            )}
-            {!isModuleCategories && (
-              <MuiGrid listGrid gridItems={categoryList} />
-            )}
-          </MuiBox>
-        </MuiBox>
+        <MuiDivider children={<h3>Categories</h3>} />
+        <MuiGrid gridItems={categoryList} />
       </MuiBox>
     </MuiBox>
   );

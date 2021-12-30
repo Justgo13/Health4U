@@ -41,7 +41,7 @@ const MuiCarousel = ({ carouselItems }) => {
                   title={item.name}
                   description={item.description}
                   image={item.image}
-                  className="carousel-card"
+                  className="card"
                 />
               </CustomButton>
             </MuiContainer>
