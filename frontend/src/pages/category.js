@@ -37,7 +37,7 @@ const Category = () => {
   return (
     <MuiBox className="header container">
       <h3>{categoryName}</h3>
-      <MuiGrid moduleGrid gridItems={items} />
+      <MuiGrid gridItems={items} />
     </MuiBox>
   );
 };
