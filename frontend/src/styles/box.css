@@ -14,10 +14,12 @@ a {
   text-decoration: none;
 }
 
-.nav-items {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
+.box {
+  padding: 1rem 0;
+}
+
+.header {
+  text-align: center;
 }
 
 /*# sourceMappingURL=box.css.map */

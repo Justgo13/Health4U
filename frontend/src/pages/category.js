@@ -1,12 +1,15 @@
-import React from 'react';
-import MuiBox from '../components/MaterialUI/mui-box';
+import React from "react";
+import { useParams } from "react-router-dom";
 
-const Category = ({category}) => {
-    return (
-        <MuiBox>
-            <h2>Viewing category {category} </h2>
-        </MuiBox>
-    );
-}
+import MuiBox from "../components/MaterialUI/mui-box";
+
+const Category = () => {
+  const { categoryName } = useParams();
+  return (
+    <MuiBox className="header">
+      <h3>{categoryName}</h3>
+    </MuiBox>
+  );
+};
 
 export default Category;

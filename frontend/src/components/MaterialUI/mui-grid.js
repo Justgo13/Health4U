@@ -33,18 +33,20 @@ const MuiGrid = ({ categoryListActive, categoryModuleActive, list }) => {
       {categoryListActive &&
         list.categories.map((category) => (
           <Grid key={uuidv4()} item xs={12} className="grid-item">
-            <CustomButton
-              className="btn category-list-btn white-inverse"
-              variant="outline"
-            >
-              <List>
-                <ListItem>
-                  <ListItemText
-                    primary={<h2 className="list-item">{category.name}</h2>}
-                  />
-                </ListItem>
-              </List>
-            </CustomButton>
+            <Link to={`category/${category.name}`}>
+              <CustomButton
+                className="btn category-list-btn white-inverse"
+                variant="outline"
+              >
+                <List>
+                  <ListItem>
+                    <ListItemText
+                      primary={<h2 className="list-item">{category.name}</h2>}
+                    />
+                  </ListItem>
+                </List>
+              </CustomButton>
+            </Link>
           </Grid>
         ))}
     </Grid>
