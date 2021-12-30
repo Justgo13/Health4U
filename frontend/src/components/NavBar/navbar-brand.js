@@ -3,12 +3,12 @@ import { Navbar } from "react-bootstrap";
 
 import FontAwesomeIcon from "../font-awesome-icon";
 
-import "../../styles/navbar.css"
+import "../../styles/navbar.css";
 
 const NavbarBrand = () => {
   return (
     <Navbar.Brand href="/shop">
-      <FontAwesomeIcon className="fa-heartbeat icon" fontSize="2rem"/>
+      <FontAwesomeIcon className="fa-heartbeat icon" fontSize="2rem" />
       <h1>Health4U</h1>
     </Navbar.Brand>
   );

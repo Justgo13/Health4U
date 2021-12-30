@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, Typography } from "@mui/material";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import CustomButton from "../custom-button";
 
@@ -26,7 +26,7 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         onClick={showUserMenuHandler}
         className="nav-btn"
       >
-        <h4 className="menu-item-title" >{menuMainButtonText}</h4>
+        <h4 className="menu-item-title">{menuMainButtonText}</h4>
       </CustomButton>
       <Menu
         sx={{ mt: `${size || "3rem"}` }}

@@ -10,16 +10,10 @@ import {
 
 import "../../styles/mui.css";
 
-
-const MuiCard = ({title, description, image, className}) => {
+const MuiCard = ({ title, description, image, className }) => {
   return (
     <Card className={`${className}`}>
-      <CardMedia
-        component="img"
-        height="80%"
-        image={image}
-        alt={title}
-      />
+      <CardMedia component="img" height="80%" image={image} alt={title} />
       <CardContent>
         <Typography gutterBottom variant="h3" component="div">
           <h2>{title}</h2>
@@ -28,8 +22,7 @@ const MuiCard = ({title, description, image, className}) => {
           {description}
         </Typography>
       </CardContent>
-      <CardActions>
-      </CardActions>
+      <CardActions></CardActions>
     </Card>
   );
 };

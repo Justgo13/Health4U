@@ -4,14 +4,12 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 
-const MuiToggleButton = ({onChange}) => {
+const MuiToggleButton = ({ onChange }) => {
   const [currentView, setCurrentView] = useState("module");
 
   const handleChange = (event, nextView) => {
     setCurrentView(nextView);
-    nextView === "module"
-      ? onChange(true)
-      : onChange(false);
+    nextView === "module" ? onChange(true) : onChange(false);
   };
 
   return (
