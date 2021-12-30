@@ -8,11 +8,11 @@ import CustomButton from "../custom-button";
 import MuiToggleButton from "./mui-toggle-button";
 import MuiBox from "./mui-box";
 
-const MuiGrid = ({ gridItems }) => {
+const MuiGrid = ({ linkType, gridItems }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
   return (
     <Fragment>
-      <MuiBox className="category-toggle">
+      <MuiBox className="grid-toggle">
         <MuiToggleButton onChange={setIsModuleCategories} />
       </MuiBox>
       <Grid
@@ -22,20 +22,20 @@ const MuiGrid = ({ gridItems }) => {
         className="grid"
       >
         {isModuleCategories &&
-          gridItems.map((category) => (
+          gridItems.map((gridItem) => (
             <Grid
-              key={category.id}
+              key={gridItem.id}
               item
               xs={12}
               sm={6}
               md={4}
               className="grid-item"
             >
-              <Link to={`category/${category.name}`}>
+              <Link to={`${linkType}/${gridItem.id}`}>
                 <CustomButton className="no-background no-btn-padding" variant="outline">
                   <MuiCard
-                    title={category.name}
-                    image={category.image}
+                    title={gridItem.name}
+                    image={gridItem.image}
                     className="card"
                   />
                 </CustomButton>
@@ -44,17 +44,17 @@ const MuiGrid = ({ gridItems }) => {
           ))}
 
         {!isModuleCategories &&
-          gridItems.map((category) => (
-            <Grid key={category.id} item xs={12} className="grid-item">
-              <Link to={`category/${category.name}`}>
+          gridItems.map((gridItem) => (
+            <Grid key={gridItem.id} item xs={12} className="grid-item">
+              <Link to={`${linkType}/${gridItem.id}`}>
                 <CustomButton
-                  className="btn category-list-btn white-inverse"
+                  className="btn grid-list-btn white-inverse"
                   variant="outline"
                 >
                   <List>
                     <ListItem>
                       <ListItemText
-                        primary={<h2 className="list-item">{category.name}</h2>}
+                        primary={<h2 className="list-item">{gridItem.name}</h2>}
                       />
                     </ListItem>
                   </List>

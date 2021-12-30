@@ -3,7 +3,7 @@ Routes
 Frontend Routes
 Main Page --> "/"
 Shop Page --> "/shop"
-Category --> "/shop/category/:categoryName"
+Category --> "/shop/category/:categoryID"
 Item --> "/shop/item/:itemID"
 Search --> "/shop/search/:searchQuery"
 Cart --> "/shop/cart/:buyerID"
