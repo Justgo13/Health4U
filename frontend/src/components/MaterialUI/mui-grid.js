@@ -8,7 +8,7 @@ import CustomButton from "../custom-button";
 import MuiToggleButton from "./mui-toggle-button";
 import MuiBox from "./mui-box";
 
-const MuiGrid = ({ linkType, gridItems }) => {
+const MuiGrid = ({ baseLinkType, linkType, gridItems }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
   return (
     <Fragment>
@@ -31,7 +31,7 @@ const MuiGrid = ({ linkType, gridItems }) => {
               md={4}
               className="grid-item"
             >
-              <Link to={`${linkType}/${gridItem.id}`}>
+              <Link to={`/${baseLinkType}/${linkType}/${gridItem.id}`}>
                 <CustomButton className="no-background no-btn-padding" variant="outline">
                   <MuiCard
                     title={gridItem.name}
@@ -46,7 +46,7 @@ const MuiGrid = ({ linkType, gridItems }) => {
         {!isModuleCategories &&
           gridItems.map((gridItem) => (
             <Grid key={gridItem.id} item xs={12} className="grid-item">
-              <Link to={`${linkType}/${gridItem.id}`}>
+              <Link to={`/${baseLinkType}/${linkType}/${gridItem.id}`}>
                 <CustomButton
                   className="btn grid-list-btn white-inverse"
                   variant="outline"
