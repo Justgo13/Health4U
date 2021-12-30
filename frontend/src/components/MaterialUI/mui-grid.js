@@ -1,23 +1,30 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import { List, ListItem, ListItemText } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 
 import MuiCard from "./mui-card";
 import CustomButton from "../custom-button";
 
-const MuiGrid = ({ categoryListActive, categoryModuleActive, list }) => {
+const MuiGrid = ({ moduleGrid, listGrid, gridItems }) => {
   return (
     <Grid
       container
       spacing={{ xs: 2, md: 5 }}
       columns={{ xs: 4, sm: 8, md: 12 }}
       className="grid"
+      rowSpacing={1}
     >
-      {categoryModuleActive &&
-        list.categories.map((category) => (
-          <Grid key={uuidv4()} item xs={12} sm={6} md={4} className="grid-item">
+      {moduleGrid &&
+        gridItems.map((category) => (
+          <Grid
+            key={category.id}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            className="grid-item"
+          >
             <Link to={`category/${category.name}`}>
               <CustomButton className="no-background btn" variant="outline">
                 <MuiCard
@@ -30,9 +37,9 @@ const MuiGrid = ({ categoryListActive, categoryModuleActive, list }) => {
           </Grid>
         ))}
 
-      {categoryListActive &&
-        list.categories.map((category) => (
-          <Grid key={uuidv4()} item xs={12} className="grid-item">
+      {listGrid &&
+        gridItems.map((category) => (
+          <Grid key={category.id} item xs={12} className="grid-item">
             <Link to={`category/${category.name}`}>
               <CustomButton
                 className="btn category-list-btn white-inverse"

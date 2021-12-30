@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import Carousel from "react-material-ui-carousel";
 
 import FontAwesomeIcon from "../font-awesome-icon";
@@ -31,10 +30,13 @@ const MuiCarousel = ({ carouselItems }) => {
           <FontAwesomeIcon className="fa-caret-square-left caret fa-lg" />
         }
       >
-        {carouselItems.map((item, i) => {
+        {carouselItems.map((item) => {
           return (
-            <MuiContainer key={uuidv4()} id="featuredContainer">
-              <CustomButton className="no-background carousel-card-btn btn" variant="outline">
+            <MuiContainer key={item.id} id="featuredContainer">
+              <CustomButton
+                className="no-background carousel-card-btn btn"
+                variant="outline"
+              >
                 <MuiCard
                   title={item.name}
                   description={item.description}
