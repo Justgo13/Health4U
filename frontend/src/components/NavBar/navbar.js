@@ -6,6 +6,7 @@ import Search from "./search";
 import NavbarBrand from "./navbar-brand";
 import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
+import ScrollReset from "../scroll-reset";
 
 // Material UI custom components
 import MuiBox from "../MaterialUI/mui-box";
@@ -22,6 +23,7 @@ const accountChoices = [
 const Navbar = () => {
   return (
     <Fragment>
+      <ScrollReset />
       <AppBar position="static" className="app-bar">
         <MuiContainer maxWidth="xl">
           <Toolbar disableGutters>
