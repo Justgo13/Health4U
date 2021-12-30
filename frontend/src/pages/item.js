@@ -4,6 +4,8 @@ import { CardMedia } from "@mui/material";
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiForm from "../components/MaterialUI/mui-form";
+import MuiCarousel from "../components/MaterialUI/mui-carousel";
+
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
 
@@ -17,6 +19,33 @@ const item = {
     "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
   price: 2.12,
 };
+
+const relatedItems = [
+  {
+    id: "1",
+    name: "Random Item #1",
+    image:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+  },
+  {
+    id: "2",
+    name: "Random Item #2",
+    image:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+  },
+  {
+    id: "3",
+    name: "Random Item #3",
+    image:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+  },
+  {
+    id: "4",
+    name: "Random Item #4",
+    image:
+      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+  },
+];
 
 const Item = () => {
   return (
@@ -54,6 +83,13 @@ const Item = () => {
         <MuiBox className="price-box flex-child">
           <MuiForm />
         </MuiBox>
+      </MuiBox>
+
+      <MuiBox className="container">
+        <MuiDivider
+          children={<h2 className="red-header">Related Products</h2>}
+        />
+        <MuiCarousel carouselItems={relatedItems} />
       </MuiBox>
     </Fragment>
   );

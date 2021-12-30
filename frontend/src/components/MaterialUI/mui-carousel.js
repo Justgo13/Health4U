@@ -34,7 +34,7 @@ const MuiCarousel = ({ carouselItems }) => {
         {carouselItems.map((item) => {
           return (
             <MuiContainer key={item.id} id="featuredContainer">
-              <Link className="featured-link" to={`item/${item.id}`}>
+              <Link className="featured-link" to={`/shop/item/${item.id}`}>
                 <CustomButton
                   className="no-background carousel-card-btn no-btn-padding"
                   variant="outline"

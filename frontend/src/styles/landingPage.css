@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+.full-height {
+  height: 100%;
+}
+
 #landingPage {
   background-image: url("https://t3.ftcdn.net/jpg/02/58/32/94/360_F_258329401_MCy6WUBkklTARuBbYRwENqDYE9ssYrZk.jpg");
   height: 100vh;

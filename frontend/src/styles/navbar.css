@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;

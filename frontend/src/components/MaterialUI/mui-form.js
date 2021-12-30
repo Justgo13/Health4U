@@ -5,7 +5,7 @@ import MuiBox from "./mui-box";
 import MuiSelect from "./Form/mui-select";
 
 import "../../styles/form.css";
-import "../../styles/item.css";
+import "../../styles/box.css";
 
 const MuiForm = () => {
   const MAX_QUANITY = 50;
@@ -21,12 +21,12 @@ const MuiForm = () => {
   }
 
   return (
-    <form action="" onSubmit={submitHandler}>
+    <form action="" onSubmit={submitHandler} className="full-height">
       <h3>
         {`$2`}
         <span className="decimal-cost">99</span>
       </h3>
-      <MuiBox className="item-purchase-details">
+      <MuiBox className="grey-background full-height">
         <MuiSelect labelText="Quantity" selectItems={quantity} />
         <CustomButton className="white-inverse big-btn">
           Add to cart

@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .landingPageContainer {
   display: flex !important;
   flex-direction: column;
