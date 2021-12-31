@@ -13,6 +13,7 @@ import MuiBox from "../MaterialUI/mui-box";
 import MuiContainer from "../MaterialUI/mui-container";
 import MuiMenu from "../MaterialUI/mui-menu";
 
+import { getCookie, CART_COUNT } from "../../shared/cookies/cookies";
 const accountChoices = [
   "Buyer Sign Up",
   "Buyer Login",
@@ -40,7 +41,7 @@ const Navbar = () => {
               </MuiBox>
               <CustomButton variant="text" size="large" className="nav-btn">
                 <FontAwesomeIcon className="fa-shopping-cart" />
-                <p id="cart-total">0</p>
+                <p id="cart-total">{getCookie(CART_COUNT) || 0}</p>
               </CustomButton>
             </MuiBox>
           </Toolbar>

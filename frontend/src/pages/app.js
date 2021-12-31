@@ -12,11 +12,9 @@ import Category from "./category";
 import Navbar from "../components/NavBar/navbar";
 import Item from "./item";
 
-import CartProvider from "../shared/provider/cart-provider";
-
 const App = () => {
   return (
-    <CartProvider value={{shoppingCartItemCount: 0}}>
+    
       <Router>
         <Routes>
           <Route path="*" element={<Navigate replace to="/" />} />
@@ -41,7 +39,6 @@ const App = () => {
           <Route path="seller/account/:sellerID" element={<LandingPage />} />
         </Routes>
       </Router>
-    </CartProvider>
   );
 };
 

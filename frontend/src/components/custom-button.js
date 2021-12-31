@@ -6,10 +6,11 @@ import "../styles/button.css";
 const CustomButton = (props) => {
   return (
     <Button
-      variant={`${props.variant || "contained"}`}
+      variant={props.variant || "contained"}
       className={props.className}
-      size={`${props.size || "medium"}`}
+      size={props.size || "medium"}
       onClick={props.onClick}
+      type={props.type || ""}
     >
       {props.children}
     </Button>

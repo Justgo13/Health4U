@@ -9,6 +9,8 @@ import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
 
+import { useCartContext } from "../shared/context/consumer/cart-consumer";
+
 import "../styles/item.css";
 
 const item = {
@@ -55,137 +57,142 @@ const allItems = [
 
 const relatedItems = allItems.filter((i) => i.category === item.category);
 
+const roundHalf = (num) => {
+  return Math.round(num * 2) / 2;
+};
+
+// had to hardcoded ratings, could not find a way to dynamically generate them
+const displayStars = (itemRating) => {
+  itemRating = roundHalf(itemRating); // rounds ratings such as 2.2 to 2.0
+  switch (itemRating) {
+    case 0.5:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star-half-alt orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+
+    case 1:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+    case 1.5:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star-half-alt orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+    case 2.0:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+
+    case 2.5:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star-half-alt orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+
+    case 3.0:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+
+    case 3.5:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star-half-alt orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+
+    case 4.0:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+    case 4.5:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star-half-alt orange" />
+        </Fragment>
+      );
+    case 5.0:
+      return (
+        <Fragment>
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+          <FontAwesomeIcon className="fa-star orange" />
+        </Fragment>
+      );
+    default:
+      return (
+        <Fragment>
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+          <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
+        </Fragment>
+      );
+  }
+};
+
 const Item = () => {
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
-
-  const roundHalf = (num) => {
-    return Math.round(num * 2) / 2;
-  };
-
-  // had to hardcoded ratings, could not find a way to dynamically generate them
-  const displayStars = (itemRating) => {
-    itemRating = roundHalf(itemRating); // rounds ratings such as 2.2 to 2.0
-    switch (itemRating) {
-      case 0.5:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star-half-alt orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-
-      case 1:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-      case 1.5:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star-half-alt orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-      case 2.0:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-
-      case 2.5:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star-half-alt orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-
-      case 3.0:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-
-      case 3.5:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star-half-alt orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-
-      case 4.0:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-      case 4.5:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star-half-alt orange" />
-          </Fragment>
-        );
-      case 5.0:
-        return (
-          <Fragment>
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-            <FontAwesomeIcon className="fa-star orange" />
-          </Fragment>
-        );
-      default:
-        return (
-          <Fragment>
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-            <FontAwesomeIcon baseClassName="far" className="fa-star orange" />
-          </Fragment>
-        );
-    }
-  };
+  const cartContext = useCartContext();
 
   const bookmarkHandler = (e) => {
     setBookMarkClicked(!bookMarkClicked);
+  };
+
+  const addToCartHandler = (e) => {
+    cartContext.onAddToCart(item.name);
   };
 
   return (
@@ -205,10 +212,7 @@ const Item = () => {
           )}
 
           {bookMarkClicked && (
-            <FontAwesomeIcon
-              className="fa-bookmark"
-              fontSize="3rem"
-            />
+            <FontAwesomeIcon className="fa-bookmark" fontSize="3rem" />
           )}
           <span className="small-plus">
             <FontAwesomeIcon className="fa-plus" />
@@ -231,7 +235,7 @@ const Item = () => {
         </MuiBox>
 
         <MuiBox className="price-box flex-child">
-          <MuiForm />
+          <MuiForm submitHandler={addToCartHandler} />
         </MuiBox>
       </MuiBox>
 

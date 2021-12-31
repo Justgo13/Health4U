@@ -7,13 +7,8 @@ import MuiSelect from "./Form/mui-select";
 import "../../styles/form.css";
 import "../../styles/box.css";
 
-const MuiForm = () => {
+const MuiForm = ({submitHandler}) => {
   const MAX_QUANITY = 50;
-
-  const submitHandler = (e) => {
-    e.prevetDefault();
-  };
-
   const quantity = [];
 
   for (let i = 1; i < MAX_QUANITY; i++) {
@@ -28,7 +23,7 @@ const MuiForm = () => {
       </h3>
       <MuiBox className="grey-background full-height">
         <MuiSelect labelText="Quantity" selectItems={quantity} />
-        <CustomButton className="white-inverse big-btn">
+        <CustomButton className="white-inverse big-btn" type="submit">
           Add to cart
         </CustomButton>
 
