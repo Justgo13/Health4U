@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {v4 as uuidv4} from "uuid"
 
 import MuiBox from "../mui-box";
 
@@ -22,7 +23,7 @@ const MuiSelect = ({ labelText, selectItems }) => {
           placeholder="1"
         >
           {selectItems.map((item) => (
-            <MenuItem value={item}>{item}</MenuItem>
+            <MenuItem key={uuidv4()} value={item}>{item}</MenuItem>
           ))}
         </Select>
       </FormControl>
