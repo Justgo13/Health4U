@@ -18,6 +18,10 @@ a {
   height: 100%;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;

@@ -18,6 +18,10 @@ a {
   height: 100%;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .icon {
   color: #f00;
   margin: 0 2rem;
@@ -30,6 +34,10 @@ a {
 
 .caret {
   color: #000;
+}
+
+.orange {
+  color: #f7bd00;
 }
 
 /*# sourceMappingURL=icon.css.map */

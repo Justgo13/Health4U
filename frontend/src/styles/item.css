@@ -18,6 +18,10 @@ a {
   height: 100%;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .flex-child {
   flex: 1 !important;
 }
@@ -34,8 +38,8 @@ a {
 }
 
 .item-desc {
-  margin: 2rem 0;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .red-header {

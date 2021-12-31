@@ -18,6 +18,10 @@ a {
   height: 100%;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .box {
   padding: 1rem 0;
 }
@@ -32,7 +36,6 @@ a {
   justify-content: flex-start;
   align-items: flex-start;
   flex-grow: 0;
-  height: 100vh;
 }
 
 .right-align {
@@ -51,7 +54,7 @@ a {
 .price-box {
   text-align: center;
   margin: 10% 0;
-  height: 80%;
+  height: auto;
 }
 
 .grey-background {

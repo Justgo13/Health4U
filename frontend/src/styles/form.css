@@ -18,6 +18,10 @@ a {
   height: 100%;
 }
 
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .form-control {
   width: 20%;
 }
