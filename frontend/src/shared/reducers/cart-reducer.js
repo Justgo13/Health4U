@@ -7,7 +7,7 @@ const cartReducer = (state, action) => {
     case "ADD_TO_CART":
       productName = action.productName;
       cartItems = [...state.cartItems];
-      productQuantity = action.productQuantity
+      productQuantity = action.productQuantity;
 
       if (cartItems === []) {
         return { ...state };
@@ -47,7 +47,7 @@ export const CartReducer = (initCartCount, initCartItems) => {
     dispatch({
       type: "ADD_TO_CART",
       productName,
-      productQuantity
+      productQuantity,
     });
   };
 

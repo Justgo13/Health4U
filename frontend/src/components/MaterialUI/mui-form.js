@@ -15,8 +15,6 @@ const MuiForm = ({ submitHandler, formHeader }) => {
     quantity.push(i);
   }
 
-  
-
   return (
     <form action="" onSubmit={submitHandler} className="full-height">
       <h3>{formHeader}</h3>
