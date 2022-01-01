@@ -8,6 +8,7 @@ import MuiCarousel from "../components/MaterialUI/mui-carousel";
 
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
+import MuiModal from "../components/MaterialUI/mui-modal";
 
 import { useCartContext } from "../shared/context/consumer/cart-consumer";
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
@@ -187,6 +188,11 @@ const displayStars = (itemRating) => {
 const Item = () => {
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
 
+  // modal state and listeners
+  const [isModalShown, setIsModalShown] = useState(false);
+  const showModalHandler = () => setIsModalShown(true);
+  const hideModalHandler = () => setIsModalShown(false);
+
   const cartContext = useCartContext();
   const quantityContext = useQuantityContext();
 
@@ -195,7 +201,10 @@ const Item = () => {
   };
 
   const addToCartHandler = (e) => {
-    cartContext.onAddToCart(item.name, quantityContext.quantity);
+    e.preventDefault()
+    showModalHandler()
+    cartContext.onAddToCart(item.name, quantityContext.quantity, item.image, item.price);
+    
   };
 
   return (
@@ -244,6 +253,8 @@ const Item = () => {
           />
         </MuiBox>
       </MuiBox>
+
+      {isModalShown && <MuiModal isModalShown={isModalShown} onClose={hideModalHandler} modalHeader="Cart Preview" modalContent={cartContext}/>}
 
       <MuiBox className="container item-desc no-bottom-padding">
         <MuiDivider

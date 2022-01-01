@@ -1,0 +1,33 @@
+.link {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Eczar", serif;
+}
+
+h2, h3, h4, h5, h6, p {
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
+.modal-image {
+  display: inline !important;
+  object-fit: fill;
+  height: 8rem;
+  width: 8rem !important;
+  border-radius: 25%;
+}
+
+/*# sourceMappingURL=image.css.map */

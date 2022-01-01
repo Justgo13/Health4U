@@ -6,10 +6,12 @@ const CartProvider = (props) => {
   const { cartState, addToCartHandler } = CartReducer(0, []);
 
   const shoppingCartItemCount = cartState.shoppingCartItemCount;
+  const cartItems = cartState.cartItems;
   return (
     <CartContext.Provider
       value={{
         shoppingCartItemCount,
+        cartItems,
         onAddToCart: addToCartHandler,
       }}
     >

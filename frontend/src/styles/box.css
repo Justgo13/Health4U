@@ -73,15 +73,33 @@ a {
 }
 
 .modal-box {
-  position: "absolute";
-  top: "50%";
-  left: "50%";
-  transform: "translate(-50%, -50%)";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 400;
-  bgcolor: "background.paper";
-  border: "2px solid #000";
-  boxShadow: 24;
-  p: 4;
+  background-color: #fff;
+  border: 2px solid #000 !important;
+  box-shadow: 2px 4px 4px -4px #f00 !important;
+  padding: 1rem;
+}
+
+.modal-header {
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.modal-header h2 {
+  font-size: 3rem;
+}
+
+.modal-details .modal-item {
+  border-bottom: 1px solid #000;
+}
+.modal-details h2 {
+  margin: 0 1rem;
+  font-size: 2rem;
+  display: inline;
 }
 
 /*# sourceMappingURL=box.css.map */

@@ -16,8 +16,12 @@ const cartReducer = (state, action) => {
       productEntry = cartItems.find((item) => item.productName === productName);
 
       if (productEntry === undefined) {
-        cartItems.push({ productName, cartCount: productQuantity });
-        console.log(cartItems);
+        cartItems.push({
+          productName,
+          cartCount: productQuantity,
+          productImage: action.productImage,
+          productBasePrice: action.productBasePrice,
+        });
       } else {
         const productIndex = cartItems.indexOf(productEntry);
         cartItems[productIndex].cartCount += productQuantity;
@@ -43,11 +47,18 @@ export const CartReducer = (initCartCount, initCartItems) => {
     cartItems: initCartItems,
   });
 
-  const addToCartHandler = (productName, productQuantity) => {
+  const addToCartHandler = (
+    productName,
+    productQuantity,
+    productImage,
+    productBasePrice
+  ) => {
     dispatch({
       type: "ADD_TO_CART",
       productName,
       productQuantity,
+      productImage,
+      productBasePrice,
     });
   };
 

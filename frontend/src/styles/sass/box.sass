@@ -35,12 +35,28 @@
         font-weight: 700
 
 .modal-box
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 400
+    background-color: #fff
+    @include global.border(2px)
+    @include global.box-shadow($vertialOffset: 4px, $color: global.$red)
+    padding: 1rem
+
+.modal-header
+    justify-content: center
+    padding-top: 0
+    padding-bottom: 0
+
+    h2
+        font-size: 3rem
+
+.modal-details
+    .modal-item
+       border-bottom: 1px solid global.$black
+    h2
+        margin: 0 1rem
+        font-size: 2rem
+        display: inline
