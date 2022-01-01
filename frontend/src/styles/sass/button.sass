@@ -1,4 +1,5 @@
 @use "_global.sass" as global
+$large-button-text: 3rem
 
 .white-inverse
     @include global.inverse($bgColor: global.$white, $color: global.$red)
@@ -10,9 +11,9 @@
     background-color: global.$white !important
 
 .landingPageBtn
-    font-size: 3rem !important
-    width: 30vw
-    border-radius: 10% !important
+    font-size: $large-button-text !important
+    @include global.width(30vw)
+    @include global.border-radius(5%)
 
 .no-btn-padding
     padding: 0 !important

@@ -22,6 +22,10 @@ a {
   padding-bottom: 0;
 }
 
+.inline-display {
+  display: inline;
+}
+
 .form-control {
   width: 30%;
 }

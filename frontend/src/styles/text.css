@@ -22,24 +22,13 @@ a {
   padding-bottom: 0;
 }
 
-.fullscreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.heading {
-  font-size: 10rem;
-  font-weight: 400;
-  color: #f00;
-  margin: 1rem;
-}
-.heading p {
+.inline-display {
   display: inline;
 }
 
-/*# sourceMappingURL=landingPage.css.map */
+.red-text-xl {
+  color: #f00;
+  font-size: 10rem !important;
+}
+
+/*# sourceMappingURL=text.css.map */

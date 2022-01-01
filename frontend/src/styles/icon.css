@@ -22,6 +22,10 @@ a {
   padding-bottom: 0;
 }
 
+.inline-display {
+  display: inline;
+}
+
 .icon {
   color: #f00;
   margin: 0 2rem;

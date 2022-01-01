@@ -5,27 +5,29 @@ import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
 import MuiContainer from "../components/MaterialUI/mui-container";
 import MuiBox from "../components/MaterialUI/mui-box";
-
-import "../styles/landingPage.css";
+import MuiTypography from "../components/MaterialUI/mui-typography";
 
 const LandingPage = () => {
-  const enterShopHandler = () => {};
-
   return (
-    <MuiBox className="fullscreen landingPage">
-      <MuiContainer className="landingPageContainer">
-        <MuiBox className="row">
-          <h1 className="heading">
-            <FontAwesomeIcon className="fa-heartbeat icon" fontSize="10rem" />
-            <p>Health4U</p>
-          </h1>
+    <MuiBox
+      style={{
+        backgroundImage: `url(https://t3.ftcdn.net/jpg/02/58/32/94/360_F_258329401_MCy6WUBkklTARuBbYRwENqDYE9ssYrZk.jpg)`,
+        height: "100vh",
+        backgroundSize: "cover",
+      }}
+    >
+      <MuiContainer className="full-height-container">
+        <MuiBox>
+          <FontAwesomeIcon className="fa-heartbeat icon" fontSize="10rem" />
+          <MuiTypography baseComponent="p" className="red-text-xl inline-display">
+            Health4U
+          </MuiTypography>
         </MuiBox>
-        <MuiBox className="row">
+        <MuiBox>
           <Link to="shop">
             <CustomButton
               variant="outlined"
               className="white-inverse landingPageBtn"
-              onClick={enterShopHandler}
             >
               Shop Now
             </CustomButton>

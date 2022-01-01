@@ -22,6 +22,10 @@ a {
   padding-bottom: 0;
 }
 
+.inline-display {
+  display: inline;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;
@@ -39,7 +43,7 @@ a {
 .landingPageBtn {
   font-size: 3rem !important;
   width: 30vw;
-  border-radius: 10% !important;
+  border-radius: 5% !important;
 }
 
 .no-btn-padding {

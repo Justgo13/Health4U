@@ -5,7 +5,7 @@ import "../../styles/box.css";
 
 const MuiBox = (props) => {
   return (
-    <Box className={`box ${props.className}`}>
+    <Box style={props.style || null} className={`box ${props.className || ""}`}>
       {props.children}
     </Box>
   );

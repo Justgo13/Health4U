@@ -22,6 +22,10 @@ a {
   padding-bottom: 0;
 }
 
+.inline-display {
+  display: inline;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;

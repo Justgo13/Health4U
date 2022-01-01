@@ -6,6 +6,12 @@ $blue: #00f
 $grey: #F4F6F9
 $orange: #f7bd00
 
+@mixin border-radius($borderRadius: 50%) 
+    border-radius: $borderRadius !important
+
+@mixin width($width: 100%)
+    width: $width
+
 @mixin inverse($bgColor: #fff, $color: #000)
     background-color: $bgColor !important
     color: $color !important
@@ -43,3 +49,6 @@ a
 
 .no-bottom-padding
     padding-bottom: 0
+    
+.inline-display
+    display: inline
