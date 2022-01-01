@@ -1,5 +1,9 @@
 @use "_global.sass" as global
 
+.left-align-box
+    @include global.flex($justify-content: flex-end, $grow: 1)
+    margin-bottom: 1rem
+
 .box
     padding: 1rem 0
 
@@ -50,7 +54,7 @@
 
 .modal-details
     .modal-item
-       border-bottom: 1px solid global.$black
+        border-bottom: 1px solid global.$black
     h2
         margin: 0 1rem
         font-size: 2rem

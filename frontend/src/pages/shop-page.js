@@ -5,8 +5,6 @@ import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
 
-import "../styles/shopPage.css";
-
 const ShopPage = () => {
   const items = [
     {
@@ -66,8 +64,12 @@ const ShopPage = () => {
     <MuiBox>
       <MuiCarousel carouselItems={items} />
       <MuiBox className="container">
-        <MuiDivider children={<h3>Categories</h3>} />
-        <MuiGrid gridItems={categoryList} linkType="category" baseLinkType="shop"/>
+        <MuiDivider headerText="Categories" className="divider-header" />
+        <MuiGrid
+          gridItems={categoryList}
+          link="category"
+          baseLink="shop"
+        />
       </MuiBox>
     </MuiBox>
   );

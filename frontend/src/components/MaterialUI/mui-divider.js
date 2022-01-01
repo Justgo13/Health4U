@@ -1,8 +1,14 @@
 import React from "react";
 import Divider from "@mui/material/Divider";
 
+import "../../styles/text.css"
+
 const MuiDivider = (props) => {
-  return <Divider children={props.children} className={`${props.className}`} />;
+  return (
+    <Divider>
+      <h3 className={props.className || ""}>{props.headerText}</h3>
+    </Divider>
+  );
 };
 
 export default MuiDivider;

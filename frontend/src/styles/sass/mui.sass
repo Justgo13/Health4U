@@ -4,13 +4,12 @@
     @include global.flex($direction: column, $justify-content: center, $align-items: center)
     height: 100vh
 
-.carousel
-    margin: 3rem 0
-    height: 45vh
-
-#featuredContainer
+.featuredContainer
     display: flex !important
     height: 40vh
+
+.featured-link
+    width: 90%
 
 .card
     width: 100%
@@ -20,22 +19,6 @@
     @include global.box-shadow($vertialOffset: 4px, $color: global.$red)
     margin: 1rem 0
 
-.toggle-group
-    justify-content: flex-end
-
-.grid-item
-    padding-top: 0 !important
-    padding-left: 1rem !important
-
-.grid
-    margin: 2rem 0 !important
-
 .list-item
     font-size: 2rem
     font-family: 'Eczar', serif
-
-.menu-item-title
-    margin: 0 !important
-
-.featured-link
-    width: 90%

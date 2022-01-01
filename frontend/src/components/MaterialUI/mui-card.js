@@ -8,12 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 
+import MuiImage from "./mui-image";
+
 import "../../styles/mui.css";
 
 const MuiCard = ({ title, description, image, className }) => {
   return (
-    <Card className={`${className}`}>
-      <CardMedia component="img" height="80%" image={image} alt={title} />
+    <Card className={`card ${className || ""}`}>
+      <MuiImage image={image} alt={title}/>
       <CardContent>
         <Typography gutterBottom variant="h3" component="div">
           <h2>{title}</h2>

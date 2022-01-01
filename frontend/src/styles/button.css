@@ -1,3 +1,11 @@
+.default-border {
+  border: 1px solid #000 !important;
+}
+
+.max-width {
+  width: 100%;
+}
+
 .link {
   text-decoration: none;
 }
@@ -36,10 +44,6 @@ a {
   color: #fff !important;
 }
 
-.no-background, .no-background:hover {
-  background-color: #fff !important;
-}
-
 .xl-button {
   font-size: 3rem !important;
   width: 30vw;
@@ -59,11 +63,6 @@ a {
   width: 100%;
   height: 100%;
   margin: 0 3rem !important;
-}
-
-.grid-list-btn {
-  width: 100%;
-  border: 1px solid #000 !important;
 }
 
 .big-btn {

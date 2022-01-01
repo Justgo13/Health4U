@@ -13,12 +13,10 @@ const MuiCarousel = ({ carouselItems }) => {
   return (
     <MuiContainer>
       <Carousel
-        className="carousel"
         animation="slide"
         navButtonsAlwaysVisible
         activeIndicatorIconButtonProps
         navButtonsProps={{
-          // Change the background and radius of the actual buttons. THIS STYLES BOTH BUTTONS
           style: {
             background: "none",
             borderRadius: 0,
@@ -33,16 +31,15 @@ const MuiCarousel = ({ carouselItems }) => {
       >
         {carouselItems.map((item) => {
           return (
-            <MuiContainer key={item.id} id="featuredContainer">
+            <MuiContainer key={item.id} className="featuredContainer">
               <Link className="featured-link" to={`/shop/item/${item.id}`}>
                 <CustomButton
-                  className="no-background carousel-card-btn no-btn-padding"
+                  className="carousel-card-btn no-btn-padding"
                   variant="outline"
                 >
                   <MuiCard
                     title={item.name}
                     image={item.image}
-                    className="card"
                   />
                 </CustomButton>
               </Link>
