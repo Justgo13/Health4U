@@ -22,6 +22,12 @@ a {
   padding-bottom: 0;
 }
 
+.landingPage {
+  background-image: url("https://t3.ftcdn.net/jpg/02/58/32/94/360_F_258329401_MCy6WUBkklTARuBbYRwENqDYE9ssYrZk.jpg");
+  height: 100vh;
+  background-size: cover;
+}
+
 .box {
   padding: 1rem 0;
 }
@@ -64,6 +70,18 @@ a {
   text-align: left;
   margin: 2rem;
   font-weight: 700;
+}
+
+.modal-box {
+  position: "absolute";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  width: 400;
+  bgcolor: "background.paper";
+  border: "2px solid #000";
+  boxShadow: 24;
+  p: 4;
 }
 
 /*# sourceMappingURL=box.css.map */

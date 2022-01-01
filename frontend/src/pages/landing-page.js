@@ -12,7 +12,7 @@ const LandingPage = () => {
   const enterShopHandler = () => {};
 
   return (
-    <MuiBox id="landingPage" className="fullscreen">
+    <MuiBox className="fullscreen landingPage">
       <MuiContainer className="landingPageContainer">
         <MuiBox className="row">
           <h1 className="heading">
