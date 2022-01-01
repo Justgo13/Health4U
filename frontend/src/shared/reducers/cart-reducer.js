@@ -2,24 +2,25 @@ import React, { useReducer } from "react";
 import { createCookie, CART_COUNT, CART_ITEMS } from "../cookies/cookies";
 
 const cartReducer = (state, action) => {
+  let cartItems, productEntry, productName, productQuantity;
   switch (action.type) {
     case "ADD_TO_CART":
-      const productName = action.productName;
-      const cartItems = [...state.cartItems];
+      productName = action.productName;
+      cartItems = [...state.cartItems];
+      productQuantity = action.productQuantity
 
       if (cartItems === []) {
-        return state;
+        return { ...state };
       }
 
-      const productEntry = cartItems.find(
-        (item) => item.productName === productName
-      );
+      productEntry = cartItems.find((item) => item.productName === productName);
 
       if (productEntry === undefined) {
-        cartItems.push({ productName, cartCount: 1 });
+        cartItems.push({ productName, cartCount: productQuantity });
+        console.log(cartItems);
       } else {
         const productIndex = cartItems.indexOf(productEntry);
-        cartItems[productIndex].cartCount += 1;
+        cartItems[productIndex].cartCount += productQuantity;
       }
 
       // create cookies for storing cart information
@@ -42,10 +43,11 @@ export const CartReducer = (initCartCount, initCartItems) => {
     cartItems: initCartItems,
   });
 
-  const addToCartHandler = (productName) => {
+  const addToCartHandler = (productName, productQuantity) => {
     dispatch({
       type: "ADD_TO_CART",
       productName,
+      productQuantity
     });
   };
 

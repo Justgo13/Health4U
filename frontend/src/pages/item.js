@@ -10,6 +10,7 @@ import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
 
 import { useCartContext } from "../shared/context/consumer/cart-consumer";
+import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
 
 import "../styles/item.css";
 
@@ -185,14 +186,16 @@ const displayStars = (itemRating) => {
 
 const Item = () => {
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
+
   const cartContext = useCartContext();
+  const quantityContext = useQuantityContext();
 
   const bookmarkHandler = (e) => {
     setBookMarkClicked(!bookMarkClicked);
   };
 
   const addToCartHandler = (e) => {
-    cartContext.onAddToCart(item.name);
+    cartContext.onAddToCart(item.name, quantityContext.quantity);
   };
 
   return (
@@ -235,7 +238,10 @@ const Item = () => {
         </MuiBox>
 
         <MuiBox className="price-box flex-child">
-          <MuiForm submitHandler={addToCartHandler} />
+          <MuiForm
+            submitHandler={addToCartHandler}
+            formHeader={["$2", <span className="decimal-cost">99</span>]}
+          />
         </MuiBox>
       </MuiBox>
 

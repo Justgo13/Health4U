@@ -3,21 +3,22 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import {v4 as uuidv4} from "uuid"
 
 import MuiBox from "../mui-box";
+import {useQuantityContext} from "../../../shared/context/consumer/quantity-consumer"
 
 import "../../../styles/form.css";
 
-const MuiSelect = ({ labelText, selectItems }) => {
-  const [selectedValue, setSelectedValue] = useState();
+const MuiSelect = ({ labelText, selectItems, onChange }) => {
+  const quantityContext = useQuantityContext();
 
   const selectChangeHandler = (e) => {
-    setSelectedValue(e.target.value);
+    quantityContext.onQuantityChange(e.target.value)
   };
   return (
     <MuiBox>
       <FormControl className="form-control">
         <InputLabel>{labelText}</InputLabel>
         <Select
-          value={selectedValue}
+          value={quantityContext.quantity}
           label={labelText}
           onChange={selectChangeHandler}
           placeholder="1"

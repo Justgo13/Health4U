@@ -7,7 +7,7 @@ import MuiSelect from "./Form/mui-select";
 import "../../styles/form.css";
 import "../../styles/box.css";
 
-const MuiForm = ({submitHandler}) => {
+const MuiForm = ({ submitHandler, formHeader }) => {
   const MAX_QUANITY = 50;
   const quantity = [];
 
@@ -15,12 +15,11 @@ const MuiForm = ({submitHandler}) => {
     quantity.push(i);
   }
 
+  
+
   return (
     <form action="" onSubmit={submitHandler} className="full-height">
-      <h3>
-        {`$2`}
-        <span className="decimal-cost">99</span>
-      </h3>
+      <h3>{formHeader}</h3>
       <MuiBox className="grey-background full-height">
         <MuiSelect labelText="Quantity" selectItems={quantity} />
         <CustomButton className="white-inverse big-btn" type="submit">
