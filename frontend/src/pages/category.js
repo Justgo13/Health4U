@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiGrid from "../components/MaterialUI/mui-grid";
+import MuiTypography from "../components/MaterialUI/mui-typography";
 
 const Category = () => {
   const { categoryID } = useParams();
@@ -64,12 +65,12 @@ const Category = () => {
   const categoryName = categoryList.find(
     (category) => category.id === categoryID
   ).name;
-
-  console.log(categoryName);
   return (
-    <MuiBox className="header container">
-      <h3>{categoryName}</h3>
-      <MuiGrid gridItems={items} linkType="item" baseLinkType="shop"/>
+    <MuiBox className="container">
+      <MuiTypography className="divider-header center-text">
+        {categoryName}
+      </MuiTypography>
+      <MuiGrid gridItems={items} link="item" baseLink="shop" />
     </MuiBox>
   );
 };
