@@ -13,6 +13,12 @@
 .flex-container
     @include global.flex()
 
+.flex-child
+    flex: 1 !important
+
+    &:first-child
+        margin-right: 2rem
+
 .right-align
     @include global.flex($justify-content: flex-end, $grow: 1)
 

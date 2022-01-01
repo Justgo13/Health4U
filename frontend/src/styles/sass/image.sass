@@ -6,3 +6,11 @@
     height: 8rem
     width: 8rem !important
     border-radius: 25%
+
+.image
+    margin: 1rem 0
+    height: 50vh !important
+    width: 40vw !important
+    object-fit: fill !important
+    @include global.border($size: 2px, $color: global.$red)
+    @include global.box-shadow($horizontalOffset: 0px, $vertialOffset: 8px, $color: global.$black)

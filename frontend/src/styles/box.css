@@ -38,6 +38,10 @@ a {
   margin: 0;
 }
 
+.align-top {
+  vertical-align: top;
+}
+
 .left-align-box {
   display: flex !important;
   flex-direction: row;
@@ -61,6 +65,13 @@ a {
   justify-content: flex-start;
   align-items: flex-start;
   flex-grow: 0;
+}
+
+.flex-child {
+  flex: 1 !important;
+}
+.flex-child:first-child {
+  margin-right: 2rem;
 }
 
 .right-align {

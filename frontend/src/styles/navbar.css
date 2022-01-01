@@ -38,6 +38,10 @@ a {
   margin: 0;
 }
 
+.align-top {
+  vertical-align: top;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;

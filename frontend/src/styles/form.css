@@ -38,6 +38,10 @@ a {
   margin: 0;
 }
 
+.align-top {
+  vertical-align: top;
+}
+
 .form-control {
   width: 30%;
 }

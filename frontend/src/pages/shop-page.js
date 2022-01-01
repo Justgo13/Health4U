@@ -64,7 +64,7 @@ const ShopPage = () => {
     <MuiBox>
       <MuiCarousel carouselItems={items} />
       <MuiBox className="container">
-        <MuiDivider headerText="Categories" className="divider-header" />
+        <MuiDivider headerText="Categories"/>
         <MuiGrid
           gridItems={categoryList}
           link="category"

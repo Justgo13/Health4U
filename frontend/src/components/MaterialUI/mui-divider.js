@@ -6,7 +6,7 @@ import "../../styles/text.css"
 const MuiDivider = (props) => {
   return (
     <Divider>
-      <h3 className={props.className || ""}>{props.headerText}</h3>
+      <h3 className={`divider-header ${props.className}`}>{props.headerText}</h3>
     </Divider>
   );
 };

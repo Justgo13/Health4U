@@ -38,6 +38,10 @@ a {
   margin: 0;
 }
 
+.align-top {
+  vertical-align: top;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;

@@ -1,28 +1,8 @@
 @use "_global.sass" as global
-.flex-child
-    flex: 1 !important
-
-    &:first-child
-        margin-right: 2rem
-
-.image
-    height: 50vh !important
-    width: 40vw !important
-    object-fit: fill !important
-    @include global.border($size: 2px, $color: global.$red)
-    @include global.box-shadow($horizontalOffset: 0px, $vertialOffset: 8px, $color: global.$black)
 
 .item-desc
     font-size: 1.5rem
     text-align: center
-
-.red-header
-    color: global.$red
-
+    
 .decimal-cost
-    vertical-align: top
     font-size: 2.5rem
-
-.small-plus
-    vertical-align: top
-    font-size: 1.5rem

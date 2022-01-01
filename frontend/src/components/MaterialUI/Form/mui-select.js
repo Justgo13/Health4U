@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,11 +26,15 @@ const MuiSelect = ({ labelText, selectItems }) => {
           value={quantityContext.quantity}
           label={labelText}
           onChange={selectChangeHandler}
-          renderValue={() => (
-            <MenuItem key={uuidv4()} value={1}>
-              1
-            </MenuItem>
-          )}
+          renderValue={
+            quantityContext.quantity === 1
+              ? () => (
+                  <MenuItem key={uuidv4()} value={1}>
+                    1
+                  </MenuItem>
+                )
+              : null
+          }
         >
           {selectItems.map((item) => (
             <MenuItem key={uuidv4()} value={item}>

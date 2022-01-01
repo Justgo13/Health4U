@@ -9,6 +9,8 @@ import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
 import MuiModal from "../components/MaterialUI/mui-modal";
+import MuiTypography from "../components/MaterialUI/mui-typography";
+import MuiImage from "../components/MaterialUI/mui-image";
 
 import { useCartContext } from "../shared/context/consumer/cart-consumer";
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
@@ -201,10 +203,14 @@ const Item = () => {
   };
 
   const addToCartHandler = (e) => {
-    e.preventDefault()
-    showModalHandler()
-    cartContext.onAddToCart(item.name, quantityContext.quantity, item.image, item.price);
-    
+    e.preventDefault();
+    showModalHandler();
+    cartContext.onAddToCart(
+      item.name,
+      quantityContext.quantity,
+      item.image,
+      item.price
+    );
   };
 
   return (
@@ -212,7 +218,7 @@ const Item = () => {
       <MuiBox className="small-box right-align">
         <CustomButton
           variant="text"
-          className="black no-background no-padding"
+          className="black no-btn-padding"
           onClick={bookmarkHandler}
         >
           {!bookMarkClicked && (
@@ -226,7 +232,7 @@ const Item = () => {
           {bookMarkClicked && (
             <FontAwesomeIcon className="fa-bookmark" fontSize="3rem" />
           )}
-          <span className="small-plus">
+          <span className="align-top">
             <FontAwesomeIcon className="fa-plus" />
           </span>
         </CustomButton>
@@ -234,42 +240,42 @@ const Item = () => {
 
       <MuiBox className="flex-container container">
         <MuiBox className="flex-child">
-          <h3>{item.name} </h3>
+          <MuiTypography className="divider-header">{item.name}</MuiTypography>
 
-          <p>{displayStars(item.rating)}</p>
+          {displayStars(item.rating)}
 
-          <CardMedia
-            className="image"
-            component="img"
-            image={item.image}
-            alt={item.name}
-          />
+          <MuiImage className="image" image={item.image} alt={item.name} />
         </MuiBox>
 
         <MuiBox className="price-box flex-child">
           <MuiForm
             submitHandler={addToCartHandler}
-            formHeader={["$2", <span className="decimal-cost">99</span>]}
+            formHeader={["$2", <span className="decimal-cost align-top">99</span>]}
           />
         </MuiBox>
       </MuiBox>
 
-      {isModalShown && <MuiModal isModalShown={isModalShown} onClose={hideModalHandler} modalHeader="Cart Preview" modalContent={cartContext}/>}
+      {isModalShown && (
+        <MuiModal
+          isModalShown={isModalShown}
+          onClose={hideModalHandler}
+          modalHeader="Cart Preview"
+          modalContent={cartContext}
+        />
+      )}
 
       <MuiBox className="container item-desc no-bottom-padding">
-        <MuiDivider
-          children={<h2 className="red-header">Product Details</h2>}
-        />
+        <MuiDivider headerText="Product Details" />
         <MuiBox className="no-bottom-padding">
-          <p>Description - {item.description}</p>
-          <p>Manufacturer - Health4U</p>
-          <p>First available - December 30, 2021</p>
+          <MuiTypography variant="p" baseComponent="p" class>{`Description -> ${item.description}`}</MuiTypography>
+          <MuiTypography variant="p" baseComponent="p">{`Manufacturer -> Health4U`}</MuiTypography>
+          <MuiTypography variant="p" baseComponent="p">{`First available -> December 30, 2021`}</MuiTypography>
         </MuiBox>
       </MuiBox>
 
       <MuiBox className="container">
         <MuiDivider
-          children={<h2 className="red-header">Related Products</h2>}
+          headerText="Related Products"
         />
         <MuiCarousel carouselItems={relatedItems} />
       </MuiBox>
