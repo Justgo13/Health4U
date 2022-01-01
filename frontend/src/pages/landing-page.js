@@ -6,6 +6,7 @@ import CustomButton from "../components/custom-button";
 import MuiContainer from "../components/MaterialUI/mui-container";
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiTypography from "../components/MaterialUI/mui-typography";
+import ScrollReset from "../components/scroll-reset";
 
 const LandingPage = () => {
   return (
@@ -16,10 +17,14 @@ const LandingPage = () => {
         backgroundSize: "cover",
       }}
     >
+      <ScrollReset />
       <MuiContainer className="full-height-container">
         <MuiBox>
           <FontAwesomeIcon className="fa-heartbeat icon" fontSize="10rem" />
-          <MuiTypography baseComponent="p" className="red-text-xl inline-display">
+          <MuiTypography
+            baseComponent="p"
+            className="red-text-xl inline-display"
+          >
             Health4U
           </MuiTypography>
         </MuiBox>
