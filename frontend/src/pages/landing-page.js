@@ -27,7 +27,7 @@ const LandingPage = () => {
           <Link to="shop">
             <CustomButton
               variant="outlined"
-              className="white-inverse landingPageBtn"
+              className="white-inverse xl-button"
             >
               Shop Now
             </CustomButton>
