@@ -34,6 +34,10 @@ a {
   display: inline;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;
@@ -61,15 +65,6 @@ a {
   justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
-}
-
-#cart-total {
-  margin: 0;
-  margin-left: 0.5rem;
-}
-
-.menu-item-title {
-  margin: 0 !important;
 }
 
 /*# sourceMappingURL=navbar.css.map */

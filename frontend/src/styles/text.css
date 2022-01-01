@@ -34,6 +34,10 @@ a {
   display: inline;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .red-text-xl {
   color: #f00;
   font-size: 10rem !important;

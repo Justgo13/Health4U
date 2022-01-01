@@ -3,10 +3,9 @@ import { Menu, MenuItem, Typography } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 import CustomButton from "../custom-button";
+import MuiTypography from "./mui-typography";
 
 import "../../styles/mui.css";
-import "../../styles/navbar.css";
-
 const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
   const [menuState, setMenuState] = useState(null);
 
@@ -26,7 +25,7 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         onClick={showUserMenuHandler}
         className="nav-btn"
       >
-        <h4 className="menu-item-title">{menuMainButtonText}</h4>
+        <MuiTypography variant="h5" className="no-margin">{menuMainButtonText}</MuiTypography>
       </CustomButton>
       <Menu
         sx={{ mt: `${size || "3rem"}` }}

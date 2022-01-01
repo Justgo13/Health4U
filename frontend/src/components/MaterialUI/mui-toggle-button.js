@@ -17,7 +17,6 @@ const MuiToggleButton = ({ onChange }) => {
       value={currentView}
       exclusive
       onChange={handleChange}
-      className="toggle-group"
     >
       <ToggleButton value="module" aria-label="module">
         <ViewModuleIcon />

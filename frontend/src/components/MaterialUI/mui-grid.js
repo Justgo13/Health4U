@@ -7,6 +7,7 @@ import MuiCard from "./mui-card";
 import CustomButton from "../custom-button";
 import MuiToggleButton from "./mui-toggle-button";
 import MuiBox from "./mui-box";
+import MuiTypography from "./mui-typography";
 
 const MuiGrid = ({ baseLink, link, gridItems }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
@@ -22,18 +23,9 @@ const MuiGrid = ({ baseLink, link, gridItems }) => {
       >
         {isModuleCategories &&
           gridItems.map((gridItem) => (
-            <Grid
-              key={gridItem.id}
-              item
-              xs={12}
-              sm={6}
-              md={4}
-            >
+            <Grid key={gridItem.id} item xs={12} sm={6} md={4}>
               <Link to={`/${baseLink}/${link}/${gridItem.id}`}>
-                <CustomButton
-                  className="no-btn-padding"
-                  variant="outline"
-                >
+                <CustomButton className="no-btn-padding" variant="outline">
                   <MuiCard
                     title={gridItem.name}
                     image={gridItem.image}
@@ -55,7 +47,11 @@ const MuiGrid = ({ baseLink, link, gridItems }) => {
                   <List>
                     <ListItem>
                       <ListItemText
-                        primary={<h2 className="list-item">{gridItem.name}</h2>}
+                        primary={
+                          <MuiTypography variant="h4" className="list-item">
+                            {gridItem.name}
+                          </MuiTypography>
+                        }
                       />
                     </ListItem>
                   </List>
