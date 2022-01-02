@@ -42,6 +42,10 @@ a {
   vertical-align: top;
 }
 
+.top-padding {
+  padding-top: 2rem;
+}
+
 .icon {
   color: #f00;
   margin: 0 2rem;

@@ -42,6 +42,10 @@ a {
   vertical-align: top;
 }
 
+.top-padding {
+  padding-top: 2rem;
+}
+
 .red-text-xl {
   color: #f00;
   font-size: 10rem !important;

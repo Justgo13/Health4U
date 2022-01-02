@@ -42,6 +42,10 @@ a {
   vertical-align: top;
 }
 
+.top-padding {
+  padding-top: 2rem;
+}
+
 .full-height-container {
   display: flex !important;
   flex-direction: column;

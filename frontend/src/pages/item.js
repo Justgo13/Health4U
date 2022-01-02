@@ -190,9 +190,8 @@ const Item = () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const showModalHandler = () => setIsModalShown(true);
   const hideModalHandler = () => {
-    //window.location.reload(`/shop/item/${itemID}`);
     setIsModalShown(false);
-    navigate("/shop")
+    navigate(`/shop/item/${itemID}`)
     
   };
 

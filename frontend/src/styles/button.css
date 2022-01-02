@@ -42,6 +42,10 @@ a {
   vertical-align: top;
 }
 
+.top-padding {
+  padding-top: 2rem;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;

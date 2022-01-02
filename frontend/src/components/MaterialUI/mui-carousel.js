@@ -11,7 +11,7 @@ import "../../styles/mui.css";
 
 const MuiCarousel = ({ carouselItems }) => {
   return (
-    <MuiContainer>
+    <MuiContainer className="top-padding">
       <Carousel
         animation="slide"
         navButtonsAlwaysVisible
