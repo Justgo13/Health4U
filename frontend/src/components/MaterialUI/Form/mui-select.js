@@ -29,7 +29,7 @@ const MuiSelect = ({ labelText, selectItems }) => {
           renderValue={
             quantityContext.quantity === 1
               ? () => (
-                  <MenuItem key={uuidv4()} value={1}>
+                  <MenuItem className="default-quantity" value={1}>
                     1
                   </MenuItem>
                 )

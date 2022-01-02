@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from "react";
-import { CardMedia } from "@mui/material";
+import React, { Fragment, useState, useEffect } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiForm from "../components/MaterialUI/mui-form";
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
+import Navbar from "../components/NavBar/navbar";
 
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
@@ -17,49 +18,39 @@ import { useQuantityContext } from "../shared/context/consumer/quantity-consumer
 
 import "../styles/item.css";
 
-const item = {
-  id: "1",
-  name: "Black mask",
-  category: "mask",
-  description: "Black facial mask",
-  image:
-    "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  price: 2.12,
-  rating: 2.2,
-};
+// const item = {
+//   id: "1",
+//   name: "Black mask",
+//   category: "mask",
+//   description: "Black facial mask",
+//   image:
+//     "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+//   price: 2.12,
+//   rating: 2.2,
+// };
 
 const allItems = [
   {
     id: "1",
-    name: "Random Item #1",
+    name: "Black mask",
     category: "mask",
+    description: "Black facial mask",
     image:
       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+    price: 2.12,
+    rating: 2.2,
   },
   {
     id: "2",
-    name: "Random Item #2",
+    name: "Pink mask",
     category: "mask",
+    description: "Pink facial mask",
     image:
       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  },
-  {
-    id: "3",
-    name: "Random Item #3",
-    category: "kit",
-    image:
-      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  },
-  {
-    id: "4",
-    name: "Random Item #4",
-    category: "kit",
-    image:
-      "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
+    price: 2.65,
+    rating: 2.3,
   },
 ];
-
-const relatedItems = allItems.filter((i) => i.category === item.category);
 
 const roundHalf = (num) => {
   return Math.round(num * 2) / 2;
@@ -189,14 +180,37 @@ const displayStars = (itemRating) => {
 
 const Item = () => {
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
+  const [priceDollar, setPriceDollar] = useState(0);
+  const [priceCents, setPriceCents] = useState(0);
+
+  const { itemID } = useParams();
+  const navigate = useNavigate();
 
   // modal state and listeners
   const [isModalShown, setIsModalShown] = useState(false);
   const showModalHandler = () => setIsModalShown(true);
-  const hideModalHandler = () => setIsModalShown(false);
+  const hideModalHandler = () => {
+    //window.location.reload(`/shop/item/${itemID}`);
+    setIsModalShown(false);
+    navigate("/shop")
+    
+  };
 
+  // contexts
   const cartContext = useCartContext();
   const quantityContext = useQuantityContext();
+
+  // get item from allItems list
+  const item = allItems.find((item) => item.id === itemID);
+  const relatedItems = allItems.filter((i) => i.category === item.category);
+
+  // set price with useEffect
+  useEffect(() => {
+    const dollarPrice = Math.trunc(item.price)
+    const centsPrice = Math.round((item.price - dollarPrice) * 100)
+    setPriceDollar(dollarPrice)
+    setPriceCents(centsPrice)
+  })
 
   const bookmarkHandler = (e) => {
     setBookMarkClicked(!bookMarkClicked);
@@ -215,6 +229,7 @@ const Item = () => {
 
   return (
     <Fragment>
+      <Navbar/>
       <MuiBox className="small-box right-align">
         <CustomButton
           variant="text"
@@ -250,7 +265,10 @@ const Item = () => {
         <MuiBox className="price-box flex-child">
           <MuiForm
             submitHandler={addToCartHandler}
-            formHeader={["$2", <span className="decimal-cost align-top">99</span>]}
+            formHeader={[
+              priceDollar,
+              <span className="decimal-cost align-top">{priceCents}</span>,
+            ]}
           />
         </MuiBox>
       </MuiBox>
@@ -267,16 +285,24 @@ const Item = () => {
       <MuiBox className="container item-desc no-bottom-padding">
         <MuiDivider headerText="Product Details" />
         <MuiBox className="no-bottom-padding">
-          <MuiTypography variant="p" baseComponent="p" class>{`Description -> ${item.description}`}</MuiTypography>
-          <MuiTypography variant="p" baseComponent="p">{`Manufacturer -> Health4U`}</MuiTypography>
-          <MuiTypography variant="p" baseComponent="p">{`First available -> December 30, 2021`}</MuiTypography>
+          <MuiTypography
+            variant="p"
+            baseComponent="p"
+            class
+          >{`Description -> ${item.description}`}</MuiTypography>
+          <MuiTypography
+            variant="p"
+            baseComponent="p"
+          >{`Manufacturer -> Health4U`}</MuiTypography>
+          <MuiTypography
+            variant="p"
+            baseComponent="p"
+          >{`First available -> December 30, 2021`}</MuiTypography>
         </MuiBox>
       </MuiBox>
 
       <MuiBox className="container">
-        <MuiDivider
-          headerText="Related Products"
-        />
+        <MuiDivider headerText="Related Products" />
         <MuiCarousel carouselItems={relatedItems} />
       </MuiBox>
     </Fragment>

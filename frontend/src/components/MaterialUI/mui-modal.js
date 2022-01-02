@@ -1,13 +1,12 @@
 import React from "react";
 import { Modal, Typography, Box, CardMedia } from "@mui/material";
 import MuiBox from "./mui-box";
-import {v4 as uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid";
 
 import "../../styles/image.css";
 
 const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
   const cartItems = modalContent.cartItems;
-    console.log(cartItems);
   return (
     <Modal
       open={isModalShown}
@@ -23,23 +22,27 @@ const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
         </MuiBox>
 
         <MuiBox className="modal-details">
-          {cartItems.map((item) => (
-            <MuiBox key={uuidv4()} className="modal-item">
-              <CardMedia
-                className="modal-image"
-                component="img"
-                image={item.productImage}
-                alt={item.name}
-              />
-              <Typography variant="h6" component="h2">
-                {`${item.productName} (${item.cartCount})`}
-              </Typography>
+          {cartItems.map((item) => {
+            const subTotal =
+              Math.round(item.productBasePrice * item.cartCount * 100) / 100;
+            return (
+              <MuiBox key={uuidv4()} className="modal-item">
+                <CardMedia
+                  className="modal-image"
+                  component="img"
+                  image={item.productImage}
+                  alt={item.name}
+                />
+                <Typography variant="h6" component="h2">
+                  {`${item.productName} (${item.cartCount})`}
+                </Typography>
 
-              <Typography variant="h6" component="h2">
-                {`$${item.productBasePrice * item.cartCount}`}
-              </Typography>
-            </MuiBox>
-          ))}
+                <Typography variant="h6" component="h2">
+                  {`$${subTotal}`}
+                </Typography>
+              </MuiBox>
+            );
+          })}
         </MuiBox>
       </MuiBox>
     </Modal>

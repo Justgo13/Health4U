@@ -9,12 +9,7 @@ const cartReducer = (state, action) => {
       cartItems = [...state.cartItems];
       productQuantity = action.productQuantity;
 
-      if (cartItems === []) {
-        return { ...state };
-      }
-
       productEntry = cartItems.find((item) => item.productName === productName);
-
       if (productEntry === undefined) {
         cartItems.push({
           productName,
@@ -22,9 +17,11 @@ const cartReducer = (state, action) => {
           productImage: action.productImage,
           productBasePrice: action.productBasePrice,
         });
+        console.log("1", cartItems);
       } else {
         const productIndex = cartItems.indexOf(productEntry);
         cartItems[productIndex].cartCount += productQuantity;
+        console.log("2", cartItems);
       }
 
       // create cookies for storing cart information

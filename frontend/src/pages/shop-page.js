@@ -4,6 +4,7 @@ import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
+import Navbar from "../components/NavBar/navbar";
 
 const ShopPage = () => {
   const items = [
@@ -62,14 +63,11 @@ const ShopPage = () => {
 
   return (
     <MuiBox>
+      <Navbar />
       <MuiCarousel carouselItems={items} />
       <MuiBox className="container">
-        <MuiDivider headerText="Categories"/>
-        <MuiGrid
-          gridItems={categoryList}
-          link="category"
-          baseLink="shop"
-        />
+        <MuiDivider headerText="Categories" />
+        <MuiGrid gridItems={categoryList} link="category" baseLink="shop" />
       </MuiBox>
     </MuiBox>
   );

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { AppBar, Toolbar } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
@@ -14,7 +14,7 @@ import MuiContainer from "../MaterialUI/mui-container";
 import MuiMenu from "../MaterialUI/mui-menu";
 import MuiTypography from "../MaterialUI/mui-typography";
 
-import "../../styles/navbar.css"
+import "../../styles/navbar.css";
 
 import { getCookie, CART_COUNT } from "../../shared/cookies/cookies";
 const accountChoices = [
@@ -44,7 +44,13 @@ const Navbar = () => {
               </MuiBox>
               <CustomButton variant="text" size="large" className="nav-btn">
                 <FontAwesomeIcon className="fa-shopping-cart" />
-                <MuiTypography variant="p" baseComponent="p" style={{marginLeft: "0.5rem"}}>{getCookie(CART_COUNT) || 0}</MuiTypography>
+                <MuiTypography
+                  variant="p"
+                  baseComponent="p"
+                  style={{ marginLeft: "0.5rem" }}
+                >
+                  {getCookie(CART_COUNT) || 0}
+                </MuiTypography>
               </CustomButton>
             </MuiBox>
           </Toolbar>
