@@ -46,6 +46,10 @@ a {
   padding-top: 2rem;
 }
 
+.top-bottom-padding {
+  padding: 1rem 0;
+}
+
 .modal-image {
   display: inline !important;
   object-fit: fill;

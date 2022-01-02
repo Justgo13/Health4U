@@ -46,6 +46,10 @@ a {
   padding-top: 2rem;
 }
 
+.top-bottom-padding {
+  padding: 1rem 0;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;

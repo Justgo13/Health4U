@@ -7,7 +7,7 @@ import { useQuantityContext } from "../../../shared/context/consumer/quantity-co
 
 import "../../../styles/form.css";
 
-const MuiSelect = ({ labelText, selectItems }) => {
+const MuiSelect = ({ labelText, selectItems, classname }) => {
   const quantityContext = useQuantityContext();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MuiSelect = ({ labelText, selectItems }) => {
     quantityContext.onQuantityChange(e.target.value);
   };
   return (
-    <MuiBox>
+    <MuiBox className={classname}>
       <FormControl className="form-control">
         <InputLabel>{labelText}</InputLabel>
         <Select

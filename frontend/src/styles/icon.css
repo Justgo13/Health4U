@@ -46,6 +46,10 @@ a {
   padding-top: 2rem;
 }
 
+.top-bottom-padding {
+  padding: 1rem 0;
+}
+
 .icon {
   color: #f00;
   margin: 0 2rem;

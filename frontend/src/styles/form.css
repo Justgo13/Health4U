@@ -46,6 +46,10 @@ a {
   padding-top: 2rem;
 }
 
+.top-bottom-padding {
+  padding: 1rem 0;
+}
+
 .red-text-xl {
   color: #f00;
   font-size: 10rem !important;

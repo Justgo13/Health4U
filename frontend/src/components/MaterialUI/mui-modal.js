@@ -24,7 +24,7 @@ const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
         <MuiBox className="modal-details">
           {cartItems.map((item) => {
             const subTotal =
-              Math.round(item.productBasePrice * item.cartCount * 100) / 100;
+              Math.round(item.productPrice * item.productQuantity * 100) / 100;
             return (
               <MuiBox key={uuidv4()} className="modal-item">
                 <CardMedia
@@ -34,7 +34,7 @@ const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
                   alt={item.name}
                 />
                 <Typography variant="h6" component="h2">
-                  {`${item.productName} (${item.cartCount})`}
+                  {`${item.productName} (${item.productQuantity})`}
                 </Typography>
 
                 <Typography variant="h6" component="h2">

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { AppBar, Toolbar } from "@mui/material";
 import { Outlet } from "react-router-dom";
 

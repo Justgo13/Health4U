@@ -46,6 +46,10 @@ a {
   padding-top: 2rem;
 }
 
+.top-bottom-padding {
+  padding: 1rem 0;
+}
+
 .full-height-container {
   display: flex !important;
   flex-direction: column;

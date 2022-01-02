@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
@@ -18,17 +18,7 @@ import { useQuantityContext } from "../shared/context/consumer/quantity-consumer
 
 import "../styles/item.css";
 
-// const item = {
-//   id: "1",
-//   name: "Black mask",
-//   category: "mask",
-//   description: "Black facial mask",
-//   image:
-//     "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-//   price: 2.12,
-//   rating: 2.2,
-// };
-
+// temporary until db is in place
 const allItems = [
   {
     id: "1",
@@ -52,13 +42,9 @@ const allItems = [
   },
 ];
 
-const roundHalf = (num) => {
-  return Math.round(num * 2) / 2;
-};
-
 // had to hardcoded ratings, could not find a way to dynamically generate them
 const displayStars = (itemRating) => {
-  itemRating = roundHalf(itemRating); // rounds ratings such as 2.2 to 2.0
+  itemRating = Math.round(itemRating * 2) / 2; // rounds ratings such as 2.2 to 2.0
   switch (itemRating) {
     case 0.5:
       return (
@@ -179,56 +165,53 @@ const displayStars = (itemRating) => {
 };
 
 const Item = () => {
+
+  // bookmark hooks
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
+  const bookmarkHandler = (e) => {
+    setBookMarkClicked(!bookMarkClicked);
+  };
+
+
+  // price hooks
   const [priceDollar, setPriceDollar] = useState(0);
   const [priceCents, setPriceCents] = useState(0);
+  useEffect(() => {
+    const dollarPrice = Math.trunc(item.price);
+    const centsPrice = Math.round((item.price - dollarPrice) * 100);
+    setPriceDollar(dollarPrice);
+    setPriceCents(centsPrice);
+  });
 
+  // url hooks
   const { itemID } = useParams();
-  const navigate = useNavigate();
 
   // modal state and listeners
   const [isModalShown, setIsModalShown] = useState(false);
   const showModalHandler = () => setIsModalShown(true);
-  const hideModalHandler = () => {
-    setIsModalShown(false);
-    navigate(`/shop/item/${itemID}`)
-    
-  };
+  const hideModalHandler = () => setIsModalShown(false);
 
   // contexts
   const cartContext = useCartContext();
   const quantityContext = useQuantityContext();
 
-  // get item from allItems list
   const item = allItems.find((item) => item.id === itemID);
   const relatedItems = allItems.filter((i) => i.category === item.category);
 
-  // set price with useEffect
-  useEffect(() => {
-    const dollarPrice = Math.trunc(item.price)
-    const centsPrice = Math.round((item.price - dollarPrice) * 100)
-    setPriceDollar(dollarPrice)
-    setPriceCents(centsPrice)
-  })
-
-  const bookmarkHandler = (e) => {
-    setBookMarkClicked(!bookMarkClicked);
-  };
-
   const addToCartHandler = (e) => {
     e.preventDefault();
+    cartContext.onAddToCart({
+      productName: item.name,
+      productQuantity: quantityContext.quantity,
+      productImage: item.image,
+      productPrice: item.price,
+    });
     showModalHandler();
-    cartContext.onAddToCart(
-      item.name,
-      quantityContext.quantity,
-      item.image,
-      item.price
-    );
   };
 
   return (
     <Fragment>
-      <Navbar/>
+      <Navbar />
       <MuiBox className="small-box right-align">
         <CustomButton
           variant="text"

@@ -18,8 +18,12 @@ const MuiForm = ({ submitHandler, formHeader }) => {
   return (
     <form action="" onSubmit={submitHandler}>
       <MuiTypography className="divider-header">{formHeader}</MuiTypography>
-      <MuiBox className="grey-background">
-        <MuiSelect labelText="Quantity" selectItems={quantity} />
+      <MuiBox className="grey-background top-bottom-padding">
+        <MuiSelect
+          classname="top-bottom-padding"
+          labelText="Quantity"
+          selectItems={quantity}
+        />
         <CustomButton className="white-inverse big-btn" type="submit">
           Add to cart
         </CustomButton>
