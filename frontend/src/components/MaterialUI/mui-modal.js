@@ -3,9 +3,11 @@ import { Modal, Typography, Box, CardMedia } from "@mui/material";
 import MuiBox from "./mui-box";
 import { v4 as uuidv4 } from "uuid";
 
+import CustomButton from "../custom-button";
+
 import "../../styles/image.css";
 
-const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
+const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent, buttonHandler }) => {
   const cartItems = modalContent.cartItems;
   return (
     <Modal
@@ -23,8 +25,9 @@ const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
 
         <MuiBox className="modal-details">
           {cartItems.map((item) => {
-            const subTotal =
-              Math.round(item.productPrice * item.productQuantity * 100) / 100;
+            let subTotal = Math.round(item.productPrice * item.productQuantity * 100) / 100;
+            subTotal = subTotal.toFixed(2)
+            
             return (
               <MuiBox key={uuidv4()} className="modal-item">
                 <CardMedia
@@ -43,6 +46,12 @@ const MuiModal = ({ isModalShown, onClose, modalHeader, modalContent }) => {
               </MuiBox>
             );
           })}
+        </MuiBox>
+
+        <MuiBox className="modal-footer">
+          <CustomButton className="white-inverse big-btn" onClick={buttonHandler}>
+            Checkout
+          </CustomButton>
         </MuiBox>
       </MuiBox>
     </Modal>

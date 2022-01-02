@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
@@ -165,13 +165,11 @@ const displayStars = (itemRating) => {
 };
 
 const Item = () => {
-
   // bookmark hooks
   const [bookMarkClicked, setBookMarkClicked] = useState(false);
   const bookmarkHandler = (e) => {
     setBookMarkClicked(!bookMarkClicked);
   };
-
 
   // price hooks
   const [priceDollar, setPriceDollar] = useState(0);
@@ -185,6 +183,7 @@ const Item = () => {
 
   // url hooks
   const { itemID } = useParams();
+  const navigate = useNavigate();
 
   // modal state and listeners
   const [isModalShown, setIsModalShown] = useState(false);
@@ -208,6 +207,11 @@ const Item = () => {
     });
     showModalHandler();
   };
+
+  const checkoutHandler = (e) => {
+    e.preventDefault();
+    navigate("/shop/cart/1")
+  }
 
   return (
     <Fragment>
@@ -261,6 +265,7 @@ const Item = () => {
           onClose={hideModalHandler}
           modalHeader="Cart Preview"
           modalContent={cartContext}
+          buttonHandler={checkoutHandler}
         />
       )}
 
