@@ -261,7 +261,7 @@ const Item = () => {
             submitHandler={addProductToCartHandler}
             formHeader={
               <MuiBox>
-                {priceDollar}
+                ${priceDollar}
                 <span className="decimal-cost align-top">{priceCents}</span>
               </MuiBox>
             }
