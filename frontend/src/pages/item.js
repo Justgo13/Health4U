@@ -14,7 +14,11 @@ import MuiImage from "../components/MaterialUI/mui-image";
 
 import CartPreviewModal from "../components/CartPreview/cart-preview-modal";
 
-import {addToCartHandler, getCartItems} from "../shared/cookies/cart-cookie-handlers"
+import {
+  addToCartHandler,
+  getCartItems,
+} from "../shared/cookies/cart-cookie-handlers";
+import { useModalReducer } from "../components/Modal/modal-reducer";
 
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
 
@@ -187,10 +191,9 @@ const Item = () => {
   const { itemID } = useParams();
   const navigate = useNavigate();
 
-  // modal state and listeners
-  const [isModalShown, setIsModalShown] = useState(false);
-  const showModalHandler = () => setIsModalShown(true);
-  const hideModalHandler = () => setIsModalShown(false);
+  const [modalState, showModalHandler, hideModalHandler] = useModalReducer({
+    showModal: false,
+  });
 
   // contexts
   const quantityContext = useQuantityContext();
@@ -211,8 +214,8 @@ const Item = () => {
 
   const checkoutHandler = (e) => {
     e.preventDefault();
-    navigate("/shop/cart/1")
-  }
+    navigate("/shop/cart/1");
+  };
 
   return (
     <Fragment>
@@ -252,17 +255,19 @@ const Item = () => {
         <MuiBox className="price-box flex-child">
           <MuiForm
             submitHandler={addProductToCartHandler}
-            formHeader={[
-              priceDollar,
-              <span className="decimal-cost align-top">{priceCents}</span>,
-            ]}
+            formHeader={
+              <MuiBox>
+                {priceDollar}
+                <span className="decimal-cost align-top">{priceCents}</span>
+              </MuiBox>
+            }
           />
         </MuiBox>
       </MuiBox>
 
-      {isModalShown && (
+      {modalState.showModal && (
         <CartPreviewModal
-          isModalShown={isModalShown}
+          isModalShown={modalState.showModal}
           onClose={hideModalHandler}
           cartList={getCartItems()}
           buttonHandler={checkoutHandler}

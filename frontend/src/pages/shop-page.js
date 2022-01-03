@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
 import Navbar from "../components/NavBar/navbar";
+import { initializeCartCookies } from "../shared/cookies/cart-cookie-handlers";
 
 const ShopPage = () => {
+  useEffect(() => initializeCartCookies(), []);
   const items = [
     {
       id: "1",

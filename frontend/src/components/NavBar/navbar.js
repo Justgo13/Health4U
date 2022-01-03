@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { AppBar, Toolbar } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -9,7 +9,12 @@ import FontAwesomeIcon from "../font-awesome-icon";
 import ScrollReset from "../scroll-reset";
 import CartPreviewModal from "../CartPreview/cart-preview-modal";
 
-import {getCartItemCount, getCartItems} from "../../shared/cookies/cart-cookie-handlers"
+import { useModalReducer } from "../Modal/modal-reducer";
+
+import {
+  getCartItemCount,
+  getCartItems,
+} from "../../shared/cookies/cart-cookie-handlers";
 
 // Material UI custom components
 import MuiBox from "../MaterialUI/mui-box";
@@ -26,15 +31,16 @@ const accountChoices = [
 ];
 
 const Navbar = () => {
-  const [isModalShown, setIsModalShown] = useState(false);
-  const showModalHandler = () => setIsModalShown(true);
-  const hideModalHandler = () => setIsModalShown(false);
+  const [modalState, showModalHandler, hideModalHandler] = useModalReducer({
+    showModal: false,
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const checkoutHandler = (e) => {
-    navigate("/shop/cart/1")
-  }
+    navigate("/shop/cart/1");
+    hideModalHandler();
+  };
   return (
     <Fragment>
       <ScrollReset />
@@ -52,7 +58,12 @@ const Navbar = () => {
                   menuMainButtonText="Account"
                 />
               </MuiBox>
-              <CustomButton variant="text" size="large" className="nav-btn" onClick={showModalHandler}>
+              <CustomButton
+                variant="text"
+                size="large"
+                className="nav-btn"
+                onClick={showModalHandler}
+              >
                 <FontAwesomeIcon className="fa-shopping-cart" />
                 <MuiTypography
                   variant="p"
@@ -68,9 +79,9 @@ const Navbar = () => {
       </AppBar>
 
       <Outlet />
-      {isModalShown && (
+      {modalState.showModal && (
         <CartPreviewModal
-          isModalShown={isModalShown}
+          isModalShown={modalState.showModal}
           onClose={hideModalHandler}
           cartList={getCartItems()}
           buttonHandler={checkoutHandler}
