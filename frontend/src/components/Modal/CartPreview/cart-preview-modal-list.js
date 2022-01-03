@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import MuiBox from "../MaterialUI/mui-box";
-import MuiImage from "../MaterialUI/mui-image";
-import MuiTypography from "../MaterialUI/mui-typography";
+import MuiBox from "../../MaterialUI/mui-box";
+import MuiImage from "../../MaterialUI/mui-image";
+import MuiTypography from "../../MaterialUI/mui-typography";
 import {v4 as uuidv4} from "uuid"
 
 const CartPreviewModalList = ({ cartList }) => {

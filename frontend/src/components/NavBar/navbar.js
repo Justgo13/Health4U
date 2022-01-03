@@ -7,7 +7,7 @@ import NavbarBrand from "./navbar-brand";
 import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
 import ScrollReset from "../scroll-reset";
-import CartPreviewModal from "../CartPreview/cart-preview-modal";
+import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 
 import { useModalReducer } from "../Modal/modal-reducer";
 

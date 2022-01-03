@@ -12,7 +12,7 @@ import CustomButton from "../components/custom-button";
 import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiImage from "../components/MaterialUI/mui-image";
 
-import CartPreviewModal from "../components/CartPreview/cart-preview-modal";
+import CartPreviewModal from "../components/Modal/CartPreview/cart-preview-modal";
 
 import {
   addToCartHandler,

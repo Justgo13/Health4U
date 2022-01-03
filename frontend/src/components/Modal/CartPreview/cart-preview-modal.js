@@ -1,7 +1,7 @@
 import React from "react";
-import MuiModal from "../MaterialUI/mui-modal";
+import MuiModal from "../../MaterialUI/mui-modal";
 import CartPreviewModalList from "./cart-preview-modal-list";
-import CustomButton from "../custom-button";
+import CustomButton from "../../custom-button";
 
 const CartPreviewModal = ({
   isModalShown,
