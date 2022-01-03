@@ -9,18 +9,18 @@ const CartPreviewModalList = ({ cartList }) => {
     <Fragment>
         {cartList.map((item) => {
           let subTotal =
-            Math.round(item.productPrice * item.productQuantity * 100) / 100;
+            Math.round(item.price * item.quantity * 100) / 100;
           subTotal = subTotal.toFixed(2);
 
           return (
             <MuiBox key={uuidv4()} className="modal-item">
               <MuiImage
                 className="modal-image"
-                image={item.productImage}
+                image={item.image}
                 alt={item.name}
               />
               <MuiTypography variant="h6" baseComponent="h2">
-                {`${item.productName} (${item.productQuantity})`}
+                {`${item.name} (${item.quantity})`}
               </MuiTypography>
 
               <MuiTypography variant="h6" baseComponent="h2">

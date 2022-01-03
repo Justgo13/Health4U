@@ -204,10 +204,10 @@ const Item = () => {
   const addProductToCartHandler = (e) => {
     e.preventDefault();
     addToCartHandler({
-      productName: item.name,
-      productQuantity: quantityContext.quantity,
-      productImage: item.image,
-      productPrice: item.price,
+      name: item.name,
+      quantity: quantityContext.quantity,
+      image: item.image,
+      price: item.price,
     });
     showModalHandler();
   };

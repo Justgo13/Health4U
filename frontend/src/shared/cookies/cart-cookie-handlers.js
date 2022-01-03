@@ -13,42 +13,42 @@ export const initializeCartCookies = () => {
 };
 
 export const addToCartHandler = ({
-  productName,
-  productImage,
-  productQuantity,
-  productPrice,
+  name,
+  image,
+  quantity,
+  price,
 }) => {
   const cartItems = [...JSON.parse(getCookie(CART_ITEMS))];
   /**
    * Cart items looks like
    * [
    *  {
-   *    productName: "Mask",
-   *    productImage: "someImage.png",
-   *    productQuantity: 2,
-   *    productPrice: 4.33
+   *    name: "Mask",
+   *    image: "someImage.png",
+   *    quantity: 2,
+   *    price: 4.33
    *  },
    *  ...
    * ]
    */
   const productEntry = cartItems.find(
-    (item) => item.productName === productName
+    (item) => item.name === name
   );
 
   // check if the product exists in the cart, if it doesn't add a new entry, otherwise update the existing entry with a new quantity
   if (!productEntry) {
-    console.log(`Product ${productName} not found, adding new entry`);
+    console.log(`Product ${name} not found, adding new entry`);
     cartItems.push({
-      productName,
-      productImage,
-      productQuantity,
-      productPrice,
+      name,
+      image,
+      quantity,
+      price,
     });
   } else {
     console.log(`Found product entry`);
     console.log(productEntry);
     const productEntryIndex = cartItems.indexOf(productEntry);
-    cartItems[productEntryIndex].productQuantity += productQuantity;
+    cartItems[productEntryIndex].quantity += quantity;
   }
 
   // create cookies for storing cart information
@@ -63,7 +63,7 @@ export const getOrderSummary = () => {
 
   const cartItems = JSON.parse(getCookie(CART_ITEMS));
   cartItems.forEach((item) => {
-    subTotal += item.productQuantity * item.productPrice;
+    subTotal += item.quantity * item.price;
   });
 
   subTotal = subTotal.toFixed(2);
