@@ -13,6 +13,8 @@ import MuiModal from "../components/MaterialUI/mui-modal";
 import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiImage from "../components/MaterialUI/mui-image";
 
+import CartPreviewModal from "../components/CartPreview/cart-preview-modal";
+
 import { useCartContext } from "../shared/context/consumer/cart-consumer";
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
 
@@ -260,11 +262,10 @@ const Item = () => {
       </MuiBox>
 
       {isModalShown && (
-        <MuiModal
+        <CartPreviewModal
           isModalShown={isModalShown}
           onClose={hideModalHandler}
-          modalHeader="Cart Preview"
-          modalContent={cartContext}
+          cartList={cartContext.cartItems}
           buttonHandler={checkoutHandler}
         />
       )}

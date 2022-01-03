@@ -44,7 +44,7 @@
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    width: 400
+    width: 35%
     background-color: #fff
     @include global.border(2px)
     @include global.box-shadow($vertialOffset: 4px, $color: global.$red)
@@ -62,8 +62,7 @@
     .modal-item
         border-bottom: 1px solid global.$black
         padding: 1rem 0
-        @include global.flex($justify-content: space-between, $align-items: center)
-        
+        @include global.flex($justify-content: space-around, $align-items: center, $grow: 1)
     h2
         margin: 0 1rem
         font-size: 2rem
