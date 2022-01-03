@@ -1,12 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { AppBar, Toolbar } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import Search from "./search";
 import NavbarBrand from "./navbar-brand";
 import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
 import ScrollReset from "../scroll-reset";
+import CartPreviewModal from "../CartPreview/cart-preview-modal";
+
+import {getCartItemCount, getCartItems} from "../../shared/cookies/cart-cookie-handlers"
 
 // Material UI custom components
 import MuiBox from "../MaterialUI/mui-box";
@@ -15,8 +18,6 @@ import MuiMenu from "../MaterialUI/mui-menu";
 import MuiTypography from "../MaterialUI/mui-typography";
 
 import "../../styles/navbar.css";
-
-import { getCookie, CART_COUNT } from "../../shared/cookies/cookies";
 const accountChoices = [
   "Buyer Sign Up",
   "Buyer Login",
@@ -25,6 +26,15 @@ const accountChoices = [
 ];
 
 const Navbar = () => {
+  const [isModalShown, setIsModalShown] = useState(false);
+  const showModalHandler = () => setIsModalShown(true);
+  const hideModalHandler = () => setIsModalShown(false);
+
+  const navigate = useNavigate()
+
+  const checkoutHandler = (e) => {
+    navigate("/shop/cart/1")
+  }
   return (
     <Fragment>
       <ScrollReset />
@@ -42,14 +52,14 @@ const Navbar = () => {
                   menuMainButtonText="Account"
                 />
               </MuiBox>
-              <CustomButton variant="text" size="large" className="nav-btn">
+              <CustomButton variant="text" size="large" className="nav-btn" onClick={showModalHandler}>
                 <FontAwesomeIcon className="fa-shopping-cart" />
                 <MuiTypography
                   variant="p"
                   baseComponent="p"
                   style={{ marginLeft: "0.5rem" }}
                 >
-                  {getCookie(CART_COUNT) || 0}
+                  {getCartItemCount()}
                 </MuiTypography>
               </CustomButton>
             </MuiBox>
@@ -58,6 +68,14 @@ const Navbar = () => {
       </AppBar>
 
       <Outlet />
+      {isModalShown && (
+        <CartPreviewModal
+          isModalShown={isModalShown}
+          onClose={hideModalHandler}
+          cartList={getCartItems()}
+          buttonHandler={checkoutHandler}
+        />
+      )}
     </Fragment>
   );
 };

@@ -9,13 +9,13 @@ import Navbar from "../components/NavBar/navbar";
 
 import FontAwesomeIcon from "../components/font-awesome-icon";
 import CustomButton from "../components/custom-button";
-import MuiModal from "../components/MaterialUI/mui-modal";
 import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiImage from "../components/MaterialUI/mui-image";
 
 import CartPreviewModal from "../components/CartPreview/cart-preview-modal";
 
-import { useCartContext } from "../shared/context/consumer/cart-consumer";
+import {addToCartHandler, getCartItems} from "../shared/cookies/cart-cookie-handlers"
+
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
 
 import "../styles/item.css";
@@ -193,15 +193,14 @@ const Item = () => {
   const hideModalHandler = () => setIsModalShown(false);
 
   // contexts
-  const cartContext = useCartContext();
   const quantityContext = useQuantityContext();
 
   const item = allItems.find((item) => item.id === itemID);
   const relatedItems = allItems.filter((i) => i.category === item.category);
 
-  const addToCartHandler = (e) => {
+  const addProductToCartHandler = (e) => {
     e.preventDefault();
-    cartContext.onAddToCart({
+    addToCartHandler({
       productName: item.name,
       productQuantity: quantityContext.quantity,
       productImage: item.image,
@@ -252,7 +251,7 @@ const Item = () => {
 
         <MuiBox className="price-box flex-child">
           <MuiForm
-            submitHandler={addToCartHandler}
+            submitHandler={addProductToCartHandler}
             formHeader={[
               priceDollar,
               <span className="decimal-cost align-top">{priceCents}</span>,
@@ -265,7 +264,7 @@ const Item = () => {
         <CartPreviewModal
           isModalShown={isModalShown}
           onClose={hideModalHandler}
-          cartList={cartContext.cartItems}
+          cartList={getCartItems()}
           buttonHandler={checkoutHandler}
         />
       )}
@@ -276,7 +275,6 @@ const Item = () => {
           <MuiTypography
             variant="p"
             baseComponent="p"
-            class
           >{`Description -> ${item.description}`}</MuiTypography>
           <MuiTypography
             variant="p"
