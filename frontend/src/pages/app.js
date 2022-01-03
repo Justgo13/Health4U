@@ -11,6 +11,7 @@ import LandingPage from "./landing-page";
 import ShopPage from "./shop-page";
 import Category from "./category";
 import Item from "./item";
+import Cart from "./cart";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
           <Route path="category/:categoryID" element={<Category />} />
           <Route path="item/:itemID" element={<Item />} />
           <Route path="search/:searchQuery" element={<LandingPage />} />
-          <Route path="cart/:buyerID" element={<LandingPage />} />
+          <Route path="cart/:buyerID" element={<Cart />} />
         </Route>
 
         <Route path="auth" element={<LandingPage />}>
