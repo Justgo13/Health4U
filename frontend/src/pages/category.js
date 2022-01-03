@@ -6,6 +6,7 @@ import Navbar from "../components/NavBar/navbar";
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiTypography from "../components/MaterialUI/mui-typography";
+import MuiDivider from "../components/MaterialUI/mui-divider";
 
 const Category = () => {
   const { categoryID } = useParams();
@@ -67,9 +68,7 @@ const Category = () => {
     <Fragment>
       <Navbar />
       <MuiBox className="container">
-        <MuiTypography className="divider-header center-text">
-          {categoryName}
-        </MuiTypography>
+        <MuiDivider className="divider-header center-text" headerText={categoryName}/>
         <MuiGrid gridItems={items} link="item" baseLink="shop" />
       </MuiBox>
     </Fragment>

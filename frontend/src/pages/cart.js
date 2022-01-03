@@ -7,16 +7,15 @@ import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 
 import CustomButton from "../components/custom-button";
-import {
-  getOrderSummary,
-  getCartItems,
-} from "../shared/cookies/cart-cookie-handlers";
+
+import { useCustomCookies, CART_ITEMS } from "../shared/cookies/cookies";
 
 const Cart = () => {
+  const {cookies, getOrderSummary} = useCustomCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const showCartItems = () => {
-    const cartItems = getCartItems();
+    const cartItems = cookies[CART_ITEMS];
     if (cartItems.length === 0) {
       return (
         <MuiTypography

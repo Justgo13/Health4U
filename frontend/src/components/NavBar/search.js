@@ -1,14 +1,40 @@
 import React from "react";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Checkbox } from "@mui/material";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
+import { useCustomCookies } from "../../shared/cookies/cookies";
 
 const Search = () => {
+  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+  const searchOptions = ["Black mask", "Pink mask"];
+
+  const {onSearchQueryCookieChange} = useCustomCookies();
+
   return (
     <Autocomplete
-      disablePortal
+      multiple
       id="auto-complete"
-      options={["jason", "gao"]}
-      freeSolo
-      renderInput={(params) => <TextField {...params} label="Product Name" />}
+      options={searchOptions}
+      disableCloseOnSelect
+      limitTags={2}
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={icon}
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option}
+        </li>
+      )}
+      renderInput={(params) => <TextField {...params} label="Search" />}
+      onChange={(e, values) => {
+        onSearchQueryCookieChange(values);
+      }}
     />
   );
 };

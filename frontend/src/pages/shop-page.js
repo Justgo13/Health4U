@@ -5,10 +5,13 @@ import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
 import Navbar from "../components/NavBar/navbar";
-import { initializeCartCookies } from "../shared/cookies/cart-cookie-handlers";
+import { useCustomCookies } from "../shared/cookies/cookies";
 
 const ShopPage = () => {
-  useEffect(() => initializeCartCookies(), []);
+  const {initCookies} = useCustomCookies()
+  useEffect(() => {
+    initCookies();
+  }, []);
   const items = [
     {
       id: "1",

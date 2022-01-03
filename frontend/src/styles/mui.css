@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.horizontal-margin {
+  margin: auto 1rem !important;
+}
+
 .full-height-container {
   display: flex !important;
   flex-direction: column;

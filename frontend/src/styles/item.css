@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.horizontal-margin {
+  margin: auto 1rem !important;
+}
+
 .item-desc {
   font-size: 1.5rem;
   text-align: center;

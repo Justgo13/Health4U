@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.horizontal-margin {
+  margin: auto 1rem !important;
+}
+
 .navbar-brand h1 {
   display: inline !important;
   color: #f00;
@@ -59,7 +63,7 @@ a {
 }
 
 #auto-complete {
-  width: 20rem;
+  width: 15rem;
 }
 
 .app-bar {

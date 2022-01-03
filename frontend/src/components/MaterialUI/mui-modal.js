@@ -20,7 +20,7 @@ const MuiModal = ({
 
         <MuiBox className="modal-details">{modalDetails}</MuiBox>
 
-        <MuiBox className="modal-footer">{modalFooter}</MuiBox>
+        {modalFooter && <MuiBox className="modal-footer">{modalFooter}</MuiBox>}
       </MuiBox>
     </Modal>
   );

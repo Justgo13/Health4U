@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.horizontal-margin {
+  margin: auto 1rem !important;
+}
+
 .red-text-xl {
   color: #f00;
   font-size: 10rem !important;

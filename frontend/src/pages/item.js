@@ -14,10 +14,12 @@ import MuiImage from "../components/MaterialUI/mui-image";
 
 import CartPreviewModal from "../components/Modal/CartPreview/cart-preview-modal";
 
-import {
-  addToCartHandler,
-  getCartItems,
-} from "../shared/cookies/cart-cookie-handlers";
+import { CART_ITEMS, useCustomCookies } from "../shared/cookies/cookies";
+
+// import {
+//   addToCartHandler,
+//   getCartItems,
+// } from "../shared/cookies/cart-cookie-handlers";
 import { useModalReducer } from "../components/Modal/modal-reducer";
 
 import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
@@ -191,8 +193,8 @@ const Item = () => {
   const { itemID } = useParams();
   const navigate = useNavigate();
 
-  const [modalState, showModalHandler, hideModalHandler] = useModalReducer({
-    showModal: false,
+  const [modalState, showCartModal, hideCartModal] = useModalReducer({
+    isCartModalShown: false,
   });
 
   // contexts
@@ -201,15 +203,17 @@ const Item = () => {
   const item = allItems.find((item) => item.id === itemID);
   const relatedItems = allItems.filter((i) => i.category === item.category);
 
+  const { cookies, onCartItemsCookieChange} = useCustomCookies();
+
   const addProductToCartHandler = (e) => {
     e.preventDefault();
-    addToCartHandler({
+    onCartItemsCookieChange({
       name: item.name,
       quantity: quantityContext.quantity,
       image: item.image,
       price: item.price,
     });
-    showModalHandler();
+    showCartModal();
   };
 
   const checkoutHandler = (e) => {
@@ -265,11 +269,11 @@ const Item = () => {
         </MuiBox>
       </MuiBox>
 
-      {modalState.showModal && (
+      {modalState.isCartModalShown && (
         <CartPreviewModal
-          isModalShown={modalState.showModal}
-          onClose={hideModalHandler}
-          cartList={getCartItems()}
+          isModalShown={modalState.isCartModalShown}
+          onClose={hideCartModal}
+          cartList={cookies[CART_ITEMS]}
           buttonHandler={checkoutHandler}
         />
       )}

@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.horizontal-margin {
+  margin: auto 1rem !important;
+}
+
 .white-inverse {
   background-color: #fff !important;
   color: #f00 !important;

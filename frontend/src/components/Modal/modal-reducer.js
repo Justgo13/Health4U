@@ -2,34 +2,65 @@ import React, { useReducer } from "react";
 
 const modalReducerHandler = (state, action) => {
   switch (action.type) {
-    case "SHOW_MODAL":
+    case "SHOW_CART_MODAL":
       return {
         ...state,
-        showModal: true,
+        isCartModalShown: true,
       };
 
-    case "HIDE_MODAL":
+    case "HIDE_CART_MODAL":
       return {
         ...state,
-        showModal: false,
+        isCartModalShown: false,
+      };
+
+    case "SHOW_SEARCH_ERROR_MODAL":
+      return {
+        ...state,
+        isSearchErrorModalShown: true,
+      };
+
+    case "HIDE_SEARCH_ERROR_MODAL":
+      return {
+        ...state,
+        isSearchErrorModalShown: false,
       };
     default:
       return state;
   }
 };
 
-export const useModalReducer = ({ showModal }) => {
+export const useModalReducer = ({
+  isCartModalShown,
+  isSearchErrorModalShown,
+}) => {
   const [modalState, dispatch] = useReducer(modalReducerHandler, {
-    showModal,
+    isCartModalShown,
+    isSearchErrorModalShown,
   });
-  const showModalHandler = () =>
+  const showCartModal = () =>
     dispatch({
-      type: "SHOW_MODAL",
+      type: "SHOW_CART_MODAL",
     });
-  const hideModalHandler = () =>
+  const hideCartModal = () =>
     dispatch({
-      type: "HIDE_MODAL",
+      type: "HIDE_CART_MODAL",
     });
 
-  return [modalState, showModalHandler, hideModalHandler];
+  const showSearchErrorModal = () =>
+    dispatch({
+      type: "SHOW_SEARCH_ERROR_MODAL",
+    });
+  const hideSearchErrorModal = () =>
+    dispatch({
+      type: "HIDE_SEARCH_ERROR_MODAL",
+    });
+
+  return [
+    modalState,
+    showCartModal,
+    hideCartModal,
+    showSearchErrorModal,
+    hideSearchErrorModal,
+  ];
 };

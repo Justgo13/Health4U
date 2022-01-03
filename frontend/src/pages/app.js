@@ -12,6 +12,7 @@ import ShopPage from "./shop-page";
 import Category from "./category";
 import Item from "./item";
 import Cart from "./cart";
+import Search from "./search";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
           <Route path="" element={<ShopPage />} />
           <Route path="category/:categoryID" element={<Category />} />
           <Route path="item/:itemID" element={<Item />} />
-          <Route path="search/:searchQuery" element={<LandingPage />} />
+          <Route path="search" element={<Search />} />
           <Route path="cart/:buyerID" element={<Cart />} />
         </Route>
 
