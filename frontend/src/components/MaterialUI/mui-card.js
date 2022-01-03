@@ -11,7 +11,7 @@ import "../../styles/mui.css";
 const MuiCard = ({ title, description, image, className }) => {
   return (
     <Card className={`card ${className || ""}`}>
-      <MuiImage image={image} alt={title} />
+      <MuiImage className="fill" image={image} alt={title} />
       <CardContent>
         <MuiTypography variant="h4">
           {title}

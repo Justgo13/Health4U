@@ -67,4 +67,8 @@ a {
   box-shadow: 0px 8px 4px -4px #000 !important;
 }
 
+.fill {
+  object-fit: fill !important;
+}
+
 /*# sourceMappingURL=image.css.map */

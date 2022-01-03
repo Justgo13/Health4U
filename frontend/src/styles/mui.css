@@ -62,6 +62,7 @@ a {
 .featuredContainer {
   display: flex !important;
   height: 40vh;
+  width: 60% !important;
 }
 
 .featured-link {
