@@ -91,4 +91,8 @@ a {
   font-family: "Eczar", serif;
 }
 
+.full-width {
+  width: 100% !important;
+}
+
 /*# sourceMappingURL=mui.css.map */

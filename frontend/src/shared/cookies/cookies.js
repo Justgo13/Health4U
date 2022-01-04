@@ -112,7 +112,6 @@ export const useCustomCookies = () => {
   };
 
   const setItemQuantity = (id, quantity) => {
-    console.log("q",quantity);
     const cartItems = cookies[CART_ITEMS];
     const item = cartItems.find((item) => item.id === id);
     item.quantity = quantity

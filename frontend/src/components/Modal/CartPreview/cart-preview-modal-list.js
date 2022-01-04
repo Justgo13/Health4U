@@ -19,7 +19,7 @@ const CartPreviewModalList = ({ cartList }) => {
     quantity.push(i);
   }
 
-  const deleteItemHandler = (productName) => deleteCartItem(productName);
+  const deleteItemHandler = (id) => deleteCartItem(id);
 
   return (
     <Fragment>

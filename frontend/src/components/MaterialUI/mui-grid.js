@@ -8,9 +8,24 @@ import CustomButton from "../custom-button";
 import MuiToggleButton from "./mui-toggle-button";
 import MuiBox from "./mui-box";
 import MuiTypography from "./mui-typography";
+import FontAwesomeIcon from "../font-awesome-icon";
+import MuiSelect from "./Form/mui-select";
 
-const MuiGrid = ({ baseLink, link, gridItems }) => {
+import { useCustomCookies } from "../../shared/cookies/cookies";
+
+const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
+
+  let quantity = [];
+
+  for (let i = 1; i < 50; i++) {
+    quantity.push(i);
+  }
+
+  const { setItemQuantity, deleteCartItem } = useCustomCookies();
+
+  const deleteItemHandler = (id) => deleteCartItem(id);
+
   return (
     <Fragment>
       <MuiBox className="left-align-box">
@@ -33,6 +48,28 @@ const MuiGrid = ({ baseLink, link, gridItems }) => {
                   />
                 </CustomButton>
               </Link>
+              {cart && (
+                <MuiBox className="container center">
+                  <MuiBox className="flex-child">
+                    <CustomButton
+                      className="big-btn white-inverse"
+                      onClick={() => deleteItemHandler(gridItem.id)}
+                    >
+                      <FontAwesomeIcon className="fa-trash big-icon" />
+                    </CustomButton>
+                  </MuiBox>
+                  <MuiBox className="flex-child">
+                    <MuiSelect
+                      classname="top-bottom-margin full-width"
+                      labelText="Quantity"
+                      selectItems={quantity}
+                      itemQuantity={gridItem.quantity}
+                      onChange={setItemQuantity}
+                      onChangeParams={gridItem.id}
+                    />
+                  </MuiBox>
+                </MuiBox>
+              )}
             </Grid>
           ))}
 
@@ -57,6 +94,25 @@ const MuiGrid = ({ baseLink, link, gridItems }) => {
                   </List>
                 </CustomButton>
               </Link>
+              {cart && (
+                <MuiBox className="container center">
+                  <MuiBox className="flex-child">
+                    <CustomButton className="big-btn white-inverse">
+                      <FontAwesomeIcon className="fa-trash big-icon" />
+                    </CustomButton>
+                  </MuiBox>
+                  <MuiBox className="flex-child">
+                    <MuiSelect
+                      classname="top-bottom-margin full-width"
+                      labelText="Quantity"
+                      selectItems={quantity}
+                      itemQuantity={gridItem.quantity}
+                      onChange={setItemQuantity}
+                      onChangeParams={gridItem.id}
+                    />
+                  </MuiBox>
+                </MuiBox>
+              )}
             </Grid>
           ))}
       </Grid>

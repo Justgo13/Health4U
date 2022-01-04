@@ -2,8 +2,6 @@ import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-import MuiBox from "../mui-box";
-
 import "../../../styles/form.css";
 
 const MuiSelect = ({
@@ -16,10 +14,11 @@ const MuiSelect = ({
 }) => {
   const selectChangeHandler = (e) => {
     if (onChangeParams) {
-      console.log("Call method");
       onChange(onChangeParams, e.target.value);
+    } else {
+      onChange(e.target.value);
     }
-    onChange(e.target.value);
+  
   };
 
   return (

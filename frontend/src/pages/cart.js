@@ -8,14 +8,14 @@ import MuiDivider from "../components/MaterialUI/mui-divider";
 
 import CustomButton from "../components/custom-button";
 
-import { useCustomCookies, CART_ITEMS } from "../shared/cookies/cookies";
+import { useCustomCookies } from "../shared/cookies/cookies";
 
 const Cart = () => {
-  const {cookies, getOrderSummary} = useCustomCookies();
+  const {getOrderSummary, getCartItems} = useCustomCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const showCartItems = () => {
-    const cartItems = cookies[CART_ITEMS];
+    const cartItems = getCartItems();
     if (cartItems.length === 0) {
       return (
         <MuiTypography
@@ -27,7 +27,7 @@ const Cart = () => {
         </MuiTypography>
       );
     }
-    return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" />;
+    return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" cart/>;
   };
 
   return (

@@ -1,4 +1,5 @@
 @use "_global.sass" as global
+@use "./text" as text
 .icon
     color: global.$red
     margin: 0 2rem
@@ -6,6 +7,9 @@
 .small-icon
     color: global.$black
     margin: 0 0.5rem
+
+.big-icon
+    font-size: text.$header-text-size !important
 
 .caret 
     color: global.$black
