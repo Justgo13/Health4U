@@ -39,7 +39,7 @@ a {
 }
 
 .align-top {
-  vertical-align: top;
+  vertical-align: top !important;
 }
 
 .top-padding {

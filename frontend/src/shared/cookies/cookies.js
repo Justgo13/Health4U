@@ -14,9 +14,16 @@ export const useCustomCookies = () => {
 
   const initCookies = () => {
     // setup cookies if not already set
-    if (Object.keys(cookies).length === 0) {
+    if (!cookies[CART_COUNT]) {
+      console.log("initializing cart count cookie");
       setCookies(CART_COUNT, 0);
+    }
+    if (!cookies[CART_ITEMS]) {
+      console.log("initializing cart items cookie");
       setCookies(CART_ITEMS, []);
+    }
+    if (!cookies[SEARCH_QUERY]) {
+      console.log("initializing search query cookie");
       setCookies(SEARCH_QUERY, []);
     }
   };
@@ -25,12 +32,13 @@ export const useCustomCookies = () => {
     setCookies(CART_COUNT, cookieValue, { path: "/" });
   };
 
-  const onCartItemsCookieChange = ({ name, quantity, image, price }) => {
+  const onCartItemsCookieChange = ({ id, name, quantity, image, price }) => {
     const cartItems = cookies[CART_ITEMS];
     /**
      * Cart items looks like
      * [
      *  {
+     *    id: "1"
      *    name: "Mask",
      *    image: "someImage.png",
      *    quantity: 2,
@@ -39,17 +47,20 @@ export const useCustomCookies = () => {
      *  ...
      * ]
      */
-    const productEntry = cartItems.find((item) => item.name === name);
+    const productEntry = cartItems.find((item) => item.id === id);
 
     // check if the product exists in the cart, if it doesn't add a new entry, otherwise update the existing entry with a new quantity
     if (!productEntry) {
       console.log(`Product ${name} not found, adding new entry`);
       cartItems.push({
+        id,
         name,
         image,
         quantity,
         price,
       });
+      console.log("Added new entry");
+      console.log(cartItems[cartItems.length - 1]);
     } else {
       console.log(`Found product entry`);
       console.log(productEntry);
@@ -71,7 +82,7 @@ export const useCustomCookies = () => {
     let taxes = 0;
     let total = 0;
 
-    const cartItems = cookies[CART_ITEMS]
+    const cartItems = cookies[CART_ITEMS];
     cartItems.forEach((item) => {
       subTotal += item.quantity * item.price;
     });
@@ -80,25 +91,25 @@ export const useCustomCookies = () => {
     taxes = (subTotal * 0.13).toFixed(2);
     total = (parseFloat(subTotal) + parseFloat(taxes)).toFixed(2);
 
+    console.log("Subtotal ", subTotal, " Taxes ", taxes, " Total ", total);
+
     return { subTotal, taxes, total };
   };
 
   const resetSearchQuery = () => {
-    setCookies(SEARCH_QUERY, [], {path: "/"})
-  }
+    setCookies(SEARCH_QUERY, [], { path: "/" });
+  };
 
-  const deleteCartItem = (productName) => {
-    const cartItems = cookies[CART_ITEMS]
-    const deletedItemIndex = cartItems.find(item => item.name === productName)
+  const deleteCartItem = (id) => {
+    console.log(id);
+    let cartItems = cookies[CART_ITEMS];
 
-    if (deletedItemIndex) {
-      cartItems.splice(deletedItemIndex, 1)
-      console.log("Deleted item from cart");
-      console.log(cartItems[deletedItemIndex]);
-    }
-    setCookies(CART_COUNT, cartItems.length, {path: "/"})
-    setCookies(CART_ITEMS, cartItems,  {path: "/"})
-  }
+    cartItems = cartItems.filter((item) => item.id !== id);
+    console.log(cartItems);
+
+    setCookies(CART_COUNT, cartItems.length, { path: "/" });
+    setCookies(CART_ITEMS, cartItems, { path: "/" });
+  };
 
   return {
     cookies,
@@ -108,6 +119,6 @@ export const useCustomCookies = () => {
     initCookies,
     getOrderSummary,
     resetSearchQuery,
-    deleteCartItem
+    deleteCartItem,
   };
 };

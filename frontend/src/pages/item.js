@@ -1,28 +1,16 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
-import MuiForm from "../components/MaterialUI/mui-form";
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import Navbar from "../components/NavBar/navbar";
 
 import FontAwesomeIcon from "../components/font-awesome-icon";
-import CustomButton from "../components/custom-button";
 import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiImage from "../components/MaterialUI/mui-image";
-
-import CartPreviewModal from "../components/Modal/CartPreview/cart-preview-modal";
-
-import { CART_ITEMS, useCustomCookies } from "../shared/cookies/cookies";
-
-// import {
-//   addToCartHandler,
-//   getCartItems,
-// } from "../shared/cookies/cart-cookie-handlers";
-import { useModalReducer } from "../components/Modal/modal-reducer";
-
-import { useQuantityContext } from "../shared/context/consumer/quantity-consumer";
+import PriceForm from "../components/Item/price-form";
+import Bookmark from "../components/Item/bookmark";
 
 import "../styles/item.css";
 
@@ -173,79 +161,17 @@ const displayStars = (itemRating) => {
 };
 
 const Item = () => {
-  // bookmark hooks
-  const [bookMarkClicked, setBookMarkClicked] = useState(false);
-  const bookmarkHandler = (e) => {
-    setBookMarkClicked(!bookMarkClicked);
-  };
-
-  // price hooks
-  const [priceDollar, setPriceDollar] = useState(0);
-  const [priceCents, setPriceCents] = useState(0);
-  useEffect(() => {
-    const dollarPrice = Math.trunc(item.price);
-    const centsPrice = Math.round((item.price - dollarPrice) * 100);
-    setPriceDollar(dollarPrice);
-    setPriceCents(centsPrice);
-  });
-
   // url hooks
   const { itemID } = useParams();
-  const navigate = useNavigate();
-
-  const [modalState, showCartModal, hideCartModal] = useModalReducer({
-    isCartModalShown: false,
-  });
-
-  // contexts
-  const quantityContext = useQuantityContext();
+  // const navigate = useNavigate();
 
   const item = allItems.find((item) => item.id === itemID);
   const relatedItems = allItems.filter((i) => i.category === item.category);
 
-  const { cookies, onCartItemsCookieChange} = useCustomCookies();
-
-  const addProductToCartHandler = (e) => {
-    e.preventDefault();
-    onCartItemsCookieChange({
-      name: item.name,
-      quantity: quantityContext.quantity,
-      image: item.image,
-      price: item.price,
-    });
-    showCartModal();
-  };
-
-  const checkoutHandler = (e) => {
-    e.preventDefault();
-    navigate("/shop/cart/1");
-  };
-
   return (
     <Fragment>
       <Navbar />
-      <MuiBox className="small-box right-align">
-        <CustomButton
-          variant="text"
-          className="black no-btn-padding"
-          onClick={bookmarkHandler}
-        >
-          {!bookMarkClicked && (
-            <FontAwesomeIcon
-              baseClassName="far"
-              className="fa-bookmark"
-              fontSize="3rem"
-            />
-          )}
-
-          {bookMarkClicked && (
-            <FontAwesomeIcon className="fa-bookmark" fontSize="3rem" />
-          )}
-          <span className="align-top">
-            <FontAwesomeIcon className="fa-plus" />
-          </span>
-        </CustomButton>
-      </MuiBox>
+      <Bookmark />
 
       <MuiBox className="flex-container container">
         <MuiBox className="flex-child">
@@ -257,26 +183,9 @@ const Item = () => {
         </MuiBox>
 
         <MuiBox className="price-box flex-child">
-          <MuiForm
-            submitHandler={addProductToCartHandler}
-            formHeader={
-              <MuiBox>
-                ${priceDollar}
-                <span className="decimal-cost align-top">{priceCents}</span>
-              </MuiBox>
-            }
-          />
+          <PriceForm item={item} />
         </MuiBox>
       </MuiBox>
-
-      {modalState.isCartModalShown && (
-        <CartPreviewModal
-          isModalShown={modalState.isCartModalShown}
-          onClose={hideCartModal}
-          cartList={cookies[CART_ITEMS]}
-          buttonHandler={checkoutHandler}
-        />
-      )}
 
       <MuiBox className="container item-desc no-bottom-padding">
         <MuiDivider headerText="Product Details" />

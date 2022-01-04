@@ -35,7 +35,7 @@ const CartPreviewModalList = ({ cartList }) => {
                 {`$${subTotal}`}
               </MuiTypography>
 
-              <CustomButton className="white-inverse" onClick={() => deleteItemHandler(item.name)}>
+              <CustomButton className="white-inverse" onClick={() => deleteItemHandler(item.id)}>
                 <FontAwesomeIcon className="fa-trash"/>
               </CustomButton>
             </MuiBox>
