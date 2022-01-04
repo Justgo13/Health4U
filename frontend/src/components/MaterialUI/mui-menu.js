@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Menu, MenuItem, Typography } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
+import { Menu } from "@mui/material";
 
 import CustomButton from "../custom-button";
 import MuiTypography from "./mui-typography";
 
 import "../../styles/mui.css";
-const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
+const MuiMenu = ({ size, menuMainButtonText, menuContent }) => {
   const [menuState, setMenuState] = useState(null);
 
   const showUserMenuHandler = (event) => {
@@ -25,7 +24,9 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         onClick={showUserMenuHandler}
         className="nav-btn"
       >
-        <MuiTypography variant="h5" className="no-margin">{menuMainButtonText}</MuiTypography>
+        <MuiTypography variant="h5" className="no-margin">
+          {menuMainButtonText}
+        </MuiTypography>
       </CustomButton>
       <Menu
         sx={{ mt: `${size || "3rem"}` }}
@@ -42,12 +43,7 @@ const MuiMenu = ({ size, menuChoices, menuMainButtonText }) => {
         open={Boolean(menuState)}
         onClose={hideUserMenuHandler}
       >
-        {menuChoices &&
-          menuChoices.map((menuChoice) => (
-            <MenuItem key={uuidv4()}>
-              <Typography textAlign="center">{menuChoice}</Typography>
-            </MenuItem>
-          ))}
+        {menuContent}
       </Menu>
     </React.Fragment>
   );

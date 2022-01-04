@@ -7,11 +7,9 @@ Category --> "/shop/category/:categoryID"
 Item --> "/shop/item/:itemID"
 Search --> "/shop/search"
 Cart --> "/shop/cart/:buyerID"
-Buyer Sign Up --> "/auth/buyer/sign-up"
-Buyer Login --> "/auth/buyer/login"
+Buyer/Seller Sign Up --> "/auth/sign-up"
+Buyer/Seller Login --> "/auth/login"
 Buyer Profile Page --> "/buyer/profile/:buyerID
-Seller Sign Up --> "/auth/seller/sign-up"
-Seller Login --> "/auth/seller/login"
 Seller Page --> "/seller/account/:sellerID"
 Seller Item Page --> "/seller/item/:itemID"
 

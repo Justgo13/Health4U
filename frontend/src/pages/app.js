@@ -13,6 +13,8 @@ import Category from "./category";
 import Item from "./item";
 import Cart from "./cart";
 import Search from "./search";
+import SignUp from "./sign-up";
+import Login from "./login";
 
 const App = () => {
   return (
@@ -29,11 +31,9 @@ const App = () => {
           <Route path="cart/:buyerID" element={<Cart />} />
         </Route>
 
-        <Route path="auth" element={<LandingPage />}>
-          <Route path="buyer/sign-up" element={<LandingPage />} />
-          <Route path="buyer/login" element={<LandingPage />} />
-          <Route path="seller/sign-up" element={<LandingPage />} />
-          <Route path="seller/login" element={<LandingPage />} />
+        <Route path="auth" element={<Outlet />}>
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="login" element={<Login />} />
         </Route>
 
         <Route path="seller/item/:itemID" element={<LandingPage />} />

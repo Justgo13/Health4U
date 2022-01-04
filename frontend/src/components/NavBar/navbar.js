@@ -24,6 +24,8 @@ import MuiContainer from "../MaterialUI/mui-container";
 import MuiMenu from "../MaterialUI/mui-menu";
 import MuiTypography from "../MaterialUI/mui-typography";
 
+import AccountMenu from "../../components/Account/account-menu"
+
 import "../../styles/navbar.css";
 const accountChoices = [
   "Buyer Sign Up",
@@ -32,7 +34,7 @@ const accountChoices = [
   "Seller Login",
 ];
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [
     modalState,
     showCartModal,
@@ -92,10 +94,7 @@ const Navbar = (props) => {
 
             <MuiBox className="nav-items">
               <MuiBox>
-                <MuiMenu
-                  menuChoices={accountChoices}
-                  menuMainButtonText="Account"
-                />
+                <AccountMenu/>
               </MuiBox>
               <CustomButton
                 variant="text"
