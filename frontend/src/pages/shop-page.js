@@ -8,7 +8,7 @@ import Navbar from "../components/NavBar/navbar";
 import { useCustomCookies } from "../shared/cookies/cookies";
 
 const ShopPage = () => {
-  const {initCookies} = useCustomCookies()
+  const { initCookies } = useCustomCookies();
   useEffect(() => {
     initCookies();
   }, []);
@@ -69,8 +69,10 @@ const ShopPage = () => {
   return (
     <MuiBox>
       <Navbar />
-      <MuiCarousel carouselItems={items} />
+
       <MuiBox className="container">
+        <MuiDivider headerText="Hot Items" />
+        <MuiCarousel carouselItems={items} />
         <MuiDivider headerText="Categories" />
         <MuiGrid gridItems={categoryList} link="category" baseLink="shop" />
       </MuiBox>
