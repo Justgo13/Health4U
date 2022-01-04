@@ -8,7 +8,7 @@ const MuiSelect = ({
   labelText,
   selectItems,
   classname,
-  itemQuantity,
+  defaultValue,
   onChange,
   onChangeParams,
 }) => {
@@ -25,11 +25,11 @@ const MuiSelect = ({
     <FormControl className={`form-control ${classname}`}>
       <InputLabel>{labelText}</InputLabel>
       <Select
-        value={itemQuantity}
+        value={defaultValue}
         label={labelText}
         onChange={selectChangeHandler}
         renderValue={
-          itemQuantity === 1
+          defaultValue === 1
             ? () => (
                 <MenuItem className="default-quantity" value={1}>
                   1

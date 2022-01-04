@@ -170,4 +170,13 @@ a {
   flex-grow: 0;
 }
 
+.textfield-group {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  width: 60%;
+}
+
 /*# sourceMappingURL=box.css.map */

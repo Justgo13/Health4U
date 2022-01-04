@@ -63,7 +63,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
                       classname="top-bottom-margin full-width"
                       labelText="Quantity"
                       selectItems={quantity}
-                      itemQuantity={gridItem.quantity}
+                      defaultValue={gridItem.quantity}
                       onChange={setItemQuantity}
                       onChangeParams={gridItem.id}
                     />
@@ -97,7 +97,10 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
               {cart && (
                 <MuiBox className="container center">
                   <MuiBox className="flex-child">
-                    <CustomButton className="big-btn white-inverse">
+                    <CustomButton
+                      className="big-btn white-inverse"
+                      onClick={() => deleteItemHandler(gridItem.id)}
+                    >
                       <FontAwesomeIcon className="fa-trash big-icon" />
                     </CustomButton>
                   </MuiBox>
@@ -106,7 +109,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
                       classname="top-bottom-margin full-width"
                       labelText="Quantity"
                       selectItems={quantity}
-                      itemQuantity={gridItem.quantity}
+                      defaultValue={gridItem.quantity}
                       onChange={setItemQuantity}
                       onChangeParams={gridItem.id}
                     />

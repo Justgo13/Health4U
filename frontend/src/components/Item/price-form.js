@@ -69,7 +69,7 @@ const PriceForm = ({ item }) => {
             classname="top-bottom-margin"
             labelText="Quantity"
             selectItems={quantity}
-            itemQuantity={itemQuantity}
+            defaultValue={itemQuantity}
             onChange={setItemQuantity}
           />
         </MuiBox>

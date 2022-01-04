@@ -42,7 +42,7 @@ const CartPreviewModalList = ({ cartList }) => {
               classname="form-control-sm"
               labelText="Quantity"
               selectItems={quantity}
-              itemQuantity={item.quantity}
+              defaultValue={item.quantity}
               onChange={setItemQuantity}
               onChangeParams={item.id}
             />
