@@ -28,7 +28,7 @@ const PriceForm = ({ item }) => {
     setPriceCents(centsPrice);
   }, [setPriceDollar, setPriceCents]);
 
-  const { cookies, onCartItemsCookieChange } = useCustomCookies();
+  const { onCartItemsCookieChange, getCartItems } = useCustomCookies();
 
   const [itemQuantity, setItemQuantity] = useState(1);
   const addProductToCartHandler = (e) => {
@@ -64,13 +64,16 @@ const PriceForm = ({ item }) => {
       submitHandler={addProductToCartHandler}
     >
       <MuiBox className="grey-background top-bottom-padding">
-        <MuiSelect
-          classname="top-bottom-padding"
-          labelText="Quantity"
-          selectItems={quantity}
-          itemQuantity={itemQuantity}
-          onChange={setItemQuantity}
-        />
+        <MuiBox>
+          <MuiSelect
+            classname="top-bottom-margin"
+            labelText="Quantity"
+            selectItems={quantity}
+            itemQuantity={itemQuantity}
+            onChange={setItemQuantity}
+          />
+        </MuiBox>
+
         <CustomButton className="white-inverse big-btn" type="submit">
           Add to cart
         </CustomButton>
@@ -89,7 +92,7 @@ const PriceForm = ({ item }) => {
         <CartPreviewModal
           isModalShown={modalState.isCartModalShown}
           onClose={hideCartModal}
-          cartList={cookies[CART_ITEMS]}
+          cartList={getCartItems()}
           buttonHandler={checkoutHandler}
         />
       )}

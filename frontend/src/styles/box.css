@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.top-bottom-margin {
+  margin: 1rem 0 !important;
+}
+
 .horizontal-margin {
   margin: auto 1rem !important;
 }
@@ -119,7 +123,7 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 35%;
+  width: 50%;
   background-color: #fff;
   border: 2px solid #000 !important;
   box-shadow: 2px 4px 4px -4px #f00 !important;

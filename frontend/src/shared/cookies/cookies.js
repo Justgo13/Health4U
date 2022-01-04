@@ -111,6 +111,16 @@ export const useCustomCookies = () => {
     setCookies(CART_ITEMS, cartItems, { path: "/" });
   };
 
+  const setItemQuantity = (id, quantity) => {
+    console.log("q",quantity);
+    const cartItems = cookies[CART_ITEMS];
+    const item = cartItems.find((item) => item.id === id);
+    item.quantity = quantity
+    setCookies(CART_ITEMS, cartItems, {path: "/"})
+  };
+
+  const getCartItems = () => cookies[CART_ITEMS]
+
   return {
     cookies,
     onCartCountCookieChange,
@@ -120,5 +130,7 @@ export const useCustomCookies = () => {
     getOrderSummary,
     resetSearchQuery,
     deleteCartItem,
+    setItemQuantity,
+    getCartItems
   };
 };

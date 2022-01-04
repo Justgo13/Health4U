@@ -50,6 +50,10 @@ a {
   padding: 1rem 0;
 }
 
+.top-bottom-margin {
+  margin: 1rem 0 !important;
+}
+
 .horizontal-margin {
   margin: auto 1rem !important;
 }
@@ -69,7 +73,11 @@ a {
 }
 
 .form-control {
-  width: 30%;
+  width: 20%;
+}
+
+.form-control-sm {
+  width: 10%;
 }
 
 .default-quantity {
