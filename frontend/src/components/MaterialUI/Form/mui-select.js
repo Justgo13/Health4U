@@ -1,33 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 import MuiBox from "../mui-box";
-import { useQuantityContext } from "../../../shared/context/consumer/quantity-consumer";
 
 import "../../../styles/form.css";
 
-const MuiSelect = ({ labelText, selectItems, classname }) => {
-  const quantityContext = useQuantityContext();
+const MuiSelect = ({ labelText, selectItems, classname, itemQuantity, onChange }) => {
+  const selectChangeHandler = e => {
+    onChange(e.target.value)
+  }
 
-  useEffect(() => {
-    // set quantity to default value 1
-    quantityContext.onQuantityChange(1);
-  }, []);
-
-  const selectChangeHandler = (e) => {
-    quantityContext.onQuantityChange(e.target.value);
-  };
   return (
     <MuiBox className={classname}>
       <FormControl className="form-control">
         <InputLabel>{labelText}</InputLabel>
         <Select
-          value={quantityContext.quantity}
+          value={itemQuantity}
           label={labelText}
           onChange={selectChangeHandler}
           renderValue={
-            quantityContext.quantity === 1
+            itemQuantity === 1
               ? () => (
                   <MenuItem className="default-quantity" value={1}>
                     1

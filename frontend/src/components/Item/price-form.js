@@ -10,7 +10,6 @@ import FontAwesomeIcon from "../font-awesome-icon";
 import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 
 import { useCustomCookies, CART_ITEMS } from "../../shared/cookies/cookies";
-import { useQuantityContext } from "../../shared/context/consumer/quantity-consumer";
 import { useModalReducer } from "../Modal/modal-reducer";
 
 const PriceForm = ({ item }) => {
@@ -19,8 +18,6 @@ const PriceForm = ({ item }) => {
   for (let i = 1; i < 50; i++) {
     quantity.push(i);
   }
-
-  const quantityContext = useQuantityContext();
 
   const [priceDollar, setPriceDollar] = useState(0);
   const [priceCents, setPriceCents] = useState(0);
@@ -33,12 +30,13 @@ const PriceForm = ({ item }) => {
 
   const { cookies, onCartItemsCookieChange } = useCustomCookies();
 
+  const [itemQuantity, setItemQuantity] = useState(1);
   const addProductToCartHandler = (e) => {
     e.preventDefault();
     onCartItemsCookieChange({
       id: item.id,
       name: item.name,
-      quantity: quantityContext.quantity,
+      quantity: itemQuantity,
       image: item.image,
       price: item.price,
     });
@@ -70,6 +68,8 @@ const PriceForm = ({ item }) => {
           classname="top-bottom-padding"
           labelText="Quantity"
           selectItems={quantity}
+          itemQuantity={itemQuantity}
+          onChange={setItemQuantity}
         />
         <CustomButton className="white-inverse big-btn" type="submit">
           Add to cart

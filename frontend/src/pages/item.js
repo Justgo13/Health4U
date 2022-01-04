@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
@@ -163,7 +163,6 @@ const displayStars = (itemRating) => {
 const Item = () => {
   // url hooks
   const { itemID } = useParams();
-  // const navigate = useNavigate();
 
   const item = allItems.find((item) => item.id === itemID);
   const relatedItems = allItems.filter((i) => i.category === item.category);
