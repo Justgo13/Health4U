@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { AppBar, Toolbar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Search from "./search";
 import NavbarBrand from "./navbar-brand";
@@ -32,7 +32,7 @@ const accountChoices = [
   "Seller Login",
 ];
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [
     modalState,
     showCartModal,
@@ -44,9 +44,17 @@ const Navbar = () => {
     isSearchErrorModalShown: false,
   });
 
-  const { cookies } = useCustomCookies();
+  const { cookies, resetSearchQuery } = useCustomCookies();
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // reset search query cookie so that the previous state is not stored
+    if (location.pathname !== "/shop/search") {
+      resetSearchQuery();
+    }
+  }, [location.pathname])
 
   const checkoutHandler = (e) => {
     navigate("/shop/cart/1");

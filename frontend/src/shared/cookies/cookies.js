@@ -82,13 +82,32 @@ export const useCustomCookies = () => {
 
     return { subTotal, taxes, total };
   };
-  
+
+  const resetSearchQuery = () => {
+    setCookies(SEARCH_QUERY, [], {path: "/"})
+  }
+
+  const deleteCartItem = (productName) => {
+    const cartItems = cookies[CART_ITEMS]
+    const deletedItemIndex = cartItems.find(item => item.name === productName)
+
+    if (deletedItemIndex) {
+      cartItems.splice(deletedItemIndex, 1)
+      console.log("Deleted item from cart");
+      console.log(cartItems[deletedItemIndex]);
+    }
+    setCookies(CART_COUNT, cartItems.length, {path: "/"})
+    setCookies(CART_ITEMS, cartItems,  {path: "/"})
+  }
+
   return {
     cookies,
     onCartCountCookieChange,
     onCartItemsCookieChange,
     onSearchQueryCookieChange,
     initCookies,
-    getOrderSummary
+    getOrderSummary,
+    resetSearchQuery,
+    deleteCartItem
   };
 };
