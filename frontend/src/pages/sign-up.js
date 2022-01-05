@@ -47,7 +47,6 @@ const SignUp = () => {
   const signUpHandler = (e) => {
     e.preventDefault();
     if (formValidationState.isValid) {
-        console.log(formValidationState.inputs);
         navigate("/shop")
     }
   };
