@@ -1,12 +1,120 @@
-import React, { Fragment } from 'react';
-import Navbar from "../components/NavBar/navbar"
+import React, { Fragment, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import Navbar from "../components/NavBar/navbar";
+
+import MuiBox from "../components/MaterialUI/mui-box";
+import MuiForm from "../components/MaterialUI/mui-form";
+import MuiTypography from "../components/MaterialUI/mui-typography";
+import MuiTextField from "../components/MaterialUI/Form/mui-textfield";
+import MuiSelect from "../components/MaterialUI/Form/mui-select";
+import CustomButton from "../components/custom-button";
+
+import {
+  VALIDATE_REQUIRE,
+  VALIDATE_MIN_LENGTH,
+  VALIDATE_EMAIL,
+} from "../components/MaterialUI/Form/mui-textfield";
+
+import { useFormValidation } from "../components/MaterialUI/Form/form-validation";
 
 const SignUp = () => {
-    return (
-        <Fragment>
-            <Navbar />
-        </Fragment>
+  const [accountType, setAccountType] = useState("Buyer");
+  const { formValidationState, updateFormValidationState, verifyForm } =
+    useFormValidation(
+      [
+        {
+          name: "name",
+          value: "",
+          isValid: false,
+        },
+        {
+          name: "email",
+          value: "",
+          isValid: false,
+        },
+        {
+          name: "password",
+          value: "",
+          isValid: false,
+        },
+      ],
+      false
     );
-}
+
+  const navigate = useNavigate();
+
+  const signUpHandler = (e) => {
+    e.preventDefault();
+    if (formValidationState.isValid) {
+        console.log(formValidationState.inputs);
+        navigate("/shop")
+    }
+  };
+
+  useEffect(() => {
+    verifyForm();
+  }, [formValidationState.inputs]);
+  return (
+    <Fragment>
+      <Navbar />
+
+      <MuiBox className="container">
+        <MuiForm
+          formHeader={
+            <MuiTypography className="divider-header top-bottom-padding center">
+              Sign Up
+            </MuiTypography>
+          }
+          submitHandler={signUpHandler}
+        >
+          <MuiBox className="grey-background container textfield-group">
+            <MuiTextField
+              label="Name"
+              validators={[VALIDATE_REQUIRE]}
+              formInput={formValidationState.inputs.find(
+                (input) => input.name === "name"
+              )}
+              updateFormValidationState={updateFormValidationState}
+            />
+            <MuiTextField
+              label="Email"
+              validators={[
+                VALIDATE_REQUIRE,
+                VALIDATE_MIN_LENGTH,
+                VALIDATE_EMAIL,
+              ]}
+              formInput={formValidationState.inputs.find(
+                (input) => input.name === "email"
+              )}
+              updateFormValidationState={updateFormValidationState}
+            />
+            <MuiTextField
+              label="Password"
+              validators={[VALIDATE_MIN_LENGTH, VALIDATE_REQUIRE]}
+              formInput={formValidationState.inputs.find(
+                (input) => input.name === "password"
+              )}
+              updateFormValidationState={updateFormValidationState}
+            />
+            <MuiSelect
+              classname="top-bottom-margin"
+              labelText="Account Type"
+              selectItems={["Buyer", "Seller"]}
+              defaultValue={accountType}
+              onChange={setAccountType}
+            />
+            <CustomButton
+              className="big-btn white-inverse top-bottom-margin"
+              onClick={signUpHandler}
+            >
+              Sign Up
+            </CustomButton>
+          </MuiBox>
+        </MuiForm>
+      </MuiBox>
+    </Fragment>
+  );
+};
 
 export default SignUp;
