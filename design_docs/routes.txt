@@ -9,8 +9,10 @@ Search --> "/shop/search"
 Cart --> "/shop/cart/:buyerID"
 Buyer/Seller Sign Up --> "/auth/sign-up"
 Buyer/Seller Login --> "/auth/login"
-Buyer Profile Page --> "/buyer/profile/:buyerID
-Seller Page --> "/seller/account/:sellerID"
+Buyer Profile Page --> "/buyer/profile/:buyerID"
+Buyer Order History --> "/buyer/order-history/:buyerID"
+Buyer Bookmarks --> "/buyer/bookmarks/:buyerID"
+Seller Page --> "/seller/profile/:sellerID"
 Seller Item Page --> "/seller/item/:itemID"
 
 Backend Routes

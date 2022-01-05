@@ -25,8 +25,8 @@ export const useAuthCookies = () => {
     }
   }, []);
 
-  const updateUserInfo = ({name, email}) => {
-    setCookie(USER_INFO, { name, email }, { path: "/" });
+  const updateUserInfo = ({name, email, accountType}) => {
+    setCookie(USER_INFO, { name, email, accountType }, { path: "/" });
   };
 
   const login = () => {

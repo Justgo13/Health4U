@@ -19,7 +19,7 @@ import MuiBox from "../MaterialUI/mui-box";
 import MuiContainer from "../MaterialUI/mui-container";
 import MuiTypography from "../MaterialUI/mui-typography";
 
-import AccountMenu from "../../components/Account/account-menu";
+import AccountMenu from "../Account/account-menu";
 
 import "../../styles/navbar.css";
 
@@ -43,6 +43,7 @@ const Navbar = () => {
   const loggedIn = getLoggedInCookie();
   const userInfo = getUserInfo();
   const userName = userInfo.name;
+  const accountType = userInfo.accountType;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,7 +91,7 @@ const Navbar = () => {
 
             <MuiBox className="nav-items">
               <MuiBox>
-                <AccountMenu loggedIn={loggedIn} menuText={userName || "Account"}/>
+                <AccountMenu loggedIn={loggedIn} menuText={userName || "Account"} accountType={accountType}/>
               </MuiBox>
               <CustomButton
                 variant="text"
