@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 
-export const CART_COUNT = "cartItemCount";
-export const CART_ITEMS = "cartItems";
-export const SEARCH_QUERY = "searchQuery";
+const CART_COUNT = "cartItemCount";
+const CART_ITEMS = "cartItems";
+const SEARCH_QUERY = "searchQuery";
 
 export const useCartCookies = () => {
   const [cookies, setCookie] = useCookies([
@@ -29,7 +29,7 @@ export const useCartCookies = () => {
     ];
     for (const cookie of cookieInitVals) {
       if (!cookies[cookie.name]) {
-        setCookie(cookie.name, cookie.value);
+        setCookie(cookie.name, cookie.value, {path: "/"});
       }
     }
   }, []);
@@ -129,8 +129,6 @@ export const useCartCookies = () => {
   const getCartCount = () => cookies[CART_COUNT];
 
   return {
-    cookies,
-    // initCartCookies,
     onCartCountCookieChange,
     onCartItemsCookieChange,
     onSearchQueryCookieChange,

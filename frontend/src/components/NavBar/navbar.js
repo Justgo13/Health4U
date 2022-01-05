@@ -12,6 +12,7 @@ import ErrorModal from "../Modal/error-modal";
 
 import { useModalReducer } from "../Modal/modal-reducer";
 import { useCartCookies } from "../../shared/cookies/cart-cookies";
+import { useAuthCookies } from "../../shared/cookies/auth-cookies";
 
 // Material UI custom components
 import MuiBox from "../MaterialUI/mui-box";
@@ -36,6 +37,7 @@ const Navbar = () => {
 
   const { resetSearchQuery, getSearchQuery, getCartItems, getCartCount } =
     useCartCookies();
+  const {getLoggedInCookie} = useAuthCookies();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,7 +85,7 @@ const Navbar = () => {
 
             <MuiBox className="nav-items">
               <MuiBox>
-                <AccountMenu />
+                <AccountMenu loggedIn={getLoggedInCookie()}/>
               </MuiBox>
               <CustomButton
                 variant="text"

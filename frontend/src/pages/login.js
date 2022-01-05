@@ -12,6 +12,7 @@ import CustomButton from "../components/custom-button";
 import { VALIDATE_REQUIRE } from "../components/MaterialUI/Form/mui-textfield";
 
 import { useFormValidation } from "../components/MaterialUI/Form/form-validation";
+import { useAuthCookies } from "../shared/cookies/auth-cookies";
 
 const Login = () => {
   const { formValidationState, updateFormValidationState, verifyForm } =
@@ -33,9 +34,16 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const { login, updateUserInfo } = useAuthCookies();
+
   const loginHandler = (e) => {
     e.preventDefault();
     if (formValidationState.isValid) {
+      const email = formValidationState.inputs.find(
+        (item) => item.name === "email"
+      );
+      login();
+      updateUserInfo({ name: "Jason", email });
       navigate("/shop");
     }
   };
@@ -43,6 +51,7 @@ const Login = () => {
   useEffect(() => {
     verifyForm();
   }, [formValidationState.inputs]);
+
   return (
     <Fragment>
       <Navbar />
