@@ -11,28 +11,16 @@ import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 import ErrorModal from "../Modal/error-modal";
 
 import { useModalReducer } from "../Modal/modal-reducer";
-import {
-  CART_COUNT,
-  CART_ITEMS,
-  SEARCH_QUERY,
-  useCustomCookies,
-} from "../../shared/cookies/cookies";
+import { useCartCookies } from "../../shared/cookies/cart-cookies";
 
 // Material UI custom components
 import MuiBox from "../MaterialUI/mui-box";
 import MuiContainer from "../MaterialUI/mui-container";
-import MuiMenu from "../MaterialUI/mui-menu";
 import MuiTypography from "../MaterialUI/mui-typography";
 
-import AccountMenu from "../../components/Account/account-menu"
+import AccountMenu from "../../components/Account/account-menu";
 
 import "../../styles/navbar.css";
-const accountChoices = [
-  "Buyer Sign Up",
-  "Buyer Login",
-  "Seller Sign Up",
-  "Seller Login",
-];
 
 const Navbar = () => {
   const [
@@ -46,7 +34,8 @@ const Navbar = () => {
     isSearchErrorModalShown: false,
   });
 
-  const { cookies, resetSearchQuery } = useCustomCookies();
+  const { resetSearchQuery, getSearchQuery, getCartItems, getCartCount } =
+    useCartCookies();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,7 +45,7 @@ const Navbar = () => {
     if (location.pathname !== "/shop/search") {
       resetSearchQuery();
     }
-  }, [location.pathname])
+  }, [location.pathname]);
 
   const checkoutHandler = (e) => {
     navigate("/shop/cart/1");
@@ -64,7 +53,7 @@ const Navbar = () => {
   };
 
   const searchHandler = () => {
-    const searchQuery = cookies[SEARCH_QUERY];
+    const searchQuery = getSearchQuery();
     if (searchQuery.length === 0) {
       showSearchErrorModal();
     } else {
@@ -94,7 +83,7 @@ const Navbar = () => {
 
             <MuiBox className="nav-items">
               <MuiBox>
-                <AccountMenu/>
+                <AccountMenu />
               </MuiBox>
               <CustomButton
                 variant="text"
@@ -108,7 +97,7 @@ const Navbar = () => {
                   baseComponent="p"
                   style={{ marginLeft: "0.5rem" }}
                 >
-                  {cookies[CART_COUNT]}
+                  {getCartCount()}
                 </MuiTypography>
               </CustomButton>
             </MuiBox>
@@ -120,7 +109,7 @@ const Navbar = () => {
         <CartPreviewModal
           isModalShown={modalState.isCartModalShown}
           onClose={hideCartModal}
-          cartList={cookies[CART_ITEMS]}
+          cartList={getCartItems()}
           buttonHandler={checkoutHandler}
         />
       )}

@@ -8,10 +8,10 @@ import MuiSelect from "../../MaterialUI/Form/mui-select";
 
 import CustomButton from "../../custom-button";
 import FontAwesomeIcon from "../../font-awesome-icon";
-import { useCustomCookies } from "../../../shared/cookies/cookies";
+import { useCartCookies } from "../../../shared/cookies/cart-cookies";
 
 const CartPreviewModalList = ({ cartList }) => {
-  const { deleteCartItem, setItemQuantity } = useCustomCookies();
+  const { deleteCartItem, setItemQuantity } = useCartCookies();
 
   let quantity = [];
 

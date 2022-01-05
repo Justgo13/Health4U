@@ -6,7 +6,7 @@ import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 
-import { useCustomCookies, SEARCH_QUERY } from "../shared/cookies/cookies";
+import { useCartCookies } from "../shared/cookies/cart-cookies";
 
 // temporary until db is in place
 const allItems = [
@@ -33,10 +33,10 @@ const allItems = [
 ];
 
 const Search = () => {
-  const { cookies } = useCustomCookies();
+  const { getSearchQuery } = useCartCookies();
 
   const searchList = () => {
-    const searchItems = cookies[SEARCH_QUERY];
+    const searchItems = getSearchQuery();
     const searchResult = [];
     searchItems.forEach((query) => {
       const entry = allItems.find((item) => item.name === query);

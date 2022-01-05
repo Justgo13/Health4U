@@ -3,7 +3,7 @@ import { Autocomplete, TextField, Checkbox } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import { useCustomCookies } from "../../shared/cookies/cookies";
+import { useCartCookies } from "../../shared/cookies/cart-cookies";
 
 const Search = () => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -11,7 +11,7 @@ const Search = () => {
 
   const searchOptions = ["Black mask", "Pink mask"];
 
-  const {onSearchQueryCookieChange} = useCustomCookies();
+  const { onSearchQueryCookieChange } = useCartCookies();
 
   return (
     <Autocomplete

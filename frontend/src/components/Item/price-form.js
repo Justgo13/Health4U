@@ -9,7 +9,7 @@ import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
 import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 
-import { useCustomCookies, CART_ITEMS } from "../../shared/cookies/cookies";
+import { useCartCookies } from "../../shared/cookies/cart-cookies";
 import { useModalReducer } from "../Modal/modal-reducer";
 
 const PriceForm = ({ item }) => {
@@ -28,7 +28,7 @@ const PriceForm = ({ item }) => {
     setPriceCents(centsPrice);
   }, [setPriceDollar, setPriceCents]);
 
-  const { onCartItemsCookieChange, getCartItems } = useCustomCookies();
+  const { onCartItemsCookieChange, getCartItems } = useCartCookies();
 
   const [itemQuantity, setItemQuantity] = useState(1);
   const addProductToCartHandler = (e) => {

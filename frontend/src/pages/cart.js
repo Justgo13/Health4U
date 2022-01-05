@@ -8,10 +8,10 @@ import MuiDivider from "../components/MaterialUI/mui-divider";
 
 import CustomButton from "../components/custom-button";
 
-import { useCustomCookies } from "../shared/cookies/cookies";
+import { useCartCookies } from "../shared/cookies/cart-cookies";
 
 const Cart = () => {
-  const {getOrderSummary, getCartItems} = useCustomCookies();
+  const {getOrderSummary, getCartItems} = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const showCartItems = () => {

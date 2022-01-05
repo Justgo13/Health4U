@@ -11,7 +11,7 @@ import MuiTypography from "./mui-typography";
 import FontAwesomeIcon from "../font-awesome-icon";
 import MuiSelect from "./Form/mui-select";
 
-import { useCustomCookies } from "../../shared/cookies/cookies";
+import { useCartCookies } from "../../shared/cookies/cart-cookies";
 
 const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
@@ -22,7 +22,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
     quantity.push(i);
   }
 
-  const { setItemQuantity, deleteCartItem } = useCustomCookies();
+  const { setItemQuantity, deleteCartItem } = useCartCookies();
 
   const deleteItemHandler = (id) => deleteCartItem(id);
 

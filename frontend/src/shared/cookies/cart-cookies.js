@@ -1,35 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 
 export const CART_COUNT = "cartItemCount";
 export const CART_ITEMS = "cartItems";
 export const SEARCH_QUERY = "searchQuery";
 
-export const useCustomCookies = () => {
-  const [cookies, setCookies] = useCookies([
+export const useCartCookies = () => {
+  const [cookies, setCookie] = useCookies([
     CART_COUNT,
     CART_ITEMS,
     SEARCH_QUERY,
   ]);
 
-  const initCookies = () => {
-    // setup cookies if not already set
-    if (!cookies[CART_COUNT]) {
-      console.log("initializing cart count cookie");
-      setCookies(CART_COUNT, 0);
+  useEffect(() => {
+    const cookieInitVals = [
+      {
+        name: CART_COUNT,
+        value: 0,
+      },
+      {
+        name: CART_ITEMS,
+        value: [],
+      },
+      {
+        name: SEARCH_QUERY,
+        value: [],
+      },
+    ];
+    for (const cookie of cookieInitVals) {
+      if (!cookies[cookie.name]) {
+        setCookie(cookie.name, cookie.value);
+      }
     }
-    if (!cookies[CART_ITEMS]) {
-      console.log("initializing cart items cookie");
-      setCookies(CART_ITEMS, []);
-    }
-    if (!cookies[SEARCH_QUERY]) {
-      console.log("initializing search query cookie");
-      setCookies(SEARCH_QUERY, []);
-    }
-  };
+  }, []);
 
   const onCartCountCookieChange = (cookieValue) => {
-    setCookies(CART_COUNT, cookieValue, { path: "/" });
+    setCookie(CART_COUNT, cookieValue, { path: "/" });
   };
 
   const onCartItemsCookieChange = ({ id, name, quantity, image, price }) => {
@@ -69,12 +75,12 @@ export const useCustomCookies = () => {
     }
 
     // create cookies for storing cart information
-    setCookies(CART_COUNT, cartItems.length, { path: "/" });
-    setCookies(CART_ITEMS, cartItems, { path: "/" });
+    setCookie(CART_COUNT, cartItems.length, { path: "/" });
+    setCookie(CART_ITEMS, cartItems, { path: "/" });
   };
 
   const onSearchQueryCookieChange = (cookieValue) => {
-    setCookies(SEARCH_QUERY, cookieValue, { path: "/" });
+    setCookie(SEARCH_QUERY, cookieValue, { path: "/" });
   };
 
   const getOrderSummary = () => {
@@ -97,39 +103,43 @@ export const useCustomCookies = () => {
   };
 
   const resetSearchQuery = () => {
-    setCookies(SEARCH_QUERY, [], { path: "/" });
+    setCookie(SEARCH_QUERY, [], { path: "/" });
   };
 
   const deleteCartItem = (id) => {
-    console.log(id);
     let cartItems = cookies[CART_ITEMS];
 
     cartItems = cartItems.filter((item) => item.id !== id);
-    console.log(cartItems);
 
-    setCookies(CART_COUNT, cartItems.length, { path: "/" });
-    setCookies(CART_ITEMS, cartItems, { path: "/" });
+    setCookie(CART_COUNT, cartItems.length, { path: "/" });
+    setCookie(CART_ITEMS, cartItems, { path: "/" });
   };
 
   const setItemQuantity = (id, quantity) => {
     const cartItems = cookies[CART_ITEMS];
     const item = cartItems.find((item) => item.id === id);
-    item.quantity = quantity
-    setCookies(CART_ITEMS, cartItems, {path: "/"})
+    item.quantity = quantity;
+    setCookie(CART_ITEMS, cartItems, { path: "/" });
   };
 
-  const getCartItems = () => cookies[CART_ITEMS]
+  const getCartItems = () => cookies[CART_ITEMS];
+
+  const getSearchQuery = () => cookies[SEARCH_QUERY];
+
+  const getCartCount = () => cookies[CART_COUNT];
 
   return {
     cookies,
+    // initCartCookies,
     onCartCountCookieChange,
     onCartItemsCookieChange,
     onSearchQueryCookieChange,
-    initCookies,
     getOrderSummary,
     resetSearchQuery,
     deleteCartItem,
     setItemQuantity,
-    getCartItems
+    getCartItems,
+    getSearchQuery,
+    getCartCount,
   };
 };
