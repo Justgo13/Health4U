@@ -36,7 +36,6 @@ const Login = () => {
   const loginHandler = (e) => {
     e.preventDefault();
     if (formValidationState.isValid) {
-      console.log(formValidationState.inputs);
       navigate("/shop");
     }
   };
