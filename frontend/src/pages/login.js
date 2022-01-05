@@ -43,7 +43,7 @@ const Login = () => {
         (item) => item.name === "email"
       );
       login();
-      updateUserInfo({ name: "Jason", email });
+      updateUserInfo({ name: "Jason", email: email.value });
       navigate("/shop");
     }
   };

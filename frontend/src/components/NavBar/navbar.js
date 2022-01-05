@@ -37,7 +37,12 @@ const Navbar = () => {
 
   const { resetSearchQuery, getSearchQuery, getCartItems, getCartCount } =
     useCartCookies();
-  const {getLoggedInCookie} = useAuthCookies();
+
+
+  const {getLoggedInCookie, getUserInfo} = useAuthCookies();
+  const loggedIn = getLoggedInCookie();
+  const userInfo = getUserInfo();
+  const userName = userInfo.name;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,7 +90,7 @@ const Navbar = () => {
 
             <MuiBox className="nav-items">
               <MuiBox>
-                <AccountMenu loggedIn={getLoggedInCookie()}/>
+                <AccountMenu loggedIn={loggedIn} menuText={userName || "Account"}/>
               </MuiBox>
               <CustomButton
                 variant="text"

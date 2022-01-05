@@ -25,7 +25,7 @@ export const useAuthCookies = () => {
     }
   }, []);
 
-  const updateUserInfo = (name, email) => {
+  const updateUserInfo = ({name, email}) => {
     setCookie(USER_INFO, { name, email }, { path: "/" });
   };
 
@@ -39,5 +39,7 @@ export const useAuthCookies = () => {
 
   const getLoggedInCookie = () => cookies[LOGGED_IN];
 
-  return { updateUserInfo, login, logout, getLoggedInCookie };
+  const getUserInfo = () => cookies[USER_INFO];
+
+  return { updateUserInfo, login, logout, getLoggedInCookie, getUserInfo };
 };

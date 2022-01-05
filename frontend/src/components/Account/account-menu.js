@@ -7,11 +7,11 @@ import SignUp from "./sign-up";
 import Login from "./login";
 import Logout from "./logout";
 
-const AccountMenu = ({ loggedIn }) => {
+const AccountMenu = ({ loggedIn , menuText}) => {
   if (loggedIn === "true") {
     return (
       <MuiMenu
-        menuMainButtonText="Account"
+        menuMainButtonText={`Welcome ${menuText}`}
         menuContent={
           <MuiBox>
             <Logout />
