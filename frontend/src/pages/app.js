@@ -15,6 +15,7 @@ import Cart from "./cart";
 import Search from "./search";
 import SignUp from "./sign-up";
 import Login from "./login";
+import Profile from "./profile";
 
 const App = () => {
   return (
@@ -28,7 +29,7 @@ const App = () => {
           <Route path="category/:categoryID" element={<Category />} />
           <Route path="item/:itemID" element={<Item />} />
           <Route path="search" element={<Search />} />
-          <Route path="cart/:buyerID" element={<Cart />} />
+          <Route path="cart/:userID" element={<Cart />} />
         </Route>
 
         <Route path="auth" element={<Outlet />}>
@@ -36,8 +37,14 @@ const App = () => {
           <Route path="login" element={<Login />} />
         </Route>
 
+        <Route path="buyer" element={<Outlet />}>
+          <Route path="profile/:userID" element={<Profile />} />
+          <Route path="order-history/:userID" element={<Login />} />
+          <Route path="bookmarks/:userID" element={<Login />} />
+        </Route>
+
         <Route path="seller/item/:itemID" element={<LandingPage />} />
-        <Route path="seller/account/:sellerID" element={<LandingPage />} />
+        <Route path="seller/account/:userID" element={<LandingPage />} />
       </Routes>
     </Router>
   );

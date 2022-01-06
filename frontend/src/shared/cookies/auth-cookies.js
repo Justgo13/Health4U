@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useCookies } from "react-cookie";
 
 const LOGGED_IN = "loggedIn";
@@ -6,24 +6,21 @@ const USER_INFO = "userInfo";
 
 export const useAuthCookies = () => {
   const [cookies, setCookie] = useCookies([LOGGED_IN, USER_INFO]);
-
-  useEffect(() => {
-    const cookieInitVals = [
-      {
-        name: LOGGED_IN,
-        value: false,
-      },
-      {
-        name: USER_INFO,
-        value: {},
-      },
-    ];
-    for (const cookie of cookieInitVals) {
-      if (!cookies[cookie.name]) {
-        setCookie(cookie.name, cookie.value, { path: "/" });
-      }
+  const cookieInitVals = [
+    {
+      name: LOGGED_IN,
+      value: false,
+    },
+    {
+      name: USER_INFO,
+      value: {},
+    },
+  ];
+  for (const cookie of cookieInitVals) {
+    if (!cookies[cookie.name]) {
+      setCookie(cookie.name, cookie.value, { path: "/" });
     }
-  }, []);
+  }
 
   const updateUserInfo = ({name, email, accountType}) => {
     setCookie(USER_INFO, { name, email, accountType }, { path: "/" });
