@@ -6,11 +6,13 @@ import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
 import Navbar from "../components/NavBar/navbar";
 import { useCartCookies } from "../shared/cookies/cart-cookies";
-import {useAuthCookies} from "../shared/cookies/auth-cookies"
+import { useAuthCookies } from "../shared/cookies/auth-cookies";
+import { useBookmarkCookies } from "../shared/cookies/bookmark-cookies";
 
 const ShopPage = () => {
   useCartCookies();
   useAuthCookies();
+  useBookmarkCookies();
   const items = [
     {
       id: "1",

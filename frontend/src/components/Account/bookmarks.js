@@ -7,7 +7,7 @@ import CustomButton from "../custom-button";
 const Bookmarks = () => {
   return (
     <MenuItem>
-      <Link to="/buyer/bookmarks/buyerID" className="full-width">
+      <Link to="/buyer/bookmarks/1" className="full-width">
         <CustomButton className="white-inverse full-width">
           My Bookmarks
         </CustomButton>

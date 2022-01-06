@@ -170,7 +170,7 @@ const Item = () => {
   return (
     <Fragment>
       <Navbar />
-      <Bookmark />
+      <Bookmark itemID={item.id}/>
 
       <MuiBox className="flex-container container">
         <MuiBox className="flex-child">
