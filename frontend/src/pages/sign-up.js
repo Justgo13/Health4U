@@ -17,6 +17,8 @@ import {
 } from "../components/MaterialUI/Form/mui-textfield";
 
 import { useFormValidation } from "../components/MaterialUI/Form/form-validation";
+import { useHttpClient } from "../shared/hooks/http-hook";
+import ErrorModal from "../components/Modal/error-modal";
 
 const SignUp = () => {
   const [accountType, setAccountType] = useState("Buyer");
@@ -42,12 +44,47 @@ const SignUp = () => {
       false
     );
 
+  const { error, sendRequest, clearError } = useHttpClient();
+
   const navigate = useNavigate();
 
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault();
     if (formValidationState.isValid) {
-        navigate("/shop")
+      const name = formValidationState.inputs.find(
+        (input) => input.name === "name"
+      ).value;
+      const email = formValidationState.inputs.find(
+        (input) => input.name === "email"
+      ).value;
+      const password = formValidationState.inputs.find(
+        (input) => input.name === "password"
+      ).value;
+
+      if (accountType === "Buyer") {
+        await sendRequest(
+          "http://localhost:5000/api/user/signUpBuyer",
+          "POST",
+          {
+            name,
+            email,
+            password,
+          }
+        );
+      } else if (accountType === "Seller") {
+        await sendRequest(
+          "http://localhost:5000/api/user/signUpSeller",
+          "POST",
+          {
+            name,
+            email,
+            password,
+          }
+        );
+      }
+      if (!error) {
+        navigate("/shop");
+      }
     }
   };
 
@@ -59,6 +96,13 @@ const SignUp = () => {
       <Navbar />
 
       <MuiBox className="container">
+        {!!error && (
+          <ErrorModal
+            isModalShown={true}
+            errorMessage={"User already exists"}
+            onClose={clearError}
+          />
+        )}
         <MuiForm
           formHeader={
             <MuiTypography className="divider-header top-bottom-padding center">
