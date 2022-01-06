@@ -25,6 +25,7 @@ const allItems = [
       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
     price: 2.12,
     rating: 2.2,
+    orderDate: ""
   },
   {
     id: "2",
@@ -35,6 +36,7 @@ const allItems = [
       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
     price: 2.65,
     rating: 2.3,
+    orderDate: ""
   },
 ];
 

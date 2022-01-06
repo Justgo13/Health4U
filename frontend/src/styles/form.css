@@ -63,6 +63,10 @@ a {
   font-size: 10rem !important;
 }
 
+.red-text {
+  color: #f00;
+}
+
 .divider-header {
   font-size: 3rem !important;
   color: #f00;
