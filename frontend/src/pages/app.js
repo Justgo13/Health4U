@@ -17,6 +17,7 @@ import SignUp from "./sign-up";
 import Login from "./login";
 import Profile from "./profile";
 import Bookmarks from "./bookmarks";
+import OrderHistory from "./order-history";
 
 const App = () => {
   return (
@@ -40,7 +41,7 @@ const App = () => {
 
         <Route path="buyer" element={<Outlet />}>
           <Route path="profile/:userID" element={<Profile />} />
-          <Route path="order-history/:userID" element={<Login />} />
+          <Route path="order-history/:userID" element={<OrderHistory />} />
           <Route path="bookmarks/:userID" element={<Bookmarks />} />
         </Route>
 

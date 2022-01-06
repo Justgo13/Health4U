@@ -7,7 +7,7 @@ import CustomButton from "../custom-button";
 const OrderHistory = () => {
   return (
     <MenuItem>
-      <Link to="/buyer/order-history/buyerID/" className="full-width">
+      <Link to="/buyer/order-history/1" className="full-width">
         <CustomButton className="white-inverse full-width">
           Order History
         </CustomButton>
