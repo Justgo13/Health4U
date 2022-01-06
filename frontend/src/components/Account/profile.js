@@ -8,10 +8,10 @@ const Profile = ({ accountType }) => {
   let link;
   switch (accountType) {
     case "Buyer":
-      link = "/buyer/profile/buyerID";
+      link = "/buyer/profile/1";
       break;
     case "Seller":
-      link = "/seller/profile/sellerID";
+      link = "/seller/profile/2";
       break;
     default:
       break;

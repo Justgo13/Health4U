@@ -45,8 +45,10 @@ const App = () => {
           <Route path="bookmarks/:userID" element={<Bookmarks />} />
         </Route>
 
-        <Route path="seller/item/:itemID" element={<LandingPage />} />
-        <Route path="seller/account/:userID" element={<LandingPage />} />
+        <Route path="seller" element={<Outlet />}>
+          <Route path="profile/:userID" element={<Profile />} />
+          <Route path="items/:itemID" element={<OrderHistory />} />
+        </Route>
       </Routes>
     </Router>
   );

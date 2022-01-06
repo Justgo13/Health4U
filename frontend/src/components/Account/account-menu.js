@@ -33,6 +33,7 @@ const AccountMenu = ({ loggedIn, menuText, accountType }) => {
           menuMainButtonText={`Welcome ${menuText}`}
           menuContent={
             <MuiBox>
+              <Profile accountType={accountType} />
               <Logout />
             </MuiBox>
           }
