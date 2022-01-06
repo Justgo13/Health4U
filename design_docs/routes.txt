@@ -16,14 +16,16 @@ Seller Page --> "/seller/profile/:userID"
 Seller Item Page --> "/seller/item/:itemID"
 
 Backend Routes
-GET user --> "/user/:userID"
-POST user --> "/user/:userID"
-PATCH user --> "/user/:userID"
-DELETE user --> "/user/:userID"
+POST signUpBuyer --> "/api/user/signUpBuyer"
+POST signUpSeller --> "/api/user/signUpSeller"
+GET user --> "/api/user/:userID"
+POST user --> "/api/user/:userID"
+PATCH user --> "/api/user/:userID"
+DELETE user --> "/api/user/:userID"
 
-GET item --> "/item/:itemID"
+GET item --> "/api/item/:itemID"
 (seller only)
-POST item --> "/item/:itemID" 
-PATH item --> "/item/:itemID" 
-DELETE item --> "/item/:itemID" 
+POST item --> "/api/item/:itemID" 
+PATH item --> "/api/item/:itemID" 
+DELETE item --> "/api/item/:itemID" 
 
