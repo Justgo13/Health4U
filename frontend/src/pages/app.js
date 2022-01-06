@@ -16,6 +16,7 @@ import Search from "./search";
 import SignUp from "./sign-up";
 import Login from "./login";
 import Profile from "./profile";
+import Bookmarks from "./bookmarks";
 
 const App = () => {
   return (
@@ -40,7 +41,7 @@ const App = () => {
         <Route path="buyer" element={<Outlet />}>
           <Route path="profile/:userID" element={<Profile />} />
           <Route path="order-history/:userID" element={<Login />} />
-          <Route path="bookmarks/:userID" element={<Login />} />
+          <Route path="bookmarks/:userID" element={<Bookmarks />} />
         </Route>
 
         <Route path="seller/item/:itemID" element={<LandingPage />} />
