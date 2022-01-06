@@ -11,7 +11,7 @@ import CustomButton from "../components/custom-button";
 import { useCartCookies } from "../shared/cookies/cart-cookies";
 
 const Cart = () => {
-  const {getOrderSummary, getCartItems} = useCartCookies();
+  const {getOrderSummary, getCartItems, checkoutCart} = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const showCartItems = () => {
@@ -29,6 +29,10 @@ const Cart = () => {
     }
     return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" cart/>;
   };
+
+  const checkoutHandler = () => {
+    checkoutCart()
+  }
 
   return (
     <Fragment>
@@ -58,7 +62,7 @@ const Cart = () => {
       </MuiBox>
 
       <MuiBox className="center top-bottom-padding">
-        <CustomButton className="xl-button white-inverse">
+        <CustomButton className="xl-button white-inverse" onClick={checkoutHandler}>
           Checkout
         </CustomButton>
       </MuiBox>

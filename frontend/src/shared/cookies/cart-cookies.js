@@ -1,17 +1,20 @@
-import { useTheme } from "@emotion/react";
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { getDate } from "../../utils/date";
 
 const CART_COUNT = "cartItemCount";
 const CART_ITEMS = "cartItems";
 const SEARCH_QUERY = "searchQuery";
 const CART_ITEM_ORDER_DATE = "cartItemOrderDate";
+const CART = "cart";
 
 export const useCartCookies = () => {
   const [cookies, setCookie] = useCookies([
     CART_COUNT,
     CART_ITEMS,
     SEARCH_QUERY,
+    CART_ITEM_ORDER_DATE,
+    CART,
   ]);
 
   useEffect(() => {
@@ -30,6 +33,10 @@ export const useCartCookies = () => {
       },
       {
         name: CART_ITEM_ORDER_DATE,
+        value: [],
+      },
+      {
+        name: CART,
         value: [],
       },
     ];
@@ -175,41 +182,79 @@ export const useCartCookies = () => {
      *  },
      */
     let cartItemsOrderDate = cookies[CART_ITEM_ORDER_DATE];
-    let cartItems = cookies[CART_ITEMS];
+    let cart = cookies[CART];
 
-
-    cartItems.map((item) => {
+    cart.map((cartEntry) => {
       if (cartItemsOrderDate.length === 0) {
         cartItemsOrderDate.push({
-          orderDate: item.orderDate,
-          orderItems: [item]
+          orderDate: cartEntry.orderDate,
+          orderItems: cartEntry.cartItems,
         });
       } else {
         const orderDateObj = cartItemsOrderDate.find(
-          (obj) => obj.orderDate === item.orderDate
+          (obj) => obj.orderDate === cartEntry.orderDate
         );
 
         if (!orderDateObj) {
           // create new entry
           cartItemsOrderDate.push({
             orderDate: orderDateObj,
-            orderItems: [item],
+            orderItems: cartEntry.cartItems,
           });
         } else {
-          // existing entry check if item already exist, if not then add
-          if (!orderDateObj.orderItems.find(i => i.id === item.id)) {
-            orderDateObj.orderItems.push(item);
-          }
-         
+          // existing entry
+          orderDateObj.orderItems = cartEntry.cartItems
         }
-
       }
     });
 
-    setCookie(CART_ITEM_ORDER_DATE, cartItemsOrderDate, {path: "/"});
+    setCookie(CART_ITEM_ORDER_DATE, cartItemsOrderDate, { path: "/" });
   };
 
   const getCartItemOrderDate = () => cookies[CART_ITEM_ORDER_DATE];
+
+  const checkoutCart = () => {
+    const orderDate = getDate();
+    const cartItems = cookies[CART_ITEMS];
+    const cart = cookies[CART];
+
+    /**
+     * Cart looks like
+     *
+     * [
+     *  {
+     *    cartItems: []
+     *    orderDate: ""
+     *  }
+     * ]
+     */
+
+    // empty cart case
+    if (cart.length === 0) {
+      cart.push({
+        cartItems,
+        orderDate,
+      });
+    } else {
+      // find if the current checkouted cart exists by looking for orderDate
+
+      const cartEntry = cart.find(entry => entry.orderDate === orderDate) 
+
+      if (!cartEntry) {
+        // add new entry
+        cart.push({
+          cartItems,
+          orderDate,
+        });
+      } else {
+        // cart exists for this order date, update the cart items
+
+        cartEntry.cartItems = cartItems
+      }
+    }
+
+    setCookie(CART, cart)
+  };
 
   return {
     onCartCountCookieChange,
@@ -225,5 +270,6 @@ export const useCartCookies = () => {
     getItemOrderDate,
     addItemByOrderDate,
     getCartItemOrderDate,
+    checkoutCart
   };
 };

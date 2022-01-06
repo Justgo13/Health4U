@@ -12,16 +12,7 @@ import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 import { useCartCookies } from "../../shared/cookies/cart-cookies";
 import { useModalReducer } from "../Modal/modal-reducer";
 
-const getDate = () => {
-  let date;
-  let today = new Date();
-  let month = today.toLocaleDateString("default", {month: "short"})
-  let day = String(today.getDate()).padStart(2, '0');
-  let year = today.getFullYear();
-
-  date = `${month} ${day}, ${year}`
-  return date
-}
+import { getDate } from "../../utils/date";
 
 const PriceForm = ({ item }) => {
   let quantity = [];
