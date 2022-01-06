@@ -61,7 +61,6 @@ const Bookmarks = () => {
     const itemObj = allItems.find((item) => item.id === itemID);
     return itemObj;
   });
-  console.log(userBookmarks);
 
   return (
     <Fragment>
