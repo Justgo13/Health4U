@@ -34,6 +34,10 @@ const SellerItems = () => {
 
     getSellerItems();
   }, [sendRequest, userID]);
+
+  const onDelete = (deletedID) => {
+      setLoadedSellerItems(loadedSellerItems.filter(item => item.id !== deletedID))
+  }
   return (
     <Fragment>
       <Navbar />
@@ -57,6 +61,8 @@ const SellerItems = () => {
               gridItems={loadedSellerItems}
               link="item"
               baseLink="shop"
+              seller
+              onDelete={onDelete}
             />
           </MuiBox>
           <MuiBox className="center top-bottom-margin">

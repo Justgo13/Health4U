@@ -97,10 +97,40 @@ const resolveItemIds = async (req, res, next) => {
 
   // turn mongoDB _id to id
 
-  itemIDs = itemIDs.map(item => item.toObject({getters: true}))
+  itemIDs = itemIDs.map((item) => item.toObject({ getters: true }));
   res.json({ resolvedItems: itemIDs });
+};
+
+const deleteItem = async (req, res, next) => {
+  const { sellerID, itemID } = req.body;
+
+  try {
+    await Item.findByIdAndDelete(itemID);
+  } catch (err) {
+    return next(new HttpError(`Failed to delete item ${itemID}`, 422));
+  }
+
+  // delete itemID from seller list
+
+  let user
+  try {
+    user = await SellerUser.findById(sellerID);
+  } catch (err) {
+    return next(new HttpError(`Failed to delete item ${itemID}`, 422));
+  }
+
+  var itemIndex = user.items.indexOf(itemID)
+  user.items.splice(itemIndex, 1)
+
+  try {
+    await user.save()
+  } catch (err) {
+    return next(new HttpError(`Failed to delete item ${itemID}`, 422));
+  }
+  res.json({ message: `Item ${itemID} deleted` });
 };
 
 exports.addItem = addItem;
 exports.getItem = getItem;
 exports.resolveItemIds = resolveItemIds;
+exports.deleteItem = deleteItem;
