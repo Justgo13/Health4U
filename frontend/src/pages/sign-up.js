@@ -99,7 +99,7 @@ const SignUp = () => {
         {!!error && (
           <ErrorModal
             isModalShown={true}
-            errorMessage={"User already exists"}
+            errorMessage={error}
             onClose={clearError}
           />
         )}

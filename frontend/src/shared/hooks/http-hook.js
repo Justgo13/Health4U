@@ -11,6 +11,9 @@ export const useHttpClient = () => {
       let res;
       try {
         switch (method) {
+          case "GET":
+            res = await axios.get(url, body);
+            break;
           case "POST":
             res = await axios.post(url, body);
             break;
@@ -21,7 +24,7 @@ export const useHttpClient = () => {
         setIsLoading(false);
         return res;
       } catch (err) {
-        setError(err.message);
+        setError(err.response.data.message);
         setIsLoading(false);
         throw err;
       }

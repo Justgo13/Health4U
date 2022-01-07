@@ -45,8 +45,10 @@ const signUpBuyer = async (req, res, next) => {
 
   // check if buyer exists
   let error = await checkExistingUser(BuyerUser, email);
-  if (error) return next(error);
-
+  if (error) {
+    res.status(422).json({ message: `User ${email} already exists, please login` });
+    return next(error);
+  }
   // buyer does not exist, create new entry
   const createdUser = new BuyerUser({
     name,
@@ -64,7 +66,11 @@ const signUpSeller = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   // check if seller exists
-  checkExistingUser(SellerUser, email);
+  let error = await checkExistingUser(SellerUser, email);
+  if (error) {
+    res.status(422).json({ message: `User ${email} already exists, please login` });
+    return next(error);
+  }
 
   // seller does not exist, create new entry
   const createdUser = new SellerUser({
