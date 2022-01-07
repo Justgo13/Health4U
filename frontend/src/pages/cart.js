@@ -7,12 +7,19 @@ import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 
 import CustomButton from "../components/custom-button";
+import ErrorModal from "../components/Modal/error-modal";
 
 import { useCartCookies } from "../shared/cookies/cart-cookies";
+import { useHttpClient } from "../shared/hooks/http-hook";
+import { useAuthCookies } from "../shared/cookies/auth-cookies";
 
 const Cart = () => {
-  const {getOrderSummary, getCartItems, checkoutCart} = useCartCookies();
+  const { getOrderSummary, getCartItems, checkoutCart } = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
+
+  const { error, isLoading, clearError, sendRequest } = useHttpClient();
+  const { getUserInfo } = useAuthCookies();
+  const userInfo = getUserInfo();
 
   const showCartItems = () => {
     const cartItems = getCartItems();
@@ -27,18 +34,31 @@ const Cart = () => {
         </MuiTypography>
       );
     }
-    return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" cart/>;
+    return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" cart />;
   };
 
-  const checkoutHandler = () => {
-    checkoutCart()
-  }
+  const checkoutHandler = async () => {
+    const cartItemsIds = getCartItems().map((item) => item.id);
+    const userInfo = getUserInfo();
+    await sendRequest("http://localhost:5000/api/user/addOrder", "POST", {
+      id: userInfo.id,
+      cartItems: cartItemsIds,
+    });
+    // checkoutCart();
+  };
 
   return (
     <Fragment>
       <Navbar />
 
       <MuiBox className="container item-desc no-bottom-padding">
+        {!!error && (
+          <ErrorModal
+            isModalShown={true}
+            errorMessage={error}
+            onClose={clearError}
+          />
+        )}
         <MuiDivider headerText="Order Summary" />
         <MuiBox className="no-bottom-padding">
           <MuiTypography
@@ -62,7 +82,10 @@ const Cart = () => {
       </MuiBox>
 
       <MuiBox className="center top-bottom-padding">
-        <CustomButton className="xl-button white-inverse" onClick={checkoutHandler}>
+        <CustomButton
+          className="xl-button white-inverse"
+          onClick={checkoutHandler}
+        >
           Checkout
         </CustomButton>
       </MuiBox>

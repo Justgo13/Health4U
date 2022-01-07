@@ -6,6 +6,17 @@ const root = (req, res) => {
   res.json({ message: "Hello" });
 };
 
+const getDate = () => {
+  let date;
+  let today = new Date();
+  let month = today.toLocaleDateString("default", { month: "short" });
+  let day = String(today.getDate()).padStart(2, "0");
+  let year = today.getFullYear();
+
+  date = `${month} ${day}, ${year}`;
+  return date;
+};
+
 const checkExistingUser = async (schema, email) => {
   // check if buyer exists
   let existingUser;
@@ -193,8 +204,64 @@ const removeBookmark = async (req, res, next) => {
   res.status(200).json({ bookmarks: user.bookmarks });
 };
 
-const getBuyerUser = async (req, res, next) => {
+const addOrder = async (req, res, next) => {
+  const { id, cartItems } = req.body;
+
+  let user;
+  try {
+    user = await BuyerUser.findById(id);
+  } catch (err) {
+    const error = new HttpError(`Could not find user with id ${id}`, 500);
+    return next(error);
+  }
+
+  const orderDate = getDate();
+
+  // cart empty or entry with order date does not exist
+  if (user.cart.length === 0 || !user.cart.find((entry) => entry.orderDate)) {
+    user.cart.push({
+      cartItems,
+      orderDate,
+    });
+  } else {
+    // cart entry exists, append list to existing list
+    const existingCart = user.cart.find(
+      (entry) => entry.orderDate === orderDate
+    );
+    const exisitingCartIndex = user.cart.indexOf(existingCart);
+    const existingCartItems = existingCart.cartItems;
+
+    cartItems.forEach(item => {
+      if (!existingCartItems.includes(item)) {
+        existingCartItems.push(item);
+      }
+    })
+    
+    existingCart.cartItems = existingCartItems
+    user.cart[exisitingCartIndex] = existingCart;
+  }
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Could not save cart for user with id " + id,
+      500
+    );
+    return next(error);
+  }
+
+  res
+    .status(201)
+    .json({
+      message: "Added order",
+      cart: user.cart.toObject({ getters: true }),
+    });
+};
+
+const getCartHistory = async(req, res, next) => {
   const userID = req.params.userID;
+
   let user;
   try {
     user = await BuyerUser.findById(userID);
@@ -203,8 +270,9 @@ const getBuyerUser = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ user: user.toObject({ getters: true }) });
-};
+  res.json({cart: user.cart.toObject({getters: true})})
+
+}
 
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
@@ -213,4 +281,5 @@ exports.login = login;
 exports.addBookmark = addBookmark;
 exports.getBookmarks = getBookmarks;
 exports.removeBookmark = removeBookmark;
-exports.getBuyerUser = getBuyerUser;
+exports.addOrder = addOrder;
+exports.getCartHistory = getCartHistory

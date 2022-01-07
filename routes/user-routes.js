@@ -10,6 +10,7 @@ router.post("/login", userControllers.login)
 router.post("/addBookmark", userControllers.addBookmark)
 router.get("/getBookmarks/:userID", userControllers.getBookmarks)
 router.delete("/removeBookmark", userControllers.removeBookmark)
-router.get("/getBuyerUser/:userID", userControllers.getBuyerUser)
+router.post("/addOrder", userControllers.addOrder)
+router.get("/getCartHistory/:userID", userControllers.getCartHistory)
 
 module.exports = router;

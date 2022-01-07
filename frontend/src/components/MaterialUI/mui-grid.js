@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
+import {v4 as uuidv4} from "uuid"
 
 import MuiCard from "./mui-card";
 import CustomButton from "../custom-button";
@@ -38,7 +39,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
       >
         {isModuleCategories &&
           gridItems.map((gridItem) => (
-            <Grid key={gridItem.id} item xs={12} sm={6} md={4}>
+            <Grid key={uuidv4()} item xs={12} sm={6} md={4}>
               <Link to={`/${baseLink}/${link}/${gridItem.id}`}>
                 <CustomButton className="no-btn-padding" variant="outline">
                   <MuiCard

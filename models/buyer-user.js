@@ -9,6 +9,7 @@ const buyerUserSchema = new Schema({
   password: { type: String, required: true, minlength: 6 },
   accountType: { type: String, required: true, default: "Buyer"},
   bookmarks: { type: Array, required: true, default: [] },
+  cart: { type: Array, required: true, default: []}
 });
 
 buyerUserSchema.plugin(uniqueValidator); // get Mongoose validation error in JSON rather than MongDO E11000 error code
