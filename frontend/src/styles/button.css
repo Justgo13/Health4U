@@ -68,6 +68,16 @@ a {
   color: #fff !important;
 }
 
+.green-inverse {
+  background-color: #fff !important;
+  color: #0f0 !important;
+}
+
+.green-inverse:hover {
+  background-color: #0f0 !important;
+  color: #fff !important;
+}
+
 .xl-button {
   font-size: 3rem !important;
   width: 30vw;
@@ -99,6 +109,12 @@ a {
 
 .no-padding {
   padding: 0 !important;
+}
+
+.lg-round {
+  border-radius: 50% !important;
+  width: 5rem;
+  height: 5rem;
 }
 
 /*# sourceMappingURL=button.css.map */

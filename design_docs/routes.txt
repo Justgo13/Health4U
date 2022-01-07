@@ -13,6 +13,7 @@ Buyer Profile Page --> "/buyer/profile/:userID"
 Buyer Order History --> "/buyer/order-history/:userID"
 Buyer Bookmarks --> "/buyer/bookmarks/:userID"
 Seller Page --> "/seller/profile/:userID"
+Seller Items --> "/seller/items/:userID"
 Seller Item Page --> "/seller/item/:itemID"
 
 Backend Routes

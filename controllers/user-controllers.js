@@ -231,13 +231,13 @@ const addOrder = async (req, res, next) => {
     const exisitingCartIndex = user.cart.indexOf(existingCart);
     const existingCartItems = existingCart.cartItems;
 
-    cartItems.forEach(item => {
+    cartItems.forEach((item) => {
       if (!existingCartItems.includes(item)) {
         existingCartItems.push(item);
       }
-    })
-    
-    existingCart.cartItems = existingCartItems
+    });
+
+    existingCart.cartItems = existingCartItems;
     user.cart[exisitingCartIndex] = existingCart;
   }
 
@@ -251,15 +251,13 @@ const addOrder = async (req, res, next) => {
     return next(error);
   }
 
-  res
-    .status(201)
-    .json({
-      message: "Added order",
-      cart: user.cart.toObject({ getters: true }),
-    });
+  res.status(201).json({
+    message: "Added order",
+    cart: user.cart.toObject({ getters: true }),
+  });
 };
 
-const getCartHistory = async(req, res, next) => {
+const getCartHistory = async (req, res, next) => {
   const userID = req.params.userID;
 
   let user;
@@ -270,9 +268,22 @@ const getCartHistory = async(req, res, next) => {
     return next(error);
   }
 
-  res.json({cart: user.cart.toObject({getters: true})})
+  res.json({ cart: user.cart.toObject({ getters: true }) });
+};
 
-}
+const getSellerItems = async (req, res, next) => {
+  const userID = req.params.userID;
+
+  let user;
+  try {
+    user = await SellerUser.findById(userID);
+  } catch (err) {
+    const error = new HttpError(`Could not find user with id ${userID}`, 500);
+    return next(error);
+  }
+
+  res.json({ items: user.items.toObject({ getters: true }) });
+};
 
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
@@ -282,4 +293,5 @@ exports.addBookmark = addBookmark;
 exports.getBookmarks = getBookmarks;
 exports.removeBookmark = removeBookmark;
 exports.addOrder = addOrder;
-exports.getCartHistory = getCartHistory
+exports.getCartHistory = getCartHistory;
+exports.getSellerItems = getSellerItems;

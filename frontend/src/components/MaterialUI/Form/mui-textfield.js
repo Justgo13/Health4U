@@ -6,6 +6,7 @@ import "../../../styles/sass/mui.sass";
 export const VALIDATE_REQUIRE = "validate_require";
 export const VALIDATE_MIN_LENGTH = "validate_min_length";
 export const VALIDATE_EMAIL = "validate_email";
+export const VALIDATE_FLOAT = "validate_float";
 
 const MIN_LENGTH = 6;
 
@@ -24,6 +25,9 @@ const inputReducer = (state, action) => {
     if (validator === VALIDATE_EMAIL) {
       isValid = isValid && !!action.input.toLowerCase().match(/^\S+@\S+\.\S+$/);
     }
+    if (validator === VALIDATE_FLOAT) {
+      isValid = isValid && !!action.input.match(/^[0-9]*\.[0-9]+/)
+    }
   }
 
   return {
@@ -40,7 +44,7 @@ const MuiTextField = ({
   validators,
   formInput,
   updateFormValidationState,
-  disabled
+  disabled,
 }) => {
   const [error, setError] = useState(false);
   const [isTouched, setIsTouched] = useState(false);

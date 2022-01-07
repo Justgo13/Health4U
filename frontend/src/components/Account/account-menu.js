@@ -9,6 +9,7 @@ import Logout from "./logout";
 import Profile from "./profile";
 import OrderHistory from "./order-history";
 import Bookmarks from "./bookmarks";
+import SellerItems from "./seller-items";
 
 const AccountMenu = ({ loggedIn, menuText, accountType }) => {
   if (loggedIn === "true") {
@@ -34,6 +35,7 @@ const AccountMenu = ({ loggedIn, menuText, accountType }) => {
           menuContent={
             <MuiBox>
               <Profile accountType={accountType} />
+              <SellerItems />
               <Logout />
             </MuiBox>
           }

@@ -7,6 +7,12 @@ $large-button-text: 3rem
 .white-inverse:hover
     @include global.inverseHover($bgColor: global.$white, $color: global.$red)
 
+.green-inverse
+    @include global.inverse($bgColor: global.$white, $color: global.$green)
+
+.green-inverse:hover
+    @include global.inverseHover($bgColor: global.$white, $color: global.$green)
+
 .xl-button
     font-size: $large-button-text !important
     @include global.width(30vw)
@@ -32,3 +38,8 @@ $large-button-text: 3rem
 
 .no-padding
     padding: 0 !important
+
+.lg-round
+    @include global.border-radius($borderRadius: 50%)
+    width: 5rem
+    height: 5rem

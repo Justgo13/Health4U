@@ -14,6 +14,8 @@ import MuiSelect from "./Form/mui-select";
 
 import { useCartCookies } from "../../shared/cookies/cart-cookies";
 
+import { useHttpClient } from "../../shared/hooks/http-hook";
+
 const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
 
@@ -26,6 +28,14 @@ const MuiGrid = ({ baseLink, link, gridItems, cart }) => {
   const { setItemQuantity, deleteCartItem } = useCartCookies();
 
   const deleteItemHandler = (id) => deleteCartItem(id);
+
+  const {sendRequest} = useHttpClient();
+
+  if (gridItems.length === 0) {
+    return <MuiTypography variant="h3" className="center">
+      No items found
+    </MuiTypography>
+  }
 
   return (
     <Fragment>
