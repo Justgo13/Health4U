@@ -32,6 +32,7 @@ export const useAuthCookies = () => {
 
   const logout = () => {
     setCookie(LOGGED_IN, false, { path: "/" });
+    setCookie(USER_INFO, {}, {path: "/"})
   };
 
   const getLoggedInCookie = () => cookies[LOGGED_IN];

@@ -62,13 +62,13 @@ const Login = () => {
 
       if (!error) {
         const user = res.user;
-        login();
         updateUserInfo({
           id: user.id,
           name: user.name,
           email: user.email,
-          accountType: user.accountType
+          accountType: user.accountType,
         });
+        login();
         navigate("/shop");
       }
     }

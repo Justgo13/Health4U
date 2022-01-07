@@ -12,12 +12,13 @@ export const useHttpClient = () => {
       try {
         switch (method) {
           case "GET":
-            res = await axios.get(url, body);
+            res = await axios.get(url);
             break;
           case "POST":
             res = await axios.post(url, body);
             break;
-
+          case "DELETE":
+            res = await axios.delete(url, { data: body });
           default:
             break;
         }

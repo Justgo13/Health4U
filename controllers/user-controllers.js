@@ -166,9 +166,51 @@ const getBookmarks = async (req, res, next) => {
   res.json({ bookmarks: user.bookmarks });
 };
 
+const removeBookmark = async (req, res, next) => {
+  const { id, itemID } = req.body;
+  let user;
+  try {
+    user = await BuyerUser.findById(id);
+  } catch (err) {
+    const error = new HttpError(`Could not find user with id ${id}`, 500);
+    return next(error);
+  }
+
+  let bookmarks = user.bookmarks;
+
+  bookmarks = bookmarks.filter((bookmark) => bookmark !== itemID);
+
+  user.bookmarks = bookmarks;
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Could not save bookmark item with id " + itemID,
+      500
+    );
+    return next(error);
+  }
+  res.status(200).json({ bookmarks: user.bookmarks });
+};
+
+const getBuyerUser = async (req, res, next) => {
+  const userID = req.params.userID;
+  let user;
+  try {
+    user = await BuyerUser.findById(userID);
+  } catch (err) {
+    const error = new HttpError(`Could not find user with id ${userID}`, 500);
+    return next(error);
+  }
+
+  res.json({ user: user.toObject({ getters: true }) });
+};
+
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
 exports.signUpSeller = signUpSeller;
 exports.login = login;
 exports.addBookmark = addBookmark;
 exports.getBookmarks = getBookmarks;
+exports.removeBookmark = removeBookmark;
+exports.getBuyerUser = getBuyerUser;
