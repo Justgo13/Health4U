@@ -60,10 +60,10 @@ a {
 
 .full-height-container {
   display: flex !important;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 0;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-grow: 0 !important;
   height: 100vh;
 }
 

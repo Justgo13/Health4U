@@ -44,7 +44,7 @@ export const useBookmarkCookies = () => {
 
     if (bookmarks.hasOwnProperty(userID)) {
       let user = bookmarks[userID];
-      user = user.filter((bookmark) => bookmark !== userID); // removing the bookmark from a user
+      user = user.filter((bookmark) => bookmark !== itemID); // removing the bookmark from a user
       bookmarks[userID] = user;
       setCookie(BOOKMARKS, bookmarks, { path: "/" });
     }
@@ -57,7 +57,7 @@ export const useBookmarkCookies = () => {
       user = bookmarks[userID];
       return user;
     } else {
-      return undefined;
+      return [];
     }
   };
 
@@ -72,10 +72,15 @@ export const useBookmarkCookies = () => {
     }
   };
 
+  const clearBookmarks = () => {
+    setCookie(BOOKMARKS, [], { path: "/" })
+  }
+
   return {
     addUserBookmark,
     getUserBookmarks,
     removeUserBookmark,
     userBookmarkExists,
+    clearBookmarks
   };
 };

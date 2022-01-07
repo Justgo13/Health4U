@@ -21,10 +21,10 @@ $orange: #f7bd00
 
 @mixin flex($direction: row, $justify-content: flex-start, $align-items: flex-start, $grow: 0)
     display: flex !important
-    flex-direction: $direction
-    justify-content: $justify-content
-    align-items: $align-items
-    flex-grow: $grow
+    flex-direction: $direction !important
+    justify-content: $justify-content !important
+    align-items: $align-items !important
+    flex-grow: $grow !important
 
 @mixin border($size: 1px, $type: solid, $color: $black)
     border: $size $type $color !important

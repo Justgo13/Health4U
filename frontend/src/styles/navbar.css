@@ -82,10 +82,10 @@ a {
 
 .nav-items {
   display: flex !important;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  flex-grow: 1;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  flex-grow: 1 !important;
 }
 
 /*# sourceMappingURL=navbar.css.map */

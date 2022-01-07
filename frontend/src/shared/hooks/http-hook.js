@@ -22,7 +22,7 @@ export const useHttpClient = () => {
             break;
         }
         setIsLoading(false);
-        return res;
+        return res.data;
       } catch (err) {
         setError(err.response.data.message);
         setIsLoading(false);

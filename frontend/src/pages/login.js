@@ -61,7 +61,7 @@ const Login = () => {
       });
 
       if (!error) {
-        const user = res.data.user;
+        const user = res.user;
         login();
         updateUserInfo({
           id: user.id,

@@ -109,10 +109,66 @@ const login = async (req, res, next) => {
     return next(new HttpError("Invalid username or password", 404));
   }
 
-  res.json({ message: "Logged in", user: existingUser.toObject({ getters: true }) });
+  res.json({
+    message: "Logged in",
+    user: existingUser.toObject({ getters: true }),
+  });
+};
+
+const addBookmark = async (req, res, next) => {
+  const { id, itemID } = req.body;
+
+  let user;
+  try {
+    user = await BuyerUser.findById(id);
+  } catch (err) {
+    const error = new HttpError("Could not find user with id " + id, 500);
+    return next(error);
+  }
+
+  const bookmarks = user.bookmarks;
+
+  /**
+   * bookmarks look like
+   *  ["1", "2"]
+   *
+   * a list of unique item ids
+   */
+
+  if (!bookmarks.includes(itemID)) {
+    bookmarks.push(itemID);
+  }
+
+  user.bookmarks = bookmarks;
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Could not save bookmark item with id " + itemID,
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ bookmarks: user.bookmarks });
+};
+
+const getBookmarks = async (req, res, next) => {
+  const userID = req.params.userID;
+  let user;
+  try {
+    user = await BuyerUser.findById(userID);
+  } catch (err) {
+    const error = new HttpError("Could not find user with id " + id, 500);
+    return next(error);
+  }
+
+  res.json({ bookmarks: user.bookmarks });
 };
 
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
 exports.signUpSeller = signUpSeller;
 exports.login = login;
+exports.addBookmark = addBookmark;
+exports.getBookmarks = getBookmarks;
