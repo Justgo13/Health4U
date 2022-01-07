@@ -46,7 +46,9 @@ const signUpBuyer = async (req, res, next) => {
   // check if buyer exists
   let error = await checkExistingUser(BuyerUser, email);
   if (error) {
-    res.status(422).json({ message: `User ${email} already exists, please login` });
+    res
+      .status(422)
+      .json({ message: `User ${email} already exists, please login` });
     return next(error);
   }
   // buyer does not exist, create new entry
@@ -68,7 +70,9 @@ const signUpSeller = async (req, res, next) => {
   // check if seller exists
   let error = await checkExistingUser(SellerUser, email);
   if (error) {
-    res.status(422).json({ message: `User ${email} already exists, please login` });
+    res
+      .status(422)
+      .json({ message: `User ${email} already exists, please login` });
     return next(error);
   }
 
@@ -85,6 +89,30 @@ const signUpSeller = async (req, res, next) => {
   res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
+const login = async (req, res, next) => {
+  const { email, password, accountType } = req.body;
+
+  // find if user exists
+  let existingUser;
+  switch (accountType) {
+    case "Buyer":
+      existingUser = await BuyerUser.findOne({ email, password });
+      break;
+    case "Seller":
+      existingUser = await SellerUser.findOne({ email, password });
+    default:
+      break;
+  }
+
+  if (!existingUser) {
+    res.status(422).json({ message: "Invalid username or password" });
+    return next(new HttpError("Invalid username or password", 404));
+  }
+
+  res.json({ message: "Logged in", user: existingUser.toObject({ getters: true }) });
+};
+
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
 exports.signUpSeller = signUpSeller;
+exports.login = login;
