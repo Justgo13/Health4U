@@ -53,7 +53,6 @@ const App = () => {
           <Route path="items/:userID" element={<SellerItems />} />
           <Route path="item/addItem" element={<SellerAddItem />} />
           <Route path="item/editItem/:itemID" element={<SellerEditItem />} />
-          <Route path="items/:itemID" element={<OrderHistory />} />
         </Route>
       </Routes>
     </Router>

@@ -14,7 +14,9 @@ Buyer Order History --> "/buyer/order-history/:userID"
 Buyer Bookmarks --> "/buyer/bookmarks/:userID"
 Seller Page --> "/seller/profile/:userID"
 Seller Items --> "/seller/items/:userID"
-Seller Item Page --> "/seller/item/:itemID"
+Seller Add Item --> "/seller/addItem"
+Seller Edit Item --> "/seller/editItem/:itemID"
+
 
 Backend Routes
 POST signUpBuyer --> "/api/user/signUpBuyer"
