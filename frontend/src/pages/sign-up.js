@@ -5,10 +5,8 @@ import Navbar from "../components/NavBar/navbar";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiForm from "../components/MaterialUI/mui-form";
-import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiTextField from "../components/MaterialUI/Form/mui-textfield";
 import MuiSelect from "../components/MaterialUI/Form/mui-select";
-import CustomButton from "../components/custom-button";
 
 import {
   VALIDATE_REQUIRE,
@@ -29,16 +27,19 @@ const SignUp = () => {
           name: "name",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "email",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE, VALIDATE_EMAIL, VALIDATE_MIN_LENGTH],
         },
         {
           name: "password",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE, VALIDATE_MIN_LENGTH],
         },
       ],
       false
@@ -50,41 +51,19 @@ const SignUp = () => {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-    if (formValidationState.isValid) {
-      const name = formValidationState.inputs.find(
-        (input) => input.name === "name"
-      ).value;
-      const email = formValidationState.inputs.find(
-        (input) => input.name === "email"
-      ).value;
-      const password = formValidationState.inputs.find(
-        (input) => input.name === "password"
-      ).value;
+    if (formValidationState.isValid && !error) {
+      const formInputs = {};
 
-      if (accountType === "Buyer") {
-        await sendRequest(
-          "http://localhost:5000/api/user/signUpBuyer",
-          "POST",
-          {
-            name,
-            email,
-            password,
-          }
-        );
-      } else if (accountType === "Seller") {
-        await sendRequest(
-          "http://localhost:5000/api/user/signUpSeller",
-          "POST",
-          {
-            name,
-            email,
-            password,
-          }
-        );
-      }
-      if (!error) {
-        navigate("/shop");
-      }
+      formValidationState.inputs.map(
+        (input) => (formInputs[input.name] = input.value)
+      );
+
+      await sendRequest(
+        `http://localhost:5000/api/user/signUp${accountType}`,
+        "POST",
+        formInputs
+      );
+      navigate("/shop");
     }
   };
 
@@ -95,65 +74,37 @@ const SignUp = () => {
     <Fragment>
       <Navbar />
 
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
+
       <MuiBox className="container">
-        {!!error && (
-          <ErrorModal
-            isModalShown={true}
-            errorMessage={error}
-            onClose={clearError}
-          />
-        )}
         <MuiForm
-          formHeader={
-            <MuiTypography className="divider-header top-bottom-padding center">
-              Sign Up
-            </MuiTypography>
-          }
+          formHeader="Sign Up"
           submitHandler={signUpHandler}
+          buttonText="Sign Up"
         >
-          <MuiBox className="grey-background container textfield-group">
+          {formValidationState.inputs.map((input) => (
             <MuiTextField
-              label="Name"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "name"
-              )}
+              key={input.name}
+              label={input.name}
+              validators={input.validators}
+              formInput={input}
               updateFormValidationState={updateFormValidationState}
             />
-            <MuiTextField
-              label="Email"
-              validators={[
-                VALIDATE_REQUIRE,
-                VALIDATE_MIN_LENGTH,
-                VALIDATE_EMAIL,
-              ]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "email"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiTextField
-              label="Password"
-              validators={[VALIDATE_MIN_LENGTH, VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "password"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiSelect
-              classname="top-bottom-margin"
-              labelText="Account Type"
-              selectItems={["Buyer", "Seller"]}
-              defaultValue={accountType}
-              onChange={setAccountType}
-            />
-            <CustomButton
-              className="big-btn white-inverse top-bottom-margin"
-              onClick={signUpHandler}
-            >
-              Sign Up
-            </CustomButton>
-          </MuiBox>
+          ))}
+
+          <MuiSelect
+            classname="top-bottom-margin"
+            labelText="Account Type"
+            selectItems={["Buyer", "Seller"]}
+            defaultValue={accountType}
+            onChange={setAccountType}
+          />
         </MuiForm>
       </MuiBox>
     </Fragment>

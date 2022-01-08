@@ -112,17 +112,15 @@ const SellerAddItem = () => {
           buttonText="Add Item"
           submitHandler={addItemHandler}
         >
-          <MuiBox className="grey-background container textfield-group">
-            {formValidationState.inputs.map((input) => (
-              <MuiTextField
-                key={input.name}
-                label={input.name}
-                validators={input.validators}
-                formInput={input}
-                updateFormValidationState={updateFormValidationState}
-              />
-            ))}
-          </MuiBox>
+          {formValidationState.inputs.map((input) => (
+            <MuiTextField
+              key={input.name}
+              label={input.name}
+              validators={input.validators}
+              formInput={input}
+              updateFormValidationState={updateFormValidationState}
+            />
+          ))}
         </MuiForm>
       </MuiBox>
     </Fragment>

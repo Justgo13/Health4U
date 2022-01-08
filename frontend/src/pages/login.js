@@ -47,7 +47,7 @@ const Login = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    if (formValidationState.isValid) {
+    if (formValidationState.isValid && !error) {
       const email = formValidationState.inputs.find(
         (item) => item.name === "email"
       ).value;
@@ -61,18 +61,17 @@ const Login = () => {
         password,
         accountType,
       });
+      
+      const user = res.user;
+      updateUserInfo({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        accountType: user.accountType,
+      });
+      login();
+      navigate("/shop");
 
-      if (!error) {
-        const user = res.user;
-        updateUserInfo({
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          accountType: user.accountType,
-        });
-        login();
-        navigate("/shop");
-      }
     }
   };
 
