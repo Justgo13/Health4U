@@ -47,10 +47,10 @@ const saveUser = async (createdUser) => {
   }
 };
 
-const getUser = async (id) => {
+const getUser = async (schema, id) => {
   let user, error;
   try {
-    user = await BuyerUser.findById(id);
+    user = await schema.findById(id);
   } catch (err) {
     error = new HttpError("Could not find user with id " + id, 500);
     return { user: null, error };
@@ -136,7 +136,7 @@ const login = async (req, res, next) => {
 const addBookmark = async (req, res, next) => {
   const { id, itemID } = req.body;
 
-  let { user, error } = await getUser(id);
+  let { user, error } = await getUser(BuyerUser, id);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + id,
@@ -170,7 +170,7 @@ const addBookmark = async (req, res, next) => {
 
 const getBookmarks = async (req, res, next) => {
   const userID = req.params.userID;
-  let { user, error } = await getUser(userID);
+  let { user, error } = await getUser(BuyerUser, userID);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + userID,
@@ -183,7 +183,7 @@ const getBookmarks = async (req, res, next) => {
 
 const removeBookmark = async (req, res, next) => {
   const { id, itemID } = req.body;
-  let { user, error } = await getUser(id);
+  let { user, error } = await getUser(BuyerUser, id);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + id,
@@ -205,7 +205,7 @@ const removeBookmark = async (req, res, next) => {
 const addOrder = async (req, res, next) => {
   const { id, cartItems } = req.body;
 
-  let { user, error } = await getUser(id);
+  let { user, error } = await getUser(BuyerUser, id);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + id,
@@ -258,7 +258,7 @@ const addOrder = async (req, res, next) => {
 const getCartHistory = async (req, res, next) => {
   const userID = req.params.userID;
 
-  let { user, error } = await getUser(userID);
+  let { user, error } = await getUser(BuyerUser, userID);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + userID,
@@ -272,7 +272,7 @@ const getCartHistory = async (req, res, next) => {
 const getSellerItems = async (req, res, next) => {
   const userID = req.params.userID;
 
-  let { user, error } = await getUser(userID);
+  let { user, error } = await getUser(SellerUser, userID);
   if (error) {
     res.status(422).json({
       message: "Could not find user with id " + userID,

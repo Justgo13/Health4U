@@ -2,22 +2,40 @@ const Item = require("../models/item");
 const SellerUser = require("../models/seller-user");
 const HttpError = require("../models/http-error.js");
 
+const checkExistingItem = async (name, category) => {
+  let exisitingItem;
+  try {
+    exisitingItem = await Item.findOne({ name, category });
+  } catch (err) {
+    const error = new HttpError("Finding item failed", 500);
+    return error;
+  }
+
+  if (exisitingItem) {
+    const error = new HttpError("Item already exists", 422);
+
+    return error;
+  }
+};
+
+const saveItem = async (item) => {
+  try {
+    await item.save();
+  } catch (err) {
+    const error = new HttpError("Creating item failed", 500);
+    return error;
+  }
+}
+
 const addItem = async (req, res, next) => {
   let { sellerID, name, category, description, image, price } = req.body;
 
   price = parseFloat(price).toFixed(2);
 
   // check if item exists
-  let exisitingItem;
-  try {
-    exisitingItem = await Item.findOne({ name, category });
-  } catch (err) {
-    const error = new HttpError("Finding item failed", 500);
-    return next(error);
-  }
+  let error = await checkExistingItem(name, category);
 
-  if (exisitingItem) {
-    const error = new HttpError("Item already exists", 422);
+  if (error) {
     res
       .status(422)
       .json({ message: `Item ${name} in category ${category} already exists` });
@@ -33,14 +51,10 @@ const addItem = async (req, res, next) => {
     price,
   });
 
-  try {
-    await createdItem.save();
-  } catch (err) {
-    const error = new HttpError("Creating item failed", 500);
-    return next(error);
-  }
+  error = await saveItem(createdItem)
+  if (error) return next(error)
 
-  // add item id to seller items list
+  // get seller entry
   let seller;
   try {
     seller = await SellerUser.findById(sellerID);
@@ -48,6 +62,8 @@ const addItem = async (req, res, next) => {
     const error = new HttpError("Finding item failed", 500);
     return next(error);
   }
+
+  // add item id to seller items list if it doesn't already exist
 
   let itemID = createdItem._id.toString();
   if (!seller.items.includes(itemID)) {
@@ -65,6 +81,7 @@ const addItem = async (req, res, next) => {
 };
 
 const getItem = async (req, res, next) => {
+  // get item by item id
   const itemID = req.params.itemID;
 
   let exisitingItem;
@@ -81,7 +98,8 @@ const getItem = async (req, res, next) => {
 const resolveItemIds = async (req, res, next) => {
   let { itemIDs } = req.body;
 
-  // itemIDs is a list of MongoDB IDs
+  // itemIDs is a list of MongoDB IDs ["1", "2"], we want to resolve these ids into
+  // mongodb item entries [{name, category, description, image, price, rating},...]
 
   for (let i = 0; i < itemIDs.length; i++) {
     let exisitingItem;
@@ -104,14 +122,16 @@ const resolveItemIds = async (req, res, next) => {
 const deleteItem = async (req, res, next) => {
   const { sellerID, itemID } = req.body;
 
+  // delete item
   try {
     await Item.findByIdAndDelete(itemID);
   } catch (err) {
     return next(new HttpError(`Failed to delete item ${itemID}`, 422));
   }
 
-  // delete itemID from seller list
+  
 
+  // find item in seller list
   let user;
   try {
     user = await SellerUser.findById(sellerID);
@@ -122,6 +142,8 @@ const deleteItem = async (req, res, next) => {
   var itemIndex = user.items.indexOf(itemID);
   user.items.splice(itemIndex, 1);
 
+
+  // delete itemID from seller list
   try {
     await user.save();
   } catch (err) {
@@ -133,20 +155,30 @@ const deleteItem = async (req, res, next) => {
 const editItem = async (req, res, next) => {
   const { itemID, name, category, description, image, price } = req.body;
 
+  // update item
   let item;
   try {
-    await Item.findByIdAndUpdate(itemID, {name, category, description, image, price});
+    await Item.findByIdAndUpdate(itemID, {
+      name,
+      category,
+      description,
+      image,
+      price,
+    });
   } catch (err) {
     return next(new HttpError(`Failed to edit item ${itemID}`, 422));
   }
 
-  // get the just edited item for returning
+  // get the edited item so that it can be passed as response
   try {
     item = await Item.findById(itemID);
   } catch (err) {
     return next(new HttpError(`Failed to edit item ${itemID}`, 422));
   }
-  res.status(201).json({message: "Edited item", editedItem: item.toObject({getters: true})})
+  res.status(201).json({
+    message: "Edited item",
+    editedItem: item.toObject({ getters: true }),
+  });
 };
 
 exports.addItem = addItem;
