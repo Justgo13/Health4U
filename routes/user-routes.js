@@ -13,5 +13,6 @@ router.delete("/removeBookmark", userControllers.removeBookmark);
 router.post("/addOrder", userControllers.addOrder);
 router.get("/getCartHistory/:userID", userControllers.getCartHistory);
 router.get("/getSellerItems/:userID", userControllers.getSellerItems);
+router.patch("/editUser", userControllers.editUser);
 
 module.exports = router;

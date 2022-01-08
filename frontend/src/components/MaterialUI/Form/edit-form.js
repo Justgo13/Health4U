@@ -43,6 +43,11 @@ const EditForm = ({
         });
         navigate(`/seller/items/${userInfo.id}`);
       } else if (profile) {
+        // send request to edit user in backend
+        await sendRequest("http://localhost:5000/api/user/editUser", "PATCH", {
+          userID: userInfo.id,
+          ...formInputs,
+        });
         updateUserInfo({
           ...userInfo,
           ...formInputs,

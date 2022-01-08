@@ -285,6 +285,21 @@ const getSellerItems = async (req, res, next) => {
   res.json({ items: user.items.toObject({ getters: true }) });
 };
 
+const editUser = async (req, res, next) => {
+  const { userID, name, email } = req.body;
+
+  // try to update user in both tables
+  try {
+    await BuyerUser.findByIdAndUpdate(userID, {name, email});
+    await SellerUser.findByIdAndUpdate(userID, {name, email});
+  } catch (err) {
+    const error = new HttpError(`Could not update user with id ${userID}`, 500);
+    return next(error);
+  }
+
+  res.status(203).json({message: "Updated user"})
+};
+
 exports.root = root;
 exports.signUpBuyer = signUpBuyer;
 exports.signUpSeller = signUpSeller;
@@ -295,3 +310,4 @@ exports.removeBookmark = removeBookmark;
 exports.addOrder = addOrder;
 exports.getCartHistory = getCartHistory;
 exports.getSellerItems = getSellerItems;
+exports.editUser = editUser;
