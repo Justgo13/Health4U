@@ -19,8 +19,10 @@ export const useHttpClient = () => {
             break;
           case "DELETE":
             res = await axios.delete(url, { data: body });
+            break;
           case "PATCH":
             res = await axios.patch(url, body);
+            break;
           default:
             break;
         }
