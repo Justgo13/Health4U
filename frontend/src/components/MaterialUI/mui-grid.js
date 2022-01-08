@@ -39,8 +39,10 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete }) => {
       sellerID,
       itemID,
     });
-    onDelete(itemID)
+    onDelete(itemID);
   };
+
+  const editItemHandler = async () => {};
 
   if (gridItems.length === 0) {
     return (
@@ -96,12 +98,25 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete }) => {
               )}
 
               {seller && (
-                <CustomButton
-                  className="big-btn white-inverse"
-                  onClick={() => deleteItemHandlerDB(userInfo.id, gridItem.id)}
-                >
-                  <FontAwesomeIcon className="fa-trash big-icon" />
-                </CustomButton>
+                <MuiBox>
+                  <Link to={`/seller/item/editItem/${gridItem.id}`}>
+                    <CustomButton
+                      className="big-btn orange-inverse"
+                      onClick={editItemHandler}
+                    >
+                      <FontAwesomeIcon className="fa-edit big-icon" />
+                    </CustomButton>
+                  </Link>
+
+                  <CustomButton
+                    className="big-btn white-inverse"
+                    onClick={() =>
+                      deleteItemHandlerDB(userInfo.id, gridItem.id)
+                    }
+                  >
+                    <FontAwesomeIcon className="fa-trash big-icon" />
+                  </CustomButton>
+                </MuiBox>
               )}
             </Grid>
           ))}

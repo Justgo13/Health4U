@@ -13,6 +13,12 @@ $large-button-text: 3rem
 .green-inverse:hover
     @include global.inverseHover($bgColor: global.$white, $color: global.$green)
 
+.orange-inverse
+    @include global.inverse($bgColor: global.$white, $color: global.$orange)
+
+.orange-inverse:hover
+    @include global.inverseHover($bgColor: global.$white, $color: global.$orange)
+
 .xl-button
     font-size: $large-button-text !important
     @include global.width(30vw)

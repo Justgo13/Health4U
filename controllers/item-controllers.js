@@ -112,25 +112,45 @@ const deleteItem = async (req, res, next) => {
 
   // delete itemID from seller list
 
-  let user
+  let user;
   try {
     user = await SellerUser.findById(sellerID);
   } catch (err) {
     return next(new HttpError(`Failed to delete item ${itemID}`, 422));
   }
 
-  var itemIndex = user.items.indexOf(itemID)
-  user.items.splice(itemIndex, 1)
+  var itemIndex = user.items.indexOf(itemID);
+  user.items.splice(itemIndex, 1);
 
   try {
-    await user.save()
+    await user.save();
   } catch (err) {
     return next(new HttpError(`Failed to delete item ${itemID}`, 422));
   }
-  res.json({ message: `Item ${itemID} deleted` });
+  res.status(201).json({ message: `Item ${itemID} deleted` });
+};
+
+const editItem = async (req, res, next) => {
+  const { itemID, name, category, description, image, price } = req.body;
+
+  let item;
+  try {
+    await Item.findByIdAndUpdate(itemID, {name, category, description, image, price});
+  } catch (err) {
+    return next(new HttpError(`Failed to edit item ${itemID}`, 422));
+  }
+
+  // get the just edited item for returning
+  try {
+    item = await Item.findById(itemID);
+  } catch (err) {
+    return next(new HttpError(`Failed to edit item ${itemID}`, 422));
+  }
+  res.status(201).json({message: "Edited item", editedItem: item.toObject({getters: true})})
 };
 
 exports.addItem = addItem;
 exports.getItem = getItem;
 exports.resolveItemIds = resolveItemIds;
 exports.deleteItem = deleteItem;
+exports.editItem = editItem;

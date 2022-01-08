@@ -78,6 +78,16 @@ a {
   color: #fff !important;
 }
 
+.orange-inverse {
+  background-color: #fff !important;
+  color: #f7bd00 !important;
+}
+
+.orange-inverse:hover {
+  background-color: #f7bd00 !important;
+  color: #fff !important;
+}
+
 .xl-button {
   font-size: 3rem !important;
   width: 30vw;

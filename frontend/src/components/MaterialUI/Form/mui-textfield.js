@@ -45,13 +45,14 @@ const MuiTextField = ({
   formInput,
   updateFormValidationState,
   disabled,
+  defaultValid
 }) => {
   const [error, setError] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
 
   const [inputState, dispatch] = useReducer(inputReducer, {
     input: defaultValue || "",
-    isValid: false,
+    isValid: defaultValid || false,
     validators: validators || [],
   });
 
