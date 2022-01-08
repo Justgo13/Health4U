@@ -53,6 +53,7 @@ const EditForm = ({
           ...formInputs,
           accountType: userInfo.accountType,
         });
+        navigate("/shop")
       }
     }
   };
