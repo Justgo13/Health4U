@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import Navbar from "../components/NavBar/navbar";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiForm from "../components/MaterialUI/mui-form";
@@ -9,6 +8,8 @@ import MuiTextField, {
   VALIDATE_REQUIRE,
   VALIDATE_EMAIL,
 } from "../components/MaterialUI/Form/mui-textfield";
+
+import Navbar from "../components/NavBar/navbar";
 import CustomButton from "../components/custom-button";
 
 import { useFormValidation } from "../components/MaterialUI/Form/form-validation";
