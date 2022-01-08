@@ -26,7 +26,7 @@ const inputReducer = (state, action) => {
       isValid = isValid && !!action.input.toLowerCase().match(/^\S+@\S+\.\S+$/);
     }
     if (validator === VALIDATE_FLOAT) {
-      isValid = isValid && !!action.input.match(/^[0-9]*\.[0-9]+/)
+      isValid = isValid && !!action.input.match(/^[0-9]*\.[0-9]+/);
     }
   }
 
@@ -45,7 +45,7 @@ const MuiTextField = ({
   formInput,
   updateFormValidationState,
   disabled,
-  defaultValid
+  defaultValid,
 }) => {
   const [error, setError] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
@@ -75,7 +75,7 @@ const MuiTextField = ({
   const touchHandler = () => {
     setIsTouched(true);
   };
-
+  
   return (
     <TextField
       defaultValue={defaultValue || ""}

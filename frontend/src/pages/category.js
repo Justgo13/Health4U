@@ -1,11 +1,10 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 
 import Navbar from "../components/NavBar/navbar";
 
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiGrid from "../components/MaterialUI/mui-grid";
-import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 
 const Category = () => {
@@ -68,7 +67,10 @@ const Category = () => {
     <Fragment>
       <Navbar />
       <MuiBox className="container">
-        <MuiDivider className="divider-header center-text" headerText={categoryName}/>
+        <MuiDivider
+          className="divider-header center-text"
+          headerText={categoryName}
+        />
         <MuiGrid gridItems={items} link="item" baseLink="shop" />
       </MuiBox>
     </Fragment>

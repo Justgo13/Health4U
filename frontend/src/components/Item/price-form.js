@@ -41,7 +41,7 @@ const PriceForm = ({ item }) => {
       quantity: itemQuantity,
       image: item.image,
       price: item.price,
-      orderDate: getDate()
+      orderDate: getDate(),
     });
     showCartModal();
   };
@@ -57,49 +57,51 @@ const PriceForm = ({ item }) => {
   };
 
   return (
-    <MuiForm
-      formHeader={
-        <MuiTypography className="divider-header">
-          ${priceDollar}
-          <span className="decimal-cost align-top">{priceCents}</span>
-        </MuiTypography>
-      }
-      submitHandler={addProductToCartHandler}
-    >
-      <MuiBox className="grey-background top-bottom-padding">
-        <MuiBox>
-          <MuiSelect
-            classname="top-bottom-margin"
-            labelText="Quantity"
-            selectItems={quantity}
-            defaultValue={itemQuantity}
-            onChange={setItemQuantity}
-          />
+    <MuiBox className="price-box flex-child">
+      <MuiForm
+        formHeader={
+          <MuiTypography className="divider-header">
+            ${priceDollar}
+            <span className="decimal-cost align-top">{priceCents}</span>
+          </MuiTypography>
+        }
+        submitHandler={addProductToCartHandler}
+      >
+        <MuiBox className="grey-background top-bottom-padding">
+          <MuiBox>
+            <MuiSelect
+              classname="top-bottom-margin"
+              labelText="Quantity"
+              selectItems={quantity}
+              defaultValue={itemQuantity}
+              onChange={setItemQuantity}
+            />
+          </MuiBox>
+
+          <CustomButton className="white-inverse big-btn" type="submit">
+            Add to cart
+          </CustomButton>
+
+          <MuiTypography variant="p" baseComponent="p">
+            <FontAwesomeIcon className="fa-shipping-fast small-icon" /> Sold and
+            Shipped by Jason
+          </MuiTypography>
+          <MuiTypography variant="p" baseComponent="p">
+            <FontAwesomeIcon className="fa-calendar-times small-icon" />{" "}
+            Estimated shipping time 1 to 3 days
+          </MuiTypography>
         </MuiBox>
 
-        <CustomButton className="white-inverse big-btn" type="submit">
-          Add to cart
-        </CustomButton>
-
-        <MuiTypography variant="p" baseComponent="p">
-          <FontAwesomeIcon className="fa-shipping-fast small-icon" /> Sold and
-          Shipped by Jason
-        </MuiTypography>
-        <MuiTypography variant="p" baseComponent="p">
-          <FontAwesomeIcon className="fa-calendar-times small-icon" /> Estimated
-          shipping time 1 to 3 days
-        </MuiTypography>
-      </MuiBox>
-
-      {modalState.isCartModalShown && (
-        <CartPreviewModal
-          isModalShown={modalState.isCartModalShown}
-          onClose={hideCartModal}
-          cartList={getCartItems()}
-          buttonHandler={checkoutHandler}
-        />
-      )}
-    </MuiForm>
+        {modalState.isCartModalShown && (
+          <CartPreviewModal
+            isModalShown={modalState.isCartModalShown}
+            onClose={hideCartModal}
+            cartList={getCartItems()}
+            buttonHandler={checkoutHandler}
+          />
+        )}
+      </MuiForm>
+    </MuiBox>
   );
 };
 

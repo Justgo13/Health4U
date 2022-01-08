@@ -9,18 +9,18 @@ import { useHttpClient } from "../shared/hooks/http-hook";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
 
 import MuiForm from "../components/MaterialUI/mui-form";
-import MuiTypography from "../components/MaterialUI/mui-typography";
 import MuiTextField, {
   VALIDATE_REQUIRE,
   VALIDATE_FLOAT,
 } from "../components/MaterialUI/Form/mui-textfield";
 import MuiBox from "../components/MaterialUI/mui-box";
-import CustomButton from "../components/custom-button";
 
 const SellerAddItem = () => {
   const navigate = useNavigate();
+
   const { getUserInfo } = useAuthCookies();
   const userInfo = getUserInfo();
+
   const { formValidationState, updateFormValidationState, verifyForm } =
     useFormValidation(
       [
@@ -28,26 +28,31 @@ const SellerAddItem = () => {
           name: "name",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "category",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "description",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "image",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "price",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE, VALIDATE_FLOAT],
         },
       ],
       false
@@ -93,69 +98,30 @@ const SellerAddItem = () => {
     <Fragment>
       <Navbar />
 
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
+
       <MuiBox className="container">
-        {!!error && (
-          <ErrorModal
-            isModalShown={true}
-            errorMessage={error}
-            onClose={clearError}
-          />
-        )}
         <MuiForm
-          formHeader={
-            <MuiTypography className="divider-header top-bottom-padding center">
-              Add Item
-            </MuiTypography>
-          }
+          formHeader="Add Item"
+          buttonText="Add Item"
           submitHandler={addItemHandler}
         >
           <MuiBox className="grey-background container textfield-group">
-            <MuiTextField
-              label="Name"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "name"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiTextField
-              label="Category"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "category"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiTextField
-              label="Description"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "description"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiTextField
-              label="Image URL"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "image"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <MuiTextField
-              label="Price ($)"
-              validators={[VALIDATE_REQUIRE, VALIDATE_FLOAT]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "price"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
-            <CustomButton
-              className="big-btn white-inverse top-bottom-margin"
-              onClick={addItemHandler}
-            >
-              Add Item
-            </CustomButton>
+            {formValidationState.inputs.map((input) => (
+              <MuiTextField
+                key={input.name}
+                label={input.name}
+                validators={input.validators}
+                formInput={input}
+                updateFormValidationState={updateFormValidationState}
+              />
+            ))}
           </MuiBox>
         </MuiForm>
       </MuiBox>

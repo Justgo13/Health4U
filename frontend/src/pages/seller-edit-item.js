@@ -26,59 +26,68 @@ const SellerEditItem = () => {
           name: "name",
           value: "",
           isValid: true,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "category",
           value: "",
           isValid: true,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "description",
           value: "",
           isValid: true,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "image",
           value: "",
           isValid: true,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "price",
           value: "",
           isValid: true,
-        }
+          validators: [VALIDATE_REQUIRE, VALIDATE_FLOAT],
+        },
       ],
       true
     );
 
   //this is used if the user clicks edit but doesn't edit anything and tries to save changes
-  const originalFormState = [
-    {
-      name: "name",
-      value: "",
-      isValid: false,
-    },
-    {
-      name: "category",
-      value: "",
-      isValid: false,
-    },
-    {
-      name: "description",
-      value: "",
-      isValid: false,
-    },
-    {
-      name: "image",
-      value: "",
-      isValid: false,
-    },
-    {
-      name: "price",
-      value: "",
-      isValid: false,
-    },
-  ];
+  // const originalFormState = [
+  //   {
+  //     name: "name",
+  //     value: "",
+  //     isValid: false,
+  //   },
+  //   {
+  //     name: "category",
+  //     value: "",
+  //     isValid: false,
+  //   },
+  //   {
+  //     name: "description",
+  //     value: "",
+  //     isValid: false,
+  //   },
+  //   {
+  //     name: "image",
+  //     value: "",
+  //     isValid: false,
+  //   },
+  //   {
+  //     name: "price",
+  //     value: "",
+  //     isValid: false,
+  //   },
+  // ];
+
+  const { itemID } = useParams();
+  const navigate = useNavigate();
+
   const [editFields, setEditFields] = useState(false);
 
   const { getUserInfo } = useAuthCookies();
@@ -88,21 +97,22 @@ const SellerEditItem = () => {
     setEditFields(true);
   };
 
-  const { itemID } = useParams();
-  const navigate = useNavigate();
+  const { error, sendRequest, isLoading, clearError } = useHttpClient();
+  const [loadedItem, setLoadedItem] = useState([]);
 
   const saveEditHandler = async (e) => {
     e.preventDefault();
 
-    const isOriginalUnchanged =
-      formValidationState.inputs.slice().sort().join(",") ===
-      originalFormState.slice().sort().join(",");
-    if (isOriginalUnchanged || formValidationState.isValid) {
-      // allow saving if original form input has not been changed or if edited form inputs is valid
-      setEditFields(false);
-    }
+    // const isOriginalUnchanged =
+    //   formValidationState.inputs.slice().sort().join(",") ===
+    //   originalFormState.slice().sort().join(",");
+    // if (isOriginalUnchanged || formValidationState.isValid) {
+    //   // allow saving if original form input has not been changed or if edited form inputs is valid
+    //   setEditFields(false);
+    // }
 
-    console.log(formValidationState.isValid);
+    setEditFields(false);
+
     if (formValidationState.isValid) {
       const name = formValidationState.inputs.find(
         (input) => input.name === "name"
@@ -132,9 +142,6 @@ const SellerEditItem = () => {
     }
   };
 
-  const { error, sendRequest, isLoading, clearError } = useHttpClient();
-  const [loadedItem, setLoadedItem] = useState([]);
-
   useEffect(() => {
     // pre-populate with existing item information
     const getItemDetails = async () => {
@@ -163,98 +170,31 @@ const SellerEditItem = () => {
         />
       )}
 
-      {isLoading && <LoadingCircle />}
-
       <MuiBox className="container top-bottom-padding">
         <MuiDivider headerText="Edit Item" />
+        {isLoading && <LoadingCircle />}
+        {!isLoading && loadedItem.length !== 0 && (
+          <MuiBox className="container">
+            <MuiForm
+              formHeader="Item details"
+              submitHandler={saveEditHandler}
+              buttonText="Save changes"
+            >
+              {formValidationState.inputs.map((input) => (
+                <MuiTextField
+                  key={input.name}
+                  label={input.name}
+                  validators={input.validators}
+                  formInput={input}
+                  updateFormValidationState={updateFormValidationState}
+                  defaultValue={loadedItem[input.name]}
+                  defaultValid
+                />
+              ))}
+            </MuiForm>
+          </MuiBox>
+        )}
       </MuiBox>
-
-      {!isLoading && loadedItem.length !== 0 && (
-        <MuiBox className="container">
-          <MuiForm
-            formHeader={
-              <MuiTypography className="divider-header top-bottom-padding center">
-                Item details
-              </MuiTypography>
-            }
-          >
-            <MuiBox className="grey-background container textfield-group">
-              <MuiTextField
-                label="Name"
-                validators={[VALIDATE_REQUIRE]}
-                formInput={formValidationState.inputs.find(
-                  (input) => input.name === "name"
-                )}
-                updateFormValidationState={updateFormValidationState}
-                disabled={!editFields}
-                defaultValue={loadedItem.name}
-                defaultValid
-              />
-              <MuiTextField
-                label="Category"
-                validators={[VALIDATE_REQUIRE]}
-                formInput={formValidationState.inputs.find(
-                  (input) => input.name === "category"
-                )}
-                updateFormValidationState={updateFormValidationState}
-                disabled={!editFields}
-                defaultValue={loadedItem.category}
-                defaultValid
-              />
-              <MuiTextField
-                label="Description"
-                validators={[VALIDATE_REQUIRE]}
-                formInput={formValidationState.inputs.find(
-                  (input) => input.name === "description"
-                )}
-                updateFormValidationState={updateFormValidationState}
-                disabled={!editFields}
-                defaultValue={loadedItem.description}
-                defaultValid
-              />
-              <MuiTextField
-                label="Image URL"
-                validators={[VALIDATE_REQUIRE]}
-                formInput={formValidationState.inputs.find(
-                  (input) => input.name === "image"
-                )}
-                updateFormValidationState={updateFormValidationState}
-                disabled={!editFields}
-                defaultValue={loadedItem.image}
-                defaultValid
-              />
-              <MuiTextField
-                label="Price ($)"
-                validators={[VALIDATE_REQUIRE, VALIDATE_FLOAT]}
-                formInput={formValidationState.inputs.find(
-                  (input) => input.name === "price"
-                )}
-                updateFormValidationState={updateFormValidationState}
-                disabled={!editFields}
-                defaultValue={loadedItem.price}
-                defaultValid
-              />
-
-              {!editFields && (
-                <CustomButton
-                  className="big-btn white-inverse top-bottom-margin"
-                  onClick={editHandler}
-                >
-                  Edit Fields
-                </CustomButton>
-              )}
-              {editFields && (
-                <CustomButton
-                  className="big-btn white-inverse top-bottom-margin"
-                  onClick={saveEditHandler}
-                >
-                  Save Changes
-                </CustomButton>
-              )}
-            </MuiBox>
-          </MuiForm>
-        </MuiBox>
-      )}
     </Fragment>
   );
 };

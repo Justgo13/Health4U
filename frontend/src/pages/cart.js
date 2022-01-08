@@ -8,18 +8,18 @@ import MuiDivider from "../components/MaterialUI/mui-divider";
 
 import CustomButton from "../components/custom-button";
 import ErrorModal from "../components/Modal/error-modal";
+import TextSection from "../components/text-section";
 
 import { useCartCookies } from "../shared/cookies/cart-cookies";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
 
 const Cart = () => {
-  const { getOrderSummary, getCartItems, checkoutCart } = useCartCookies();
+  const { getOrderSummary, getCartItems } = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const { error, isLoading, clearError, sendRequest } = useHttpClient();
   const { getUserInfo } = useAuthCookies();
-  const userInfo = getUserInfo();
 
   const showCartItems = () => {
     const cartItems = getCartItems();
@@ -37,6 +37,21 @@ const Cart = () => {
     return <MuiGrid gridItems={cartItems} link="item" baseLink="shop" cart />;
   };
 
+  const textLines = [
+    {
+      label: "Sub Total",
+      text: subTotal,
+    },
+    {
+      label: "Taxes",
+      text: taxes,
+    },
+    {
+      label: "Total",
+      text: total,
+    },
+  ];
+
   const checkoutHandler = async () => {
     const cartItemsIds = getCartItems().map((item) => item.id);
     const userInfo = getUserInfo();
@@ -44,37 +59,21 @@ const Cart = () => {
       id: userInfo.id,
       cartItems: cartItemsIds,
     });
-    // checkoutCart();
   };
 
   return (
     <Fragment>
       <Navbar />
 
-      <MuiBox className="container item-desc no-bottom-padding">
-        {!!error && (
-          <ErrorModal
-            isModalShown={true}
-            errorMessage={error}
-            onClose={clearError}
-          />
-        )}
-        <MuiDivider headerText="Order Summary" />
-        <MuiBox className="no-bottom-padding">
-          <MuiTypography
-            variant="h4"
-            baseComponent="p"
-          >{`Sub Total - $${subTotal}`}</MuiTypography>
-          <MuiTypography
-            variant="h4"
-            baseComponent="p"
-          >{`HST & GST - $${taxes}`}</MuiTypography>
-          <MuiTypography
-            variant="h4"
-            baseComponent="p"
-          >{`Order Total - $${total}`}</MuiTypography>
-        </MuiBox>
-      </MuiBox>
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
+
+      <TextSection sectionHeader="Related Products" textLines={textLines}/>
 
       <MuiBox className="container">
         <MuiDivider headerText={`${"Jason's"} Cart`} />

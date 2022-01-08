@@ -27,11 +27,13 @@ const Login = () => {
           name: "email",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
         {
           name: "password",
           value: "",
           isValid: false,
+          validators: [VALIDATE_REQUIRE],
         },
       ],
 
@@ -82,54 +84,36 @@ const Login = () => {
     <Fragment>
       <Navbar />
 
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
       <MuiBox className="container">
-        {!!error && (
-          <ErrorModal
-            isModalShown={true}
-            errorMessage={error}
-            onClose={clearError}
-          />
-        )}
         <MuiForm
-          formHeader={
-            <MuiTypography className="divider-header top-bottom-padding center">
-              Login
-            </MuiTypography>
-          }
+          formHeader="Login"
           submitHandler={loginHandler}
+          buttonText="Login"
         >
-          <MuiBox className="grey-background container textfield-group">
+          {formValidationState.inputs.map((input) => (
             <MuiTextField
-              label="Email"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "email"
-              )}
+              key={input.name}
+              label={input.name}
+              validators={input.validators}
+              formInput={input}
               updateFormValidationState={updateFormValidationState}
             />
-            <MuiTextField
-              label="Password"
-              validators={[VALIDATE_REQUIRE]}
-              formInput={formValidationState.inputs.find(
-                (input) => input.name === "password"
-              )}
-              updateFormValidationState={updateFormValidationState}
-            />
+          ))}
 
-            <MuiSelect
-              classname="top-bottom-margin"
-              labelText="Account Type"
-              selectItems={["Buyer", "Seller"]}
-              defaultValue={accountType}
-              onChange={setAccountType}
-            />
-            <CustomButton
-              className="big-btn white-inverse top-bottom-margin"
-              onClick={loginHandler}
-            >
-              Login
-            </CustomButton>
-          </MuiBox>
+          <MuiSelect
+            classname="top-bottom-margin"
+            labelText="Account Type"
+            selectItems={["Buyer", "Seller"]}
+            defaultValue={accountType}
+            onChange={setAccountType}
+          />
         </MuiForm>
       </MuiBox>
     </Fragment>
