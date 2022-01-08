@@ -2,10 +2,6 @@ const SellerUser = require("../models/seller-user");
 const BuyerUser = require("../models/buyer-user");
 const HttpError = require("../models/http-error.js");
 
-const root = (req, res) => {
-  res.json({ message: "Hello" });
-};
-
 const getDate = () => {
   let date;
   let today = new Date();
@@ -39,7 +35,7 @@ const checkExistingUser = async (schema, email) => {
   }
 };
 
-const createUser = async (createdUser) => {
+const saveUser = async (createdUser) => {
   try {
     await createdUser.save();
   } catch (err) {
@@ -49,6 +45,17 @@ const createUser = async (createdUser) => {
     );
     return error;
   }
+};
+
+const getUser = async (id) => {
+  let user, error;
+  try {
+    user = await BuyerUser.findById(id);
+  } catch (err) {
+    error = new HttpError("Could not find user with id " + id, 500);
+    return { user: null, error };
+  }
+  return { user, error };
 };
 
 const signUpBuyer = async (req, res, next) => {
@@ -69,7 +76,7 @@ const signUpBuyer = async (req, res, next) => {
     password,
   });
 
-  error = await createUser(createdUser);
+  error = await saveUser(createdUser);
   if (error) return next(error);
 
   res.status(201).json({ user: createdUser.toObject({ getters: true }) });
@@ -94,7 +101,7 @@ const signUpSeller = async (req, res, next) => {
     password,
   });
 
-  error = await createUser(createdUser);
+  error = await saveUser(createdUser);
   if (error) return next(error);
 
   res.status(201).json({ user: createdUser.toObject({ getters: true }) });
@@ -129,11 +136,11 @@ const login = async (req, res, next) => {
 const addBookmark = async (req, res, next) => {
   const { id, itemID } = req.body;
 
-  let user;
-  try {
-    user = await BuyerUser.findById(id);
-  } catch (err) {
-    const error = new HttpError("Could not find user with id " + id, 500);
+  let { user, error } = await getUser(id);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + id,
+    });
     return next(error);
   }
 
@@ -151,13 +158,10 @@ const addBookmark = async (req, res, next) => {
   }
 
   user.bookmarks = bookmarks;
-  try {
-    await user.save();
-  } catch (err) {
-    const error = new HttpError(
-      "Could not save bookmark item with id " + itemID,
-      500
-    );
+
+  error = await saveUser(user);
+  if (error) {
+    res.status(500).json({ message: "Failed to save bookmark" });
     return next(error);
   }
 
@@ -166,11 +170,11 @@ const addBookmark = async (req, res, next) => {
 
 const getBookmarks = async (req, res, next) => {
   const userID = req.params.userID;
-  let user;
-  try {
-    user = await BuyerUser.findById(userID);
-  } catch (err) {
-    const error = new HttpError("Could not find user with id " + id, 500);
+  let { user, error } = await getUser(userID);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + userID,
+    });
     return next(error);
   }
 
@@ -179,11 +183,11 @@ const getBookmarks = async (req, res, next) => {
 
 const removeBookmark = async (req, res, next) => {
   const { id, itemID } = req.body;
-  let user;
-  try {
-    user = await BuyerUser.findById(id);
-  } catch (err) {
-    const error = new HttpError(`Could not find user with id ${id}`, 500);
+  let { user, error } = await getUser(id);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + id,
+    });
     return next(error);
   }
 
@@ -192,26 +196,20 @@ const removeBookmark = async (req, res, next) => {
   bookmarks = bookmarks.filter((bookmark) => bookmark !== itemID);
 
   user.bookmarks = bookmarks;
-  try {
-    await user.save();
-  } catch (err) {
-    const error = new HttpError(
-      "Could not save bookmark item with id " + itemID,
-      500
-    );
-    return next(error);
-  }
+  
+  error = await saveUser(createdUser);
+  if (error) return next(error);
   res.status(200).json({ bookmarks: user.bookmarks });
 };
 
 const addOrder = async (req, res, next) => {
   const { id, cartItems } = req.body;
 
-  let user;
-  try {
-    user = await BuyerUser.findById(id);
-  } catch (err) {
-    const error = new HttpError(`Could not find user with id ${id}`, 500);
+  let { user, error } = await getUser(id);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + id,
+    });
     return next(error);
   }
 
@@ -260,11 +258,11 @@ const addOrder = async (req, res, next) => {
 const getCartHistory = async (req, res, next) => {
   const userID = req.params.userID;
 
-  let user;
-  try {
-    user = await BuyerUser.findById(userID);
-  } catch (err) {
-    const error = new HttpError(`Could not find user with id ${userID}`, 500);
+  let { user, error } = await getUser(userID);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + userID,
+    });
     return next(error);
   }
 
@@ -274,11 +272,11 @@ const getCartHistory = async (req, res, next) => {
 const getSellerItems = async (req, res, next) => {
   const userID = req.params.userID;
 
-  let user;
-  try {
-    user = await SellerUser.findById(userID);
-  } catch (err) {
-    const error = new HttpError(`Could not find user with id ${userID}`, 500);
+  let { user, error } = await getUser(userID);
+  if (error) {
+    res.status(422).json({
+      message: "Could not find user with id " + userID,
+    });
     return next(error);
   }
 
@@ -290,17 +288,16 @@ const editUser = async (req, res, next) => {
 
   // try to update user in both tables
   try {
-    await BuyerUser.findByIdAndUpdate(userID, {name, email});
-    await SellerUser.findByIdAndUpdate(userID, {name, email});
+    await BuyerUser.findByIdAndUpdate(userID, { name, email });
+    await SellerUser.findByIdAndUpdate(userID, { name, email });
   } catch (err) {
     const error = new HttpError(`Could not update user with id ${userID}`, 500);
     return next(error);
   }
 
-  res.status(203).json({message: "Updated user"})
+  res.status(203).json({ message: "Updated user" });
 };
 
-exports.root = root;
 exports.signUpBuyer = signUpBuyer;
 exports.signUpSeller = signUpSeller;
 exports.login = login;
