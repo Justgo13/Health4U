@@ -51,14 +51,27 @@ const Item = () => {
   const item = allItems.find((item) => item.id === itemID);
 
   const [loadedItem, setLoadedItem] = useState();
+  const [relatedItems, setRelatedItems] = useState([]);
 
   const { error, isLoading, sendRequest, clearError } = useHttpClient();
   useEffect(() => {
     const getItem = async () => {
-      const res = await sendRequest(
+      let res = await sendRequest(
         `http://localhost:5000/api/item/getItem/${itemID}`
       );
-      setLoadedItem(res.item);
+
+      let item = res.item;
+      let category = item.category;
+
+      // get all items
+      res = await sendRequest("http://localhost:5000/api/item/getItems");
+
+      // get related items by category and filter out duplicate item
+      let allItems = res.items;
+      let relatedItems = allItems.filter(i => i.category === category && i.name !== item.name);
+
+      setRelatedItems(relatedItems)
+      setLoadedItem(item);
     };
 
     getItem();
@@ -108,7 +121,7 @@ const Item = () => {
 
           <MuiBox className="container">
             <MuiDivider headerText="Related Products" />
-            <MuiCarousel carouselItems={[]} />
+            <MuiCarousel carouselItems={relatedItems} />
           </MuiBox>
         </Fragment>
       )}

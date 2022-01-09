@@ -84,7 +84,13 @@ const ShopPage = () => {
       // get categories for each item and add to set
       let categories = [];
       allItems.map((item) => {
-        if (!categories.includes(item.name)) {
+        let duplicateFound = false;
+        for (const category of categories) {
+          if (category.name === item.category) {
+            duplicateFound = true;
+          }
+        }
+        if (!duplicateFound) {
           categories.push({ name: item.category, image: item.image });
         }
       });

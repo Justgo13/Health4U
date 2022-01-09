@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Navbar from "../components/NavBar/navbar";
 
 import MuiBox from "../components/MaterialUI/mui-box";
@@ -18,8 +18,11 @@ const Cart = () => {
   const { getOrderSummary, getCartItems } = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
+  const [badUserCheckout, setBadUserCheckout] = useState(false);
+
   const { error, isLoading, clearError, sendRequest } = useHttpClient();
   const { getUserInfo } = useAuthCookies();
+  const userInfo = getUserInfo();
 
   const showCartItems = () => {
     const cartItems = getCartItems();
@@ -54,11 +57,18 @@ const Cart = () => {
 
   const checkoutHandler = async () => {
     const cartItemsIds = getCartItems().map((item) => item.id);
-    const userInfo = getUserInfo();
-    await sendRequest("http://localhost:5000/api/user/addOrder", "POST", {
-      id: userInfo.id,
-      cartItems: cartItemsIds,
-    });
+   
+
+    // only if user is a buyer
+
+    if (userInfo.accountType === "Buyer") {
+      await sendRequest("http://localhost:5000/api/user/addOrder", "POST", {
+        id: userInfo.id,
+        cartItems: cartItemsIds,
+      });
+    } else {
+      setBadUserCheckout(true);
+    }
   };
 
   return (
@@ -73,10 +83,18 @@ const Cart = () => {
         />
       )}
 
-      <TextSection sectionHeader="Related Products" textLines={textLines}/>
+      {badUserCheckout && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage="Only buyer accounts can checkout"
+          onClose={() => setBadUserCheckout(false)}
+        />
+      )}
+
+      <TextSection sectionHeader="Related Products" textLines={textLines} />
 
       <MuiBox className="container">
-        <MuiDivider headerText={`${"Jason's"} Cart`} />
+        <MuiDivider headerText={`${userInfo.name}'s Cart`} />
         {showCartItems()}
       </MuiBox>
 
