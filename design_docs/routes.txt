@@ -6,7 +6,7 @@ Shop Page --> "/shop"
 Category --> "/shop/category/:categoryName"
 Item --> "/shop/item/:itemID"
 Search --> "/shop/search"
-Cart --> "/shop/cart/"
+Cart --> "/shop/cart"
 Buyer/Seller Sign Up --> "/auth/sign-up"
 Buyer/Seller Login --> "/auth/login"
 Buyer Profile Page --> "/buyer/profile/:userID"
@@ -19,16 +19,30 @@ Seller Edit Item --> "/seller/editItem/:itemID"
 
 
 Backend Routes
-POST signUpBuyer --> "/api/user/signUpBuyer"
-POST signUpSeller --> "/api/user/signUpSeller"
-GET user --> "/api/user/:userID"
-POST user --> "/api/user/:userID"
-PATCH user --> "/api/user/:userID"
-DELETE user --> "/api/user/:userID"
 
-GET item --> "/api/item/:itemID"
-(seller only)
-POST item --> "/api/item/:itemID" 
-PATH item --> "/api/item/:itemID" 
-DELETE item --> "/api/item/:itemID" 
+USER ROUTES /api/user
+GET Order history --> "/getCartHistory/:userID"
+GET Seller items --> "/getSellerItems/:userID"
+GET Bookmarks --> "/getBookmarks/:userID"
+
+POST Sign Up Buyer --> "/signUpBuyer"
+POST Sign Up Seller --> "/signUpSeller"
+POST Login --> "/login"
+POST Add Bookmark --> "/addBookmark"
+POST Add Order --> "/addOrder"
+
+DELETE Remove Bookmark --> "/removeBookmark"
+
+PATCH Edit User --> "/editUser"
+
+ITEM ROUTES /api/item
+GET Single Item --> "/getItem/:itemID"
+GET All Items --> "/getItems"
+
+POST Add Item --> "/addItem" 
+POST Resolve Item IDs --> "/resolveItemIds"
+
+DELETE Single Item --> "/deleteItem"
+
+PATCH Edit Item --> "/editItem"
 
