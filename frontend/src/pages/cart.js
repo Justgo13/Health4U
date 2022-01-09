@@ -14,15 +14,19 @@ import { useCartCookies } from "../shared/cookies/cart-cookies";
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
 
+import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
-  const { getOrderSummary, getCartItems } = useCartCookies();
+  const { getOrderSummary, getCartItems, cartLogout } = useCartCookies();
   const { subTotal, taxes, total } = getOrderSummary();
 
   const [badUserCheckout, setBadUserCheckout] = useState(false);
 
-  const { error, isLoading, clearError, sendRequest } = useHttpClient();
+  const { error, clearError, sendRequest } = useHttpClient();
   const { getUserInfo } = useAuthCookies();
   const userInfo = getUserInfo();
+
+  const navigate = useNavigate();
 
   const showCartItems = () => {
     const cartItems = getCartItems();
@@ -57,7 +61,6 @@ const Cart = () => {
 
   const checkoutHandler = async () => {
     const cartItemsIds = getCartItems().map((item) => item.id);
-   
 
     // only if user is a buyer
 
@@ -65,7 +68,10 @@ const Cart = () => {
       await sendRequest("http://localhost:5000/api/user/addOrder", "POST", {
         id: userInfo.id,
         cartItems: cartItemsIds,
+        total
       });
+      cartLogout();
+      navigate("/shop");
     } else {
       setBadUserCheckout(true);
     }

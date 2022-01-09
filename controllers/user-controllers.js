@@ -7,9 +7,12 @@ const getDate = () => {
   let today = new Date();
   let month = today.toLocaleDateString("default", { month: "short" });
   let day = String(today.getDate()).padStart(2, "0");
+  let hour = today.getHours();
+  let minutes = today.getMinutes();
+  let seconds = String(today.getSeconds()).padStart(2, "0");
   let year = today.getFullYear();
 
-  date = `${month} ${day}, ${year}`;
+  date = `${month} ${day}, ${year} @ ${hour}:${minutes}:${seconds}`;
   return date;
 };
 
@@ -204,7 +207,7 @@ const removeBookmark = async (req, res, next) => {
 };
 
 const addOrder = async (req, res, next) => {
-  const { id, cartItems } = req.body;
+  const { id, cartItems, total } = req.body;
 
   let { user, error } = await getUser(BuyerUser, id);
   if (error) {
@@ -216,29 +219,11 @@ const addOrder = async (req, res, next) => {
 
   const orderDate = getDate();
 
-  // cart empty or entry with order date does not exist
-  if (user.cart.length === 0 || !user.cart.find((entry) => entry.orderDate)) {
-    user.cart.push({
-      cartItems,
-      orderDate,
-    });
-  } else {
-    // cart entry exists, append list to existing list
-    const existingCart = user.cart.find(
-      (entry) => entry.orderDate === orderDate
-    );
-    const exisitingCartIndex = user.cart.indexOf(existingCart);
-    const existingCartItems = existingCart.cartItems;
-
-    cartItems.forEach((item) => {
-      if (!existingCartItems.includes(item)) {
-        existingCartItems.push(item);
-      }
-    });
-
-    existingCart.cartItems = existingCartItems;
-    user.cart[exisitingCartIndex] = existingCart;
-  }
+  user.cart.unshift({
+    cartItems,
+    orderDate,
+    total
+  });
 
   try {
     await user.save();

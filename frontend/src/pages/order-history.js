@@ -8,13 +8,10 @@ import ErrorModal from "../components/Modal/error-modal";
 import LoadingCircle from "../components/loading-circle";
 import { v4 as uuidv4 } from "uuid";
 
-// import { useCartCookies } from "../shared/cookies/cart-cookies";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
 import { useHttpClient } from "../shared/hooks/http-hook";
 
 const OrderHistory = () => {
-  // const { addItemByOrderDate, getCartItemOrderDate } = useCartCookies();
-  // const itemsByOrderDate = getCartItemOrderDate();
   const { getUserInfo } = useAuthCookies();
   const userInfo = getUserInfo();
 
@@ -71,11 +68,12 @@ const OrderHistory = () => {
         {loadedCartHistory.map((item) => {
           const orderDate = item.orderDate;
           const cartItems = item.cartItems;
+          const orderTotal = item.total;
 
           return (
             <MuiBox key={uuidv4()}>
               <MuiTypography variant="h3" className="red-text">
-                {orderDate}
+                {orderDate} - ${orderTotal}
               </MuiTypography>
               <MuiGrid gridItems={cartItems} link="item" baseLink="shop" />
             </MuiBox>
