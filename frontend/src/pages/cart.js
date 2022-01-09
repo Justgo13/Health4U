@@ -43,15 +43,15 @@ const Cart = () => {
   const textLines = [
     {
       label: "Sub Total",
-      text: subTotal,
+      text: `$${subTotal}`,
     },
     {
       label: "Taxes",
-      text: taxes,
+      text: `$${taxes}`,
     },
     {
       label: "Total",
-      text: total,
+      text: `$${total}`,
     },
   ];
 
@@ -91,10 +91,10 @@ const Cart = () => {
         />
       )}
 
-      <TextSection sectionHeader="Related Products" textLines={textLines} />
+      <TextSection sectionHeader="Order Summary" textLines={textLines} />
 
       <MuiBox className="container">
-        <MuiDivider headerText={`${userInfo.name}'s Cart`} />
+        <MuiDivider headerText={`${userInfo.name || "Unknown"}'s Cart`} />
         {showCartItems()}
       </MuiBox>
 

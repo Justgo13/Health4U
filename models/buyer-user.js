@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
 
 const Schema = mongoose.Schema;
 
@@ -11,7 +10,5 @@ const buyerUserSchema = new Schema({
   bookmarks: { type: Array, required: true, default: [] },
   cart: { type: Array, required: true, default: []}
 });
-
-buyerUserSchema.plugin(uniqueValidator); // get Mongoose validation error in JSON rather than MongDO E11000 error code
 
 module.exports = mongoose.model("Buyer", buyerUserSchema);

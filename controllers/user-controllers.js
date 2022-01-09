@@ -37,10 +37,11 @@ const checkExistingUser = async (schema, email) => {
 
 const saveUser = async (createdUser) => {
   try {
+    console.log(createdUser);
     await createdUser.save();
   } catch (err) {
     const error = new HttpError(
-      "Signing up failed, please try again later.",
+      "Saving user failed " + err,
       500
     );
     return error;

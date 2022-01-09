@@ -8,13 +8,13 @@ import { quantity } from "../../utils/quantityDropdown";
 import { useCartCookies } from "../../shared/cookies/cart-cookies";
 
 const GridItemCart = ({ gridItem }) => {
-  const { setItemQuantity, deleteItemHandler } = useCartCookies();
+  const { setItemQuantity, deleteCartItem } = useCartCookies();
   return (
     <MuiBox className="container center">
       <MuiBox className="flex-child">
         <CustomButton
           className="big-btn white-inverse"
-          onClick={() => deleteItemHandler(gridItem.id)}
+          onClick={() => deleteCartItem(gridItem.id)}
         >
           <FontAwesomeIcon className="fa-trash big-icon" />
         </CustomButton>

@@ -75,7 +75,7 @@ const Item = () => {
     };
 
     getItem();
-  }, [sendRequest]);
+  }, [sendRequest, itemID]);
 
   const textLines = loadedItem
     ? [

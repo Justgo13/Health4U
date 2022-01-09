@@ -22,16 +22,39 @@ const OrderHistory = () => {
   const [loadedCartHistory, setLoadedCartHistory] = useState([]);
 
   useEffect(() => {
-    // addItemByOrderDate();
     const getCartHistory = async () => {
-      const res = await sendRequest(
+
+      // get the buyer's cart history
+      let res = await sendRequest(
         `http://localhost:5000/api/user/getCartHistory/${userInfo.id}`
       );
 
-      setLoadedCartHistory(res.cart);
+      // cartHistory is [{cartItems: ["1",...], orderDate: "Jan 2, 2020"}]
+      let cartHistory = res.cart;
+
+      // for each cart we use Promise.all to wait for all the promises
+      // created in each iteration to resolve
+      cartHistory = await Promise.all(cartHistory.map(async(order) => {
+        let cartItems = order.cartItems; // cartItems looks like {cartItems: ["1", "2", ...] }
+
+        // turn each item id in cartItems into a item object
+        cartItems = await Promise.all(cartItems.map(async(itemID) => {
+          let res = await sendRequest(`http://localhost:5000/api/item/getItem/${itemID}`);
+          let item = res.item;
+          return item
+        }))
+
+        // cart items looks like {cartItems: [{name, category, description, image, rating}, ...]}
+        return {...order, cartItems}
+      }));
+
+
+      // cartHistory becomes [{cartItems: [{name, category, description, image, rating}, ...], orderDate: "Jan 2, 2020"}]
+      setLoadedCartHistory(cartHistory);
     };
     getCartHistory();
   }, [sendRequest, userInfo]);
+
   return (
     <Fragment>
       <Navbar />
