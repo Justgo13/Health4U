@@ -256,6 +256,11 @@ export const useCartCookies = () => {
     setCookie(CART, cart)
   };
 
+  const cartLogout = () => {
+    setCookie(CART_COUNT, 0, {path: "/"})
+    setCookie(CART_ITEMS, [], {path: "/"})
+  }
+
   return {
     onCartCountCookieChange,
     onCartItemsCookieChange,
@@ -270,6 +275,7 @@ export const useCartCookies = () => {
     getItemOrderDate,
     addItemByOrderDate,
     getCartItemOrderDate,
-    checkoutCart
+    checkoutCart,
+    cartLogout
   };
 };

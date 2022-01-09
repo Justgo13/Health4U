@@ -1,11 +1,13 @@
 import React from "react";
 import { useCookies } from "react-cookie";
+import { useCartCookies } from "./cart-cookies";
 
 const LOGGED_IN = "loggedIn";
 const USER_INFO = "userInfo";
 
 export const useAuthCookies = () => {
   const [cookies, setCookie] = useCookies([LOGGED_IN, USER_INFO]);
+  const {cartLogout} = useCartCookies();
   const cookieInitVals = [
     {
       name: LOGGED_IN,
@@ -33,6 +35,7 @@ export const useAuthCookies = () => {
   const logout = () => {
     setCookie(LOGGED_IN, false, { path: "/" });
     setCookie(USER_INFO, {}, {path: "/"})
+    cartLogout();
   };
 
   const getLoggedInCookie = () => cookies[LOGGED_IN];
