@@ -63,6 +63,7 @@ const SellerItems = () => {
               baseLink="shop"
               seller
               onDelete={onDelete}
+              noButton
             />
           </MuiBox>
           <MuiBox className="center top-bottom-margin">

@@ -38,7 +38,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete, noButton }
               <GridItemModule
                 link={`/${baseLink}/${link}/${gridItem.id}`}
                 gridItem={gridItem}
-                noButton
+                noButton={noButton}
               />
               {cart && <GridItemCart gridItem={gridItem} />}
 
