@@ -11,7 +11,7 @@ import GridItemModule from "../Grid/grid-item-module";
 import GridItemCart from "../Grid/grid-item-cart";
 import GridItemSeller from "../Grid/grid-item-seller";
 
-const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete }) => {
+const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete, noButton }) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
 
   if (gridItems.length === 0) {
@@ -38,6 +38,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete }) => {
               <GridItemModule
                 link={`/${baseLink}/${link}/${gridItem.id}`}
                 gridItem={gridItem}
+                noButton
               />
               {cart && <GridItemCart gridItem={gridItem} />}
 
@@ -57,6 +58,7 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete }) => {
               <GridItemList
                 link={`/${baseLink}/${link}/${gridItem.id}`}
                 gridItem={gridItem}
+                noButton
               />
               {cart && <GridItemCart gridItem={gridItem} />}
 
