@@ -74,11 +74,23 @@ const ShopPage = () => {
 
   const { error, isLoading, sendRequest, clearError } = useHttpClient();
   const [loadedItems, setLoadedItems] = useState();
+  const [loadedCategories, setLoadedCategories] = useState();
 
   useEffect(() => {
     const getItems = async () => {
       const res = await sendRequest("http://localhost:5000/api/item/getItems");
-      setLoadedItems(res.items);
+
+      let allItems = res.items;
+      // get categories for each item and add to set
+      let categories = [];
+      allItems.map((item) => {
+        if (!categories.includes(item.name)) {
+          categories.push({ name: item.category, image: item.image });
+        }
+      });
+
+      setLoadedCategories(categories);
+      setLoadedItems(allItems);
     };
 
     getItems();
@@ -102,7 +114,12 @@ const ShopPage = () => {
           <MuiDivider headerText="Hot Items" />
           <MuiCarousel carouselItems={loadedItems} />
           <MuiDivider headerText="Categories" />
-          <MuiGrid gridItems={categoryList} link="category" baseLink="shop" />
+          <MuiGrid
+            gridItems={loadedCategories}
+            link="category"
+            baseLink="shop"
+            category
+          />
         </MuiBox>
       )}
     </MuiBox>

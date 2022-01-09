@@ -11,7 +11,16 @@ import GridItemModule from "../Grid/grid-item-module";
 import GridItemCart from "../Grid/grid-item-cart";
 import GridItemSeller from "../Grid/grid-item-seller";
 
-const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete, noButton }) => {
+const MuiGrid = ({
+  baseLink,
+  link,
+  gridItems,
+  cart,
+  seller,
+  onDelete,
+  noButton,
+  category,
+}) => {
   const [isModuleCategories, setIsModuleCategories] = useState(true);
 
   if (gridItems.length === 0) {
@@ -31,15 +40,25 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete, noButton }
         container
         spacing={{ xs: 2, md: 5 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
+        className="top-bottom-padding"
       >
         {isModuleCategories &&
           gridItems.map((gridItem) => (
             <Grid key={uuidv4()} item xs={12} sm={6} md={4}>
-              <GridItemModule
-                link={`/${baseLink}/${link}/${gridItem.id}`}
-                gridItem={gridItem}
-                noButton={noButton}
-              />
+              {category && (
+                <GridItemModule
+                  link={`/${baseLink}/${link}/${gridItem.name}`}
+                  gridItem={gridItem}
+                  noButton={noButton}
+                />
+              )}
+              {!category && (
+                <GridItemModule
+                  link={`/${baseLink}/${link}/${gridItem.id}`}
+                  gridItem={gridItem}
+                  noButton={noButton}
+                />
+              )}
               {cart && <GridItemCart gridItem={gridItem} />}
 
               {seller && (
@@ -54,12 +73,22 @@ const MuiGrid = ({ baseLink, link, gridItems, cart, seller, onDelete, noButton }
 
         {!isModuleCategories &&
           gridItems.map((gridItem) => (
-            <Grid key={gridItem.id} item xs={12}>
-              <GridItemList
-                link={`/${baseLink}/${link}/${gridItem.id}`}
-                gridItem={gridItem}
-                noButton
-              />
+            <Grid key={uuidv4()} item xs={12}>
+              {category && (
+                <GridItemList
+                  link={`/${baseLink}/${link}/${gridItem.name}`}
+                  gridItem={gridItem}
+                  noButton={noButton}
+                />
+              )}
+
+              {!category && (
+                <GridItemList
+                  link={`/${baseLink}/${link}/${gridItem.id}`}
+                  gridItem={gridItem}
+                  noButton={noButton}
+                />
+              )}
               {cart && <GridItemCart gridItem={gridItem} />}
 
               {seller && (

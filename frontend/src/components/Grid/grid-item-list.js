@@ -12,7 +12,7 @@ const GridItemList = ({ link, gridItem, noButton }) => {
       <CustomButton
         className="max-width default-border white-inverse"
         variant="outline"
-        disabled={noButton}
+        disabled
       >
         <List>
           <ListItem>
