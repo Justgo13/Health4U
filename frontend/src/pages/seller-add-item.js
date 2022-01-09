@@ -68,28 +68,15 @@ const SellerAddItem = () => {
     e.preventDefault();
 
     if (formValidationState.isValid) {
-      const name = formValidationState.inputs.find(
-        (input) => input.name === "name"
-      ).value;
-      const category = formValidationState.inputs.find(
-        (input) => input.name === "category"
-      ).value;
-      const description = formValidationState.inputs.find(
-        (input) => input.name === "description"
-      ).value;
-      const image = formValidationState.inputs.find(
-        (input) => input.name === "image"
-      ).value;
-      const price = formValidationState.inputs.find(
-        (input) => input.name === "price"
-      ).value;
+      const formInputs = {};
+
+      formValidationState.inputs.map(
+        (input) => (formInputs[input.name] = input.value)
+      );
+
       await sendRequest("http://localhost:5000/api/item/addItem", "POST", {
         sellerID: userInfo.id,
-        name,
-        category,
-        description,
-        image,
-        price,
+        ...formInputs,
       });
       navigate(`/seller/items/${userInfo.id}`);
     }
