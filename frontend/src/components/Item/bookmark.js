@@ -18,7 +18,7 @@ const Bookmark = ({ itemID }) => {
   const { error, sendRequest, clearError } = useHttpClient();
 
   const bookmarkHandler = async (e) => {
-    if (loggedIn === "true") {
+    if (loggedIn === "true" && userInfo.accountType === "Buyer") {
       if (!bookMarkClicked) {
         await sendRequest(
           "http://localhost:5000/api/user/addBookmark",
@@ -64,7 +64,9 @@ const Bookmark = ({ itemID }) => {
       }
     };
 
-    userHasBookmark();
+    if (userInfo.accountType === "Buyer") {
+      userHasBookmark();
+    }
   }, [sendRequest, userID, itemID]);
 
   return (

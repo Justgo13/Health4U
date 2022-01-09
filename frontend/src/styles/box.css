@@ -179,4 +179,9 @@ a {
   width: 60%;
 }
 
+.full-width {
+  width: 100% !important;
+  margin: 0;
+}
+
 /*# sourceMappingURL=box.css.map */

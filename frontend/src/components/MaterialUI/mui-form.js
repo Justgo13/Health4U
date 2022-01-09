@@ -12,7 +12,7 @@ const MuiForm = (props) => {
         </MuiTypography>
       </MuiBox>
       <MuiBox className="form-content">
-        <MuiBox className="grey-background container textfield-group">
+        <MuiBox className={`grey-background container textfield-group ${props.contentClassName}`}>
           {props.children}
           <CustomButton className="big-btn white-inverse top-bottom-margin">
             {props.buttonText}

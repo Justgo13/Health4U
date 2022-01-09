@@ -66,19 +66,29 @@ const Bookmarks = () => {
   let bookmarks;
   useEffect(() => {
     const getBookmarks = async () => {
+      console.log("HIE");
       let res = await sendRequest(
         `http://localhost:5000/api/user/getBookmarks/${user.id}`
       );
 
       bookmarks = res.bookmarks;
-      bookmarks = bookmarks.map((itemID) => {
-        const itemObj = allItems.find((item) => item.id === itemID);
-        return itemObj;
-      });
-      setLoadedBookmarks(bookmarks)
+
+      bookmarks = await Promise.all(
+        bookmarks.map(async (itemID) => {
+          res = await sendRequest(
+            `http://localhost:5000/api/item/getItem/${itemID}`
+          );
+          return res.item;
+        })
+      );
+
+      console.log(bookmarks);
+      setLoadedBookmarks(bookmarks);
     };
 
-    getBookmarks();
+    if (user.accountType === "Buyer") {
+      getBookmarks();
+    }
   }, [sendRequest, user]);
 
   return (
@@ -92,7 +102,7 @@ const Bookmarks = () => {
         />
       )}
 
-      {isLoading && <LoadingCircle/>}
+      {isLoading && <LoadingCircle />}
       {!isLoading && (
         <MuiBox className="container top-bottom-padding">
           <MuiDivider headerText={`${user.name}'s Bookmarks`} />

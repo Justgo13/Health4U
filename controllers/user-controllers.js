@@ -197,7 +197,7 @@ const removeBookmark = async (req, res, next) => {
 
   user.bookmarks = bookmarks;
   
-  error = await saveUser(createdUser);
+  error = await saveUser(user);
   if (error) return next(error);
   res.status(200).json({ bookmarks: user.bookmarks });
 };

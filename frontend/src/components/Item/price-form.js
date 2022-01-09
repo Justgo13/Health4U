@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
 import MuiForm from "../MaterialUI/mui-form";
 import MuiTypography from "../MaterialUI/mui-typography";
 import MuiBox from "../MaterialUI/mui-box";
 import MuiSelect from "../MaterialUI/Form/mui-select";
-import CustomButton from "../custom-button";
 import FontAwesomeIcon from "../font-awesome-icon";
 import CartPreviewModal from "../Modal/CartPreview/cart-preview-modal";
 
@@ -13,14 +12,9 @@ import { useCartCookies } from "../../shared/cookies/cart-cookies";
 import { useModalReducer } from "../Modal/modal-reducer";
 
 import { getDate } from "../../utils/date";
+import { quantity } from "../../utils/quantityDropdown";
 
 const PriceForm = ({ item }) => {
-  let quantity = [];
-
-  for (let i = 1; i < 50; i++) {
-    quantity.push(i);
-  }
-
   const [priceDollar, setPriceDollar] = useState(0);
   const [priceCents, setPriceCents] = useState(0);
   useEffect(() => {
@@ -60,37 +54,31 @@ const PriceForm = ({ item }) => {
     <MuiBox className="price-box flex-child">
       <MuiForm
         formHeader={
-          <MuiTypography className="divider-header">
+          <Fragment>
             ${priceDollar}
             <span className="decimal-cost align-top">{priceCents}</span>
-          </MuiTypography>
+          </Fragment>
         }
         submitHandler={addProductToCartHandler}
+        buttonText="Add To Cart"
+        contentClassName="full-width"
       >
-        <MuiBox className="grey-background top-bottom-padding">
-          <MuiBox>
-            <MuiSelect
-              classname="top-bottom-margin"
-              labelText="Quantity"
-              selectItems={quantity}
-              defaultValue={itemQuantity}
-              onChange={setItemQuantity}
-            />
-          </MuiBox>
+        <MuiSelect
+          classname="top-bottom-margin"
+          labelText="Quantity"
+          selectItems={quantity}
+          defaultValue={itemQuantity}
+          onChange={setItemQuantity}
+        />
 
-          <CustomButton className="white-inverse big-btn" type="submit">
-            Add to cart
-          </CustomButton>
-
-          <MuiTypography variant="p" baseComponent="p">
-            <FontAwesomeIcon className="fa-shipping-fast small-icon" /> Sold and
-            Shipped by Jason
-          </MuiTypography>
-          <MuiTypography variant="p" baseComponent="p">
-            <FontAwesomeIcon className="fa-calendar-times small-icon" />{" "}
-            Estimated shipping time 1 to 3 days
-          </MuiTypography>
-        </MuiBox>
+        <MuiTypography variant="p" baseComponent="p">
+          <FontAwesomeIcon className="fa-shipping-fast small-icon" /> Sold and
+          Shipped by Jason
+        </MuiTypography>
+        <MuiTypography variant="p" baseComponent="p">
+          <FontAwesomeIcon className="fa-calendar-times small-icon" /> Estimated
+          shipping time 1 to 3 days
+        </MuiTypography>
 
         {modalState.isCartModalShown && (
           <CartPreviewModal

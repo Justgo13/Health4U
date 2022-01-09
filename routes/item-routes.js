@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.get("/getItem/:itemID", itemControllers.getItem)
+router.get("/getItems", itemControllers.getItems)
 
 router.post("/addItem", itemControllers.addItem)
 router.post("/resolveItemIds", itemControllers.resolveItemIds)

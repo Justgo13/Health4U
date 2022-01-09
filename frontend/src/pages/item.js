@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import MuiBox from "../components/MaterialUI/mui-box";
@@ -10,7 +10,11 @@ import PriceForm from "../components/Item/price-form";
 import Bookmark from "../components/Item/bookmark";
 import ItemLanding from "../components/Item/item-landing";
 import TextSection from "../components/text-section";
+import ErrorModal from "../components/Modal/error-modal";
+import LoadingCircle from "../components/loading-circle";
+
 import { getDate } from "../utils/date";
+import { useHttpClient } from "../shared/hooks/http-hook";
 
 import "../styles/item.css";
 
@@ -45,39 +49,69 @@ const Item = () => {
   const { itemID } = useParams();
 
   const item = allItems.find((item) => item.id === itemID);
-  const relatedItems = allItems.filter((i) => i.category === item.category);
 
-  const textLines = [
-    {
-      label: "Description",
-      text: item.description,
-    },
-    {
-      label: "Manufaturer",
-      text: "Health4U",
-    },
-    {
-      label: "First Available",
-      text: getDate(),
-    },
-  ];
+  const [loadedItem, setLoadedItem] = useState();
+
+  const { error, isLoading, sendRequest, clearError } = useHttpClient();
+  useEffect(() => {
+    const getItem = async () => {
+      const res = await sendRequest(
+        `http://localhost:5000/api/item/getItem/${itemID}`
+      );
+      setLoadedItem(res.item);
+    };
+
+    getItem();
+  }, [sendRequest]);
+
+  const textLines = loadedItem
+    ? [
+        {
+          label: "Description",
+          text: loadedItem.description,
+        },
+        {
+          label: "Manufaturer",
+          text: "Health4U",
+        },
+        {
+          label: "First Available",
+          text: getDate(),
+        },
+      ]
+    : [];
 
   return (
     <Fragment>
       <Navbar />
-      <Bookmark itemID={item.id} />
 
-      <MuiBox className="flex-container container">
-        <ItemLanding item={item} />
-        <PriceForm item={item} />
-      </MuiBox>
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
 
-      <TextSection sectionHeader="Product Details" textLines={textLines} />
+      {isLoading && <LoadingCircle />}
 
-      <MuiBox className="container">
-        <MuiDivider headerText="Related Products" />
-        <MuiCarousel carouselItems={relatedItems} />
-      </MuiBox>
+      {!isLoading && loadedItem && (
+        <Fragment>
+          <Bookmark itemID={loadedItem.id} />
+
+          <MuiBox className="flex-container container">
+            <ItemLanding item={loadedItem} />
+            <PriceForm item={loadedItem} />
+          </MuiBox>
+
+          <TextSection sectionHeader="Product Details" textLines={textLines} />
+
+          <MuiBox className="container">
+            <MuiDivider headerText="Related Products" />
+            <MuiCarousel carouselItems={[]} />
+          </MuiBox>
+        </Fragment>
+      )}
     </Fragment>
   );
 };

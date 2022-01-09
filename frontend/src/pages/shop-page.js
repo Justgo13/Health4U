@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import MuiCarousel from "../components/MaterialUI/mui-carousel";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
 import MuiBox from "../components/MaterialUI/mui-box";
+
 import Navbar from "../components/NavBar/navbar";
+import LoadingCircle from "../components/loading-circle";
+import ErrorModal from "../components/Modal/error-modal";
+
 import { useCartCookies } from "../shared/cookies/cart-cookies";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
 import { useBookmarkCookies } from "../shared/cookies/bookmark-cookies";
+import { useHttpClient } from "../shared/hooks/http-hook";
 
 const ShopPage = () => {
   useCartCookies();
@@ -67,16 +72,39 @@ const ShopPage = () => {
     },
   ];
 
+  const { error, isLoading, sendRequest, clearError } = useHttpClient();
+  const [loadedItems, setLoadedItems] = useState();
+
+  useEffect(() => {
+    const getItems = async () => {
+      const res = await sendRequest("http://localhost:5000/api/item/getItems");
+      setLoadedItems(res.items);
+    };
+
+    getItems();
+  }, [sendRequest]);
+
   return (
     <MuiBox>
       <Navbar />
 
-      <MuiBox className="container">
-        <MuiDivider headerText="Hot Items" />
-        <MuiCarousel carouselItems={items} />
-        <MuiDivider headerText="Categories" />
-        <MuiGrid gridItems={categoryList} link="category" baseLink="shop" />
-      </MuiBox>
+      {!!error && (
+        <ErrorModal
+          isModalShown={true}
+          errorMessage={error}
+          onClose={clearError}
+        />
+      )}
+
+      {isLoading && <LoadingCircle />}
+      {!isLoading && loadedItems && (
+        <MuiBox className="container">
+          <MuiDivider headerText="Hot Items" />
+          <MuiCarousel carouselItems={loadedItems} />
+          <MuiDivider headerText="Categories" />
+          <MuiGrid gridItems={categoryList} link="category" baseLink="shop" />
+        </MuiBox>
+      )}
     </MuiBox>
   );
 };

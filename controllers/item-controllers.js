@@ -2,6 +2,8 @@ const Item = require("../models/item");
 const SellerUser = require("../models/seller-user");
 const HttpError = require("../models/http-error.js");
 
+const BAD_IMAGE_URL = "https://community.atlassian.com/t5/image/serverpage/image-id/127481i2A3E643B5F41B152/image-dimensions/383x383?v=v2"
+
 const checkExistingItem = async (name, category) => {
   let exisitingItem;
   try {
@@ -25,6 +27,11 @@ const saveItem = async (item) => {
     const error = new HttpError("Creating item failed", 500);
     return error;
   }
+};
+
+const hasImageExtension = (imageURL) => {
+  const ext = imageURL.split(".").pop().toLowerCase()
+  return ["png", "jpg", "jpeg"].includes(ext)
 }
 
 const addItem = async (req, res, next) => {
@@ -42,6 +49,11 @@ const addItem = async (req, res, next) => {
     return next(error);
   }
 
+  // replace image with default image not found if passed in image url is invalid
+  if (!hasImageExtension(image)) {
+    image = BAD_IMAGE_URL
+  }
+
   // item does not exist, create new entry
   const createdItem = new Item({
     name,
@@ -51,8 +63,8 @@ const addItem = async (req, res, next) => {
     price,
   });
 
-  error = await saveItem(createdItem)
-  if (error) return next(error)
+  error = await saveItem(createdItem);
+  if (error) return next(error);
 
   // get seller entry
   let seller;
@@ -129,8 +141,6 @@ const deleteItem = async (req, res, next) => {
     return next(new HttpError(`Failed to delete item ${itemID}`, 422));
   }
 
-  
-
   // find item in seller list
   let user;
   try {
@@ -141,7 +151,6 @@ const deleteItem = async (req, res, next) => {
 
   var itemIndex = user.items.indexOf(itemID);
   user.items.splice(itemIndex, 1);
-
 
   // delete itemID from seller list
   try {
@@ -181,8 +190,21 @@ const editItem = async (req, res, next) => {
   });
 };
 
+const getItems = async (req, res, next) => {
+  let items
+  try {
+    items = await Item.find({});
+  } catch (err) {
+    throw err;
+  }
+
+  items = items.map(item => item.toObject({getters: true}))
+  res.json({ items });
+};
+
 exports.addItem = addItem;
 exports.getItem = getItem;
 exports.resolveItemIds = resolveItemIds;
 exports.deleteItem = deleteItem;
 exports.editItem = editItem;
+exports.getItems = getItems;
