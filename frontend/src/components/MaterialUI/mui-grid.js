@@ -44,7 +44,7 @@ const MuiGrid = ({
       >
         {isModuleCategories &&
           gridItems.map((gridItem) => (
-            <Grid key={uuidv4()} item xs={12} sm={6} md={4}>
+            <Grid key={uuidv4()} item xs={12} sm={6} md={4} className="full-height">
               {category && (
                 <GridItemModule
                   link={`/${baseLink}/${link}/${gridItem.name}`}
