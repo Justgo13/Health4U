@@ -15,62 +15,8 @@ import { useHttpClient } from "../shared/hooks/http-hook";
 const Category = () => {
   const { categoryName } = useParams();
 
-  // const categoryList = [
-  //   {
-  //     id: "1",
-  //     name: "Masks",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Sanitizer",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Kits",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //   },
-  //   {
-  //     id: "4",
-  //     name: "Kits",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //   },
-  // ];
-
-  // const items = [
-  //   {
-  //     id: "1",
-  //     name: "Black mask",
-  //     category: "mask",
-  //     description: "Black facial mask",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //     price: 2.12,
-  //     rating: 2.2,
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Pink mask",
-  //     category: "mask",
-  //     description: "Pink facial mask",
-  //     image:
-  //       "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
-  //     price: 2.65,
-  //     rating: 2.3,
-  //   },
-  // ];
-
   const { error, isLoading, clearError, sendRequest } = useHttpClient();
   const [categoryItems, setCategoryItems] = useState([]);
-
-  // const categoryName = categoryList.find(
-  //   (category) => category.id === categoryID
-  // ).name;
 
   useEffect(() => {
     const getCategoryItems = async () => {
@@ -104,8 +50,10 @@ const Category = () => {
           className="divider-header center-text"
           headerText={categoryName}
         />
-         {isLoading && <LoadingCircle />}
-        {!isLoading && <MuiGrid gridItems={categoryItems} link="item" baseLink="shop" />}
+        {isLoading && <LoadingCircle />}
+        {!isLoading && (
+          <MuiGrid gridItems={categoryItems} link="item" baseLink="shop" />
+        )}
       </MuiBox>
     </Fragment>
   );
