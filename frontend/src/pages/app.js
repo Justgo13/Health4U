@@ -34,7 +34,7 @@ const App = () => {
           <Route path="category/:categoryName" element={<Category />} />
           <Route path="item/:itemID" element={<Item />} />
           <Route path="search" element={<Search />} />
-          <Route path="cart/:userID" element={<Cart />} />
+          <Route path="cart" element={<Cart />} />
         </Route>
 
         <Route path="auth" element={<Outlet />}>

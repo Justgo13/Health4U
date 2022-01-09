@@ -56,7 +56,7 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const checkoutHandler = (e) => {
-    navigate("/shop/cart/1");
+    navigate("/shop/cart");
     hideCartModal();
   };
 
