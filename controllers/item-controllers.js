@@ -2,7 +2,8 @@ const Item = require("../models/item");
 const SellerUser = require("../models/seller-user");
 const HttpError = require("../models/http-error.js");
 
-const BAD_IMAGE_URL = "https://community.atlassian.com/t5/image/serverpage/image-id/127481i2A3E643B5F41B152/image-dimensions/383x383?v=v2"
+const BAD_IMAGE_URL =
+  "https://community.atlassian.com/t5/image/serverpage/image-id/127481i2A3E643B5F41B152/image-dimensions/383x383?v=v2";
 
 const checkExistingItem = async (name, category) => {
   let exisitingItem;
@@ -30,9 +31,9 @@ const saveItem = async (item) => {
 };
 
 const hasImageExtension = (imageURL) => {
-  const ext = imageURL.split(".").pop().toLowerCase()
-  return ["png", "jpg", "jpeg"].includes(ext)
-}
+  const ext = imageURL.split(".").pop().toLowerCase();
+  return ["png", "jpg", "jpeg"].includes(ext);
+};
 
 const addItem = async (req, res, next) => {
   let { sellerID, name, category, description, image, price } = req.body;
@@ -51,7 +52,7 @@ const addItem = async (req, res, next) => {
 
   // replace image with default image not found if passed in image url is invalid
   if (!hasImageExtension(image)) {
-    image = BAD_IMAGE_URL
+    image = BAD_IMAGE_URL;
   }
 
   // item does not exist, create new entry
@@ -191,14 +192,14 @@ const editItem = async (req, res, next) => {
 };
 
 const getItems = async (req, res, next) => {
-  let items
+  let items;
   try {
     items = await Item.find({});
   } catch (err) {
     throw err;
   }
 
-  items = items.map(item => item.toObject({getters: true}))
+  items = items.map((item) => item.toObject({ getters: true }));
   res.json({ items });
 };
 
