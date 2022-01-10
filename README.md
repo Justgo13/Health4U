@@ -4,6 +4,8 @@ A web application that allows users to purchase COVID-19 health products.
 
 To checkout on the site, users must create a buyer account.
 
+Design docs are found in design_docs
+
 ## Buyer account features:
 - Add items to cart
 - Remove items from cart
