@@ -46,7 +46,7 @@ const Search = () => {
 
   useEffect(() => {
     const getItems = async () => {
-      const res = await sendRequest("http://localhost:5000/api/item/getItems");
+      const res = await sendRequest("/api/item/getItems");
       let items = res.items;
       setLoadedItems(items);
     };

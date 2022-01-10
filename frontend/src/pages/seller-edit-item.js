@@ -57,7 +57,7 @@ const SellerEditItem = () => {
     // pre-populate with existing item information
     const getItemDetails = async () => {
       const res = await sendRequest(
-        `http://localhost:5000/api/item/getItem/${itemID}`
+        `/api/item/getItem/${itemID}`
       );
       setLoadedItem(res.item);
     };

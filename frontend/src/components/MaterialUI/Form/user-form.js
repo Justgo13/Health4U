@@ -32,7 +32,7 @@ const UserForm = ({ formHeader, buttonText, initFormState, loginUser, signup }) 
       if (loginUser) {
         let res;
         res = await sendRequest(
-          "http://localhost:5000/api/user/login",
+          "/api/user/login",
           "POST",
           {
             ...formInputs,
@@ -50,7 +50,7 @@ const UserForm = ({ formHeader, buttonText, initFormState, loginUser, signup }) 
         login();
       } else if (signup) {
         await sendRequest(
-          `http://localhost:5000/api/user/signUp${accountType}`,
+          `/api/user/signUp${accountType}`,
           "POST",
           formInputs
         );

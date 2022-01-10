@@ -21,7 +21,7 @@ const Bookmark = ({ itemID }) => {
     if (loggedIn === "true" && userInfo.accountType === "Buyer") {
       if (!bookMarkClicked) {
         await sendRequest(
-          "http://localhost:5000/api/user/addBookmark",
+          "/api/user/addBookmark",
           "POST",
           {
             id: userID,
@@ -31,7 +31,7 @@ const Bookmark = ({ itemID }) => {
         setBookMarkClicked(true);
       } else {
         await sendRequest(
-          "http://localhost:5000/api/user/removeBookmark",
+          "/api/user/removeBookmark",
           "DELETE",
           {
             id: userID,
@@ -54,7 +54,7 @@ const Bookmark = ({ itemID }) => {
     const userHasBookmark = async () => {
       if (userID) {
         let res = await sendRequest(
-          `http://localhost:5000/api/user/getBookmarks/${userID}`
+          `/api/user/getBookmarks/${userID}`
         );
 
         let bookmarks = res.bookmarks;

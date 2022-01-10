@@ -65,7 +65,7 @@ const Cart = () => {
     // only if user is a buyer
 
     if (userInfo.accountType === "Buyer") {
-      await sendRequest("http://localhost:5000/api/user/addOrder", "POST", {
+      await sendRequest("/api/user/addOrder", "POST", {
         id: userInfo.id,
         cartItems: cartItemsIds,
         total

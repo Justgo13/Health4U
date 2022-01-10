@@ -16,7 +16,7 @@ const GridItemSeller = ({ gridItem, link, onDelete }) => {
   const userInfo = getUserInfo();
 
   const deleteItemHandler = async (sellerID, itemID) => {
-    await sendRequest("http://localhost:5000/api/item/deleteItem", "DELETE", {
+    await sendRequest("/api/item/deleteItem", "DELETE", {
       sellerID,
       itemID,
     });

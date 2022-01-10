@@ -23,7 +23,7 @@ const OrderHistory = () => {
 
       // get the buyer's cart history
       let res = await sendRequest(
-        `http://localhost:5000/api/user/getCartHistory/${userInfo.id}`
+        `/api/user/getCartHistory/${userInfo.id}`
       );
 
       // cartHistory is [{cartItems: ["1",...], orderDate: "Jan 2, 2020"}]
@@ -36,7 +36,7 @@ const OrderHistory = () => {
 
         // turn each item id in cartItems into a item object
         cartItems = await Promise.all(cartItems.map(async(itemID) => {
-          let res = await sendRequest(`http://localhost:5000/api/item/getItem/${itemID}`);
+          let res = await sendRequest(`/api/item/getItem/${itemID}`);
           let item = res.item;
           return item
         }))

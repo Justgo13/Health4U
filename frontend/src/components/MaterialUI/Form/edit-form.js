@@ -37,14 +37,14 @@ const EditForm = ({
       );
 
       if (item) {
-        await sendRequest("http://localhost:5000/api/item/editItem", "PATCH", {
+        await sendRequest("/api/item/editItem", "PATCH", {
           itemID,
           ...formInputs,
         });
         navigate(`/seller/items/${userInfo.id}`);
       } else if (profile) {
         // send request to edit user in backend
-        await sendRequest("http://localhost:5000/api/user/editUser", "PATCH", {
+        await sendRequest("/api/user/editUser", "PATCH", {
           userID: userInfo.id,
           ...formInputs,
         });

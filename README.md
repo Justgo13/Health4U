@@ -34,6 +34,12 @@ Design docs are found in design_docs
 ### Database 
 - MongoDB
 
+## PRODUCTION
+```
+cd frontend
+npm run build
+```
+
 ## LOCAL DEVELOPMENT
 
 ### Set-up frontend (2 terminals)

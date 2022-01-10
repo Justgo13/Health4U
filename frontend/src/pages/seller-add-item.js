@@ -74,7 +74,7 @@ const SellerAddItem = () => {
         (input) => (formInputs[input.name] = input.value)
       );
 
-      await sendRequest("http://localhost:5000/api/item/addItem", "POST", {
+      await sendRequest("/api/item/addItem", "POST", {
         sellerID: userInfo.id,
         ...formInputs,
       });

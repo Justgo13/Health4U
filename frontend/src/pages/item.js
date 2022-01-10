@@ -29,14 +29,14 @@ const Item = () => {
   useEffect(() => {
     const getItem = async () => {
       let res = await sendRequest(
-        `http://localhost:5000/api/item/getItem/${itemID}`
+        `/api/item/getItem/${itemID}`
       );
 
       let item = res.item;
       let category = item.category;
 
       // get all items
-      res = await sendRequest("http://localhost:5000/api/item/getItems");
+      res = await sendRequest("/api/item/getItems");
 
       // get related items by category and filter out duplicate item
       let allItems = res.items;

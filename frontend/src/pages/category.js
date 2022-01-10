@@ -20,7 +20,7 @@ const Category = () => {
 
   useEffect(() => {
     const getCategoryItems = async () => {
-      const res = await sendRequest("http://localhost:5000/api/item/getItems");
+      const res = await sendRequest("/api/item/getItems");
 
       const items = res.items;
 

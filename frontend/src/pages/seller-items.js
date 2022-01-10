@@ -22,10 +22,10 @@ const SellerItems = () => {
   useEffect(() => {
     const getSellerItems = async () => {
       const res1 = await sendRequest(
-        `http://localhost:5000/api/user/getSellerItems/${userID}`
+        `/api/user/getSellerItems/${userID}`
       );
       const res2 = await sendRequest(
-        "http://localhost:5000/api/item/resolveItemIds",
+        "/api/item/resolveItemIds",
         "POST",
         { itemIDs: res1.items }
       );

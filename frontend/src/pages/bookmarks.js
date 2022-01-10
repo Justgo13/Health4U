@@ -21,7 +21,7 @@ const Bookmarks = () => {
     const getBookmarks = async () => {
       console.log("HIE");
       let res = await sendRequest(
-        `http://localhost:5000/api/user/getBookmarks/${user.id}`
+        `/api/user/getBookmarks/${user.id}`
       );
 
       bookmarks = res.bookmarks;
@@ -29,7 +29,7 @@ const Bookmarks = () => {
       bookmarks = await Promise.all(
         bookmarks.map(async (itemID) => {
           res = await sendRequest(
-            `http://localhost:5000/api/item/getItem/${itemID}`
+            `/api/item/getItem/${itemID}`
           );
           return res.item;
         })

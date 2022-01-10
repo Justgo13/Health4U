@@ -25,7 +25,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     const getItems = async () => {
-      const res = await sendRequest("http://localhost:5000/api/item/getItems");
+      const res = await sendRequest("/api/item/getItems");
 
       let allItems = res.items;
       // get categories for each item and add to set
