@@ -14,12 +14,14 @@ const Login = () => {
       value: "",
       isValid: false,
       validators: [VALIDATE_REQUIRE],
+      type: "text"
     },
     {
       name: "password",
       value: "",
       isValid: false,
       validators: [VALIDATE_REQUIRE],
+      type: "password"
     },
   ];
 

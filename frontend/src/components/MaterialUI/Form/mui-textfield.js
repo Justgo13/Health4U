@@ -46,6 +46,7 @@ const MuiTextField = ({
   updateFormValidationState,
   disabled,
   defaultValid,
+  type
 }) => {
   const [error, setError] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
@@ -85,6 +86,7 @@ const MuiTextField = ({
       onBlur={touchHandler}
       error={error}
       disabled={disabled}
+      type={type}
     />
   );
 };

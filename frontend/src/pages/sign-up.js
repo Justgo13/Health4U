@@ -18,18 +18,21 @@ const SignUp = () => {
       value: "",
       isValid: false,
       validators: [VALIDATE_REQUIRE],
+      type: "text"
     },
     {
       name: "email",
       value: "",
       isValid: false,
       validators: [VALIDATE_REQUIRE, VALIDATE_EMAIL, VALIDATE_MIN_LENGTH],
+      type: "text"
     },
     {
       name: "password",
       value: "",
       isValid: false,
       validators: [VALIDATE_REQUIRE, VALIDATE_MIN_LENGTH],
+      type: "password"
     },
   ];
 

@@ -83,6 +83,7 @@ const UserForm = ({ formHeader, buttonText, initFormState, loginUser, signup }) 
           validators={input.validators}
           formInput={input}
           updateFormValidationState={updateFormValidationState}
+          type={input.type}
         />
       ))}
 
