@@ -47,10 +47,6 @@ export const useCartCookies = () => {
     }
   }, []);
 
-  const onCartCountCookieChange = (cookieValue) => {
-    setCookie(CART_COUNT, cookieValue, { path: "/" });
-  };
-
   const onCartItemsCookieChange = ({
     id,
     name,
@@ -151,118 +147,12 @@ export const useCartCookies = () => {
 
   const getCartCount = () => cookies[CART_COUNT];
 
-  const getItemOrderDate = (itemID) => {
-    const cartItems = cookies[CART_ITEMS];
-    const item = cartItems.find((i) => i.id === itemID);
-
-    return item.orderDate;
-  };
-
-  const addItemByOrderDate = () => {
-    /**
-     * cartItemOrderDate looks like
-     * [
-     *  {
-     *    orderDate: "Jan 03, 2022"
-     *    orderItem: [itemObj]
-     *  }
-     * ]
-     *
-     *
-     * itemObj looks like
-     *
-     * {
-     *    id: "1"
-     *    name: "Mask",
-     *    image: "someImage.png",
-     *    quantity: 2,
-     *    price: 4.33,
-     *    rating: 2.2,
-     *    orderDate: "Jan 03, 2021"
-     *  },
-     */
-    let cartItemsOrderDate = cookies[CART_ITEM_ORDER_DATE];
-    let cart = cookies[CART];
-
-    cart.map((cartEntry) => {
-      if (cartItemsOrderDate.length === 0) {
-        cartItemsOrderDate.push({
-          orderDate: cartEntry.orderDate,
-          orderItems: cartEntry.cartItems,
-        });
-      } else {
-        const orderDateObj = cartItemsOrderDate.find(
-          (obj) => obj.orderDate === cartEntry.orderDate
-        );
-
-        if (!orderDateObj) {
-          // create new entry
-          cartItemsOrderDate.push({
-            orderDate: orderDateObj,
-            orderItems: cartEntry.cartItems,
-          });
-        } else {
-          // existing entry
-          orderDateObj.orderItems = cartEntry.cartItems
-        }
-      }
-    });
-
-    setCookie(CART_ITEM_ORDER_DATE, cartItemsOrderDate, { path: "/" });
-  };
-
-  const getCartItemOrderDate = () => cookies[CART_ITEM_ORDER_DATE];
-
-  const checkoutCart = () => {
-    const orderDate = getDate();
-    const cartItems = cookies[CART_ITEMS];
-    const cart = cookies[CART];
-
-    /**
-     * Cart looks like
-     *
-     * [
-     *  {
-     *    cartItems: []
-     *    orderDate: ""
-     *  }
-     * ]
-     */
-
-    // empty cart case
-    if (cart.length === 0) {
-      cart.push({
-        cartItems,
-        orderDate,
-      });
-    } else {
-      // find if the current checkouted cart exists by looking for orderDate
-
-      const cartEntry = cart.find(entry => entry.orderDate === orderDate) 
-
-      if (!cartEntry) {
-        // add new entry
-        cart.push({
-          cartItems,
-          orderDate,
-        });
-      } else {
-        // cart exists for this order date, update the cart items
-
-        cartEntry.cartItems = cartItems
-      }
-    }
-
-    setCookie(CART, cart)
-  };
-
   const cartLogout = () => {
     setCookie(CART_COUNT, 0, {path: "/"})
     setCookie(CART_ITEMS, [], {path: "/"})
   }
 
   return {
-    onCartCountCookieChange,
     onCartItemsCookieChange,
     onSearchQueryCookieChange,
     getOrderSummary,
@@ -272,10 +162,6 @@ export const useCartCookies = () => {
     getCartItems,
     getSearchQuery,
     getCartCount,
-    getItemOrderDate,
-    addItemByOrderDate,
-    getCartItemOrderDate,
-    checkoutCart,
     cartLogout
   };
 };

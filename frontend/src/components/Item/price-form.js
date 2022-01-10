@@ -47,7 +47,7 @@ const PriceForm = ({ item }) => {
   const navigate = useNavigate();
   const checkoutHandler = (e) => {
     e.preventDefault();
-    navigate("/shop/cart/1");
+    navigate("/shop/cart");
   };
 
   return (
