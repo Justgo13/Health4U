@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 
 import CustomButton from "../custom-button";
 import { useAuthCookies } from "../../shared/cookies/auth-cookies";
-import { useBookmarkCookies } from "../../shared/cookies/bookmark-cookies";
 
 const Logout = () => {
   const { logout } = useAuthCookies();
-  const {clearBookmarks} = useBookmarkCookies();
 
   const logoutHandler = () => {
     logout();
-    clearBookmarks();
   };
   return (
     <MenuItem>

@@ -12,30 +12,23 @@ import LoadingCircle from "../components/loading-circle";
 const Bookmarks = () => {
   const { getUserInfo } = useAuthCookies();
   const user = getUserInfo();
-  // const { getUserBookmarks } = useBookmarkCookies();
   const { error, sendRequest, clearError, isLoading } = useHttpClient();
   const [loadedBookmarks, setLoadedBookmarks] = useState([]);
 
   let bookmarks;
   useEffect(() => {
     const getBookmarks = async () => {
-      console.log("HIE");
-      let res = await sendRequest(
-        `/api/user/getBookmarks/${user.id}`
-      );
+      let res = await sendRequest(`/api/user/getBookmarks/${user.id}`);
 
       bookmarks = res.bookmarks;
 
       bookmarks = await Promise.all(
         bookmarks.map(async (itemID) => {
-          res = await sendRequest(
-            `/api/item/getItem/${itemID}`
-          );
+          res = await sendRequest(`/api/item/getItem/${itemID}`);
           return res.item;
         })
       );
 
-      console.log(bookmarks);
       setLoadedBookmarks(bookmarks);
     };
 

@@ -11,13 +11,11 @@ import ErrorModal from "../components/Modal/error-modal";
 
 import { useCartCookies } from "../shared/cookies/cart-cookies";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
-import { useBookmarkCookies } from "../shared/cookies/bookmark-cookies";
 import { useHttpClient } from "../shared/hooks/http-hook";
 
 const ShopPage = () => {
   useCartCookies();
   useAuthCookies();
-  useBookmarkCookies();
 
   const { error, isLoading, sendRequest, clearError } = useHttpClient();
   const [loadedItems, setLoadedItems] = useState();
