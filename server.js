@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require("cors")
+const cors = require("cors");
+const path = require('path');
 
 const port = process.env.PORT || 5000; // listen to heroku assigned port, or default to 5000
 
