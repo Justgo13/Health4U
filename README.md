@@ -6,6 +6,8 @@ To checkout on the site, users must create a buyer account.
 
 Design docs are found in design_docs
 
+Deployed at https://health-4u.herokuapp.com/
+
 ## Buyer account features:
 - Add items to cart
 - Remove items from cart
