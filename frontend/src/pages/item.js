@@ -12,6 +12,7 @@ import ItemLanding from "../components/Item/item-landing";
 import TextSection from "../components/text-section";
 import ErrorModal from "../components/Modal/error-modal";
 import LoadingCircle from "../components/loading-circle";
+import CommentList from "../components/Item/comment-list";
 
 import { getDate } from "../utils/date";
 import { useHttpClient } from "../shared/hooks/http-hook";
@@ -92,6 +93,8 @@ const Item = () => {
           </MuiBox>
 
           <TextSection sectionHeader="Product Details" textLines={textLines} />
+
+          <CommentList />
 
           <MuiBox className="container">
             <MuiDivider headerText="Related Products" />

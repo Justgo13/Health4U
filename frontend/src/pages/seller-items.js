@@ -1,15 +1,22 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Navbar from "../components/NavBar/navbar";
+import { Link } from "react-router-dom";
+
+
+
 import MuiBox from "../components/MaterialUI/mui-box";
 import MuiDivider from "../components/MaterialUI/mui-divider";
 import MuiGrid from "../components/MaterialUI/mui-grid";
+
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { useAuthCookies } from "../shared/cookies/auth-cookies";
+
 import ErrorModal from "../components/Modal/error-modal";
 import LoadingCircle from "../components/loading-circle";
 import CustomButton from "../components/custom-button";
 import FontAwesomeIcon from "../components/font-awesome-icon";
-import { Link } from "react-router-dom";
+import Navbar from "../components/NavBar/navbar";
+import RoundAddBtn from "../components/round-add-btn";
+
 
 const SellerItems = () => {
   const { error, isLoading, sendRequest, clearError } = useHttpClient();
@@ -66,13 +73,7 @@ const SellerItems = () => {
               noButton
             />
           </MuiBox>
-          <MuiBox className="center top-bottom-margin">
-            <Link to="/seller/item/addItem">
-              <CustomButton className="green-inverse lg-round">
-                <FontAwesomeIcon className="fa-plus" />
-              </CustomButton>
-            </Link>
-          </MuiBox>
+          <RoundAddBtn link="/seller/item/addItem"/>
         </MuiBox>
       )}
     </Fragment>

@@ -61,7 +61,7 @@ a {
 .left-align-box {
   display: flex !important;
   flex-direction: row !important;
-  justify-content: flex-end !important;
+  justify-content: flex-start !important;
   align-items: flex-start !important;
   flex-grow: 1 !important;
   margin-bottom: 1rem;
