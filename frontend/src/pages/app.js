@@ -21,6 +21,7 @@ import OrderHistory from "./order-history";
 import SellerItems from "./seller-items";
 import SellerAddItem from "./seller-add-item";
 import SellerEditItem from "./seller-edit-item";
+import AddComment from "./add-comment";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="item/:itemID" element={<Item />} />
           <Route path="search" element={<Search />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="addComment" element={<AddComment />} />
         </Route>
 
         <Route path="auth" element={<Outlet />}>

@@ -102,4 +102,8 @@ a {
   color: #f00;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=icon.css.map */
